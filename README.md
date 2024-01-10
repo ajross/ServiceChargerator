@@ -19,9 +19,15 @@ Connect using the `psql` command line tool:
 docker exec -it CHARGE_DATA_DB psql -U postgres
 ```
 
-The DB can be stopped with `docker stop CHARGE_DATA_DB`
+The DB can be stopped with
+```shell
+docker stop CHARGE_DATA_DB
+```
 
-It can be started again with `docker start CHARGE_DATA_DB`
+It can be started again with
+```shell
+docker start CHARGE_DATA_DB
+```
 
 ## Create a DB User
 
@@ -47,3 +53,13 @@ pip install alembic
 Initialise Alembic and create the initial config files.
 
 `alembic init alembic`
+
+## Copy over data to the container
+
+```shell
+docker cp data.csv container_name:/path/to/data.csv
+```
+
+```shell
+psql -U alembic -d CHARGE_DATA -c "COPY your_table_name FROM '/tmp/charges.csv' DELIMITER ',' CSV HEADER;"
+```

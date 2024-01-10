@@ -31,4 +31,4 @@ def upgrade():
     )
 
 def downgrade():
-    op.drop_table(table_name)
+    op.drop_table(table_name, if_exists=True)
