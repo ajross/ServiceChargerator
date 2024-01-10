@@ -25,16 +25,25 @@
         <thead>
           <tr>
             <th>Charge Category</th>
-            <!-- Add other table headers as needed -->
+            {% if charges %}
+              {% for charge_group in charges %}
+                <th>{{ charge_group.Year_End }}</th>
+              {% endfor %}
+            {% endif %}
           </tr>
         </thead>
         <tbody>
-          {% for charge in charges %}
-            <tr>
-              <td>{{ charge.category }}</td>
-              <!-- Add other table columns as needed -->
-            </tr>
-          {% endfor %}
+          {% if charges %}
+            {% for charge_group in charges %}
+              {% for charge in charge_group.charges %}
+                <tr>
+                  <td>{{ charge.Estate_ID }}</td>
+                  <td>{{ charge.Block_ID }}</td>
+                  <!-- Add other charge columns starting with "Block" -->
+                </tr>
+              {% endfor %}
+            {% endfor %}
+          {% endif %}
         </tbody>
       </table>
     {% endif %}
