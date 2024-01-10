@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>{% block title %}Your Web App{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <h1>Your Web App</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('block_charges') }}">Block Charges</a></li>
+                <li><a href="{{ url_for('premise_charges') }}">Premise Charges</a></li>
+                <li><a href="{{ url_for('block_charge_comparisons') }}">Block Charge Comparisons</a></li>
+                <li><a href="{{ url_for('premise_charge_comparisons') }}">Premise Charge Comparisons</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
