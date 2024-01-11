@@ -34,14 +34,13 @@
         </thead>
         <tbody>
           {% if charges %}
-            {% for charge_group in charges %}
-              {% for charge in charge_group.charges %}
-                <tr>
-                  <td>{{ charge.Estate_ID }}</td>
-                  <td>{{ charge.Block_ID }}</td>
-                  <!-- Add other charge columns starting with "Block" -->
-                </tr>
-              {% endfor %}
+            {% for charge_type in charge_types %}
+              <tr>
+                  <td>{{ charge_type }}</td>
+                  {% for charge_group in charges %}
+                  <td>£{{ charge_group.charges[charge_type] }}</td>
+                  {% endfor %}
+              </tr>
             {% endfor %}
           {% endif %}
         </tbody>
