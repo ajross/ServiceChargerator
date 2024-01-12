@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const EstateDropdown = () => {
+const EstateDropdown = ({ onEstateSelect }) => {
   const [estates, setEstates] = useState([]);
 
   useEffect(() => {
@@ -11,10 +11,11 @@ const EstateDropdown = () => {
   }, []);
 
   return (
-    <select>
-      {estates.map((estate, index) => (
-        <option key={index} value={estate[0]}>
-          {estate[1]}
+    <select onChange={(e) => onEstateSelect(e.target.value)}>
+      <option value="">Select Estate</option>
+      {estates.map((estate) => (
+        <option key={estate.ID} value={estate.ID}>
+          {estate.Estate_Name}
         </option>
       ))}
     </select>

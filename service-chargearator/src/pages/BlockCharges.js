@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../components/Header';
 import NavBar from '../components/NavBar';
-import EstateDropdown from '../components/EstateDropdown'
+import EstateBlockDropdowns from '../components/EstateBlockDropdowns'
 
 const BlockCharges = () => {
   return (
@@ -10,7 +10,7 @@ const BlockCharges = () => {
       <NavBar />
       <main>
         <h2>Block Charges</h2>
-        <EstateDropdown />
+        <EstateBlockDropdowns />
         {/* Add content specific to the home page */}
       </main>
     </div>
