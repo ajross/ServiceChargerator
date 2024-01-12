@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const BlockDropdown = ({ estateId }) => {
+const BlockDropdown = ({ estateId, onBlockSelect }) => {
   const [blocks, setBlocks] = useState([]);
 
   useEffect(() => {
@@ -13,7 +13,7 @@ const BlockDropdown = ({ estateId }) => {
   }, [estateId]);
 
   return (
-    <select disabled={!estateId}>
+    <select onChange={(b) => onBlockSelect(b.target.value)}  disabled={!estateId}>
       <option value="">Select Block</option>
       {blocks.map((block) => (
         <option key={block.ID} value={block.ID}>

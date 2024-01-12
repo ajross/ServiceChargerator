@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../components/Header';
 import NavBar from '../components/NavBar';
-import EstateBlockDropdowns from '../components/EstateBlockDropdowns'
+import EstateBlockDropdowns from '../components/EstateBlockDropdowns';
 
 const BlockCharges = () => {
   return (

@@ -25,5 +25,17 @@ def get_blocks(estate_id):
     blocks_list = [{'ID': block.ID, 'Block_Name': block.Block_Name, 'Block_RV': block.Block_RV, 'Estate_ID': block.Estate_ID} for block in blocks]
     return jsonify(blocks_list)
 
+
+@app.route('/charges/<int:estate_id>/<int:block_id>', methods=['GET'])
+def get_charges(estate_id, block_id):
+    charges = Charges.query.filter_by(Estate_ID=estate_id, Block_ID=block_id).order_by(Charges.Year_End).all()
+
+    if not charges:
+        return {"message": "No data found"}, 404
+
+    charges_list = [{column.name: getattr(charge, column.name) for column in charge.__table__.columns} for charge in
+                    charges]
+    return jsonify(charges_list)
+
 if __name__ == '__main__':
     app.run(debug=True)
