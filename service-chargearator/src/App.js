@@ -1,24 +1,22 @@
-// src/App.js
-
-import React, { useState, useEffect } from 'react';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import BlockCharges from './pages/BlockCharges';
+import BlockChargeComparison from './pages/BlockChargeComparison';
+import PremiseCharges from './pages/PremiseCharges';
+import PremiseChargeComparison from './pages/PremiseChargeComparison';
 
 function App() {
-  const [message, setMessage] = useState('');
-
-  useEffect(() => {
-    const apiBaseUrl = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
-
-    fetch(`${apiBaseUrl}/api/hello`)
-      .then((response) => response.json())
-      .then((data) => setMessage(data.message))
-      .catch((error) => console.error('Error:', error));
-  }, []);
-
   return (
-    <div className="App">
-      <h1>{message}</h1>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/block-charges" element={<BlockCharges />} />
+        <Route path="/block-charge-comparison" element={<BlockChargeComparison />} />
+        <Route path="/premise-charges" element={<PremiseCharges />} />
+        <Route path="/premise-charge-comparison" element={<PremiseChargeComparison />} />
+      </Routes>
+    </Router>
   );
 }
 

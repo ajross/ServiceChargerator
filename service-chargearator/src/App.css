@@ -36,3 +36,26 @@
     transform: rotate(360deg);
   }
 }
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+header {
+  background-color: #069; /* Replace with actual color from the website */
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+nav {
+  background-color: #000; /* Replace with actual color */
+  padding: 10px;
+}
+
+nav a {
+  color: white;
+  margin-right: 10px;
+  text-decoration: none;
+}
+
