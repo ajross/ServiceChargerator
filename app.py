@@ -1,19 +1,39 @@
 from flask import Flask, jsonify, render_template, request
-from models import db, Estates, Blocks, Charges
+from models import db, Estates, Blocks, Charges, EstatesSchema, BlocksSchema
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://alembic:alembic_pass@localhost:5432/charge_data'
 db.init_app(app)
 
+estates_schema = EstatesSchema()
+blocks_schema = BlocksSchema()
+
 @app.route('/')
 def home():
     return render_template('home.html')
 
+@app.route('/get_estates')
+def get_estates():
+    estates = Estates.query.all()
+    estates_data = [estates_schema.dump(estate) for estate in estates]
+
+    return jsonify({'estates': estates_data})
+
+@app.route('/get_estate/<int:estate_id>')
+def get_estate(estate_id):
+    estate = Estates.query.filter_by(Estate_ID=estate_id).all()
+    return jsonify({'estates': estates_schema.dump(estate)})
+
 @app.route('/get_blocks/<int:estate_id>')
 def get_blocks(estate_id):
     blocks = Blocks.query.filter_by(Estate_ID=estate_id).all()
-    blocks_data = [{'ID': block.ID, 'Block_Name': block.Block_Name} for block in blocks]
+    blocks_data = [blocks_schema.dump(block) for block in blocks]
     return jsonify({'blocks': blocks_data})
+
+@app.route('/get_blocks/<int:block_id>')
+def get_block(block_id):
+    block = Blocks.query.filter_by(Block_ID=block_id).all()
+    return jsonify({'block': Blocks.dump(block)})
 
 
 def charges_data_by_block(estate_id, block_id):
@@ -69,14 +89,20 @@ def charges_data_by_block(estate_id, block_id):
 
 @app.route('/block_charges', methods=['GET', 'POST'])
 def block_charges():
-    estates = Estates.query.all()
+    estates = get_estates()
 
     if request.method == 'POST':
         estate_id = request.form.get('estate')
         block_id = request.form.get('block')
 
+        block = get_block(block_id)
+        estate = get_estate(block.Estate_ID)
+
+        if estate.ID != estate_id:
+            print("Submitted Estate didn't match the estate for the submitted block!")
+
         # Query charges based on selected estate and block
-        charges = charges_data_by_block(estate_id, block_id)  # Replace with your actual query function
+        charges = charges_data_by_block(estate.ID, block.ID)
         
         charge_types = [
             "Block_Boiler_Repairs_and_Maintenance",
@@ -108,7 +134,7 @@ def block_charges():
             "Estate_Tree_Maintenance",
         ]
 
-        return render_template('block_charges.html', estates=estates, charges=charges, charge_types=charge_types)
+        return render_template('block_charges.html', estates=estates, charges=charges, charge_types=charge_types, estate=estate, block=block)
 
     return render_template('block_charges.html', estates=estates, charges=None)
 

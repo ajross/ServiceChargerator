@@ -1,6 +1,11 @@
 from flask_sqlalchemy import SQLAlchemy
+from marshmallow import Schema, fields
 
 db = SQLAlchemy()
+
+class EstatesSchema(Schema):
+    class Meta:
+        fields = ('ID', 'Estate_Name', 'Estate_RV')
 
 class Estates(db.Model):
     __tablename__ = 'estates'
@@ -8,6 +13,10 @@ class Estates(db.Model):
     ID = db.Column(db.Integer, primary_key=True)
     Estate_Name = db.Column(db.String, nullable=False)
     Estate_RV = db.Column(db.Integer, nullable=False)
+
+class BlocksSchema(Schema):
+    class Meta:
+        fields = ('ID', 'Block_Name', 'Block_RV', 'Estate_ID')
 
 class Blocks(db.Model):
     __tablename__ = 'blocks'
