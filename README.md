@@ -63,3 +63,18 @@ docker cp data.csv container_name:/path/to/data.csv
 ```shell
 psql -U alembic -d CHARGE_DATA -c "COPY your_table_name FROM '/tmp/charges.csv' DELIMITER ',' CSV HEADER;"
 ```
+
+
+# React App
+
+```shell
+npx create-react-app service-chargearator
+cd service-chargearator
+npm start
+```
+
+# Flask App
+
+```shell
+python app.py
+```
