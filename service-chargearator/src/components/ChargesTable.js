@@ -75,7 +75,7 @@ const ChargesTable = ({ estateId, blockId }) => {
   };
 
   return (
-    <div>
+    <div className="table-container">
       {isLoading && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
       {chargesData.years && chargesData?.years.length > 0 && !isLoading && !error && (
@@ -89,9 +89,11 @@ const ChargesTable = ({ estateId, blockId }) => {
         <tbody>
           {chargesData.pivotedData.map((row, index) => (
             <tr key={index}>
-              <td>{row.chargeType}</td>
+              <td>{row.chargeType.replace(/_/g, ' ')}</td>
               {chargesData.years.map(year => (
-                <td key={year}>{row[year]}</td>
+                <td key={year}>
+                    £{row[year] != null ? Number(row[year]).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '0.00'}
+                </td>
               ))}
             </tr>
           ))}
