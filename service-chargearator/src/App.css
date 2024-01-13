@@ -42,14 +42,14 @@ body {
 }
 
 header {
-  background-color: #069; /* Replace with actual color from the website */
+  background-color: #069;
   color: white;
   padding: 10px;
   text-align: center;
 }
 
 nav {
-  background-color: #000; /* Replace with actual color */
+  background-color: #000;
   padding: 10px;
 }
 
@@ -84,7 +84,7 @@ th {
 td:first-child, th:first-child {
     background-color: #333;
     color: white;
-    text-align: center; /* Center align if needed */
+    text-align: center;
 }
 
 tr:nth-child(even) {
@@ -137,4 +137,47 @@ select option {
     background-color: white;
     color: #333;
 }
+.home-content-container {
+    display: grid;
+    grid-template-columns: 1fr; /* Single column layout */
+    justify-items: center; /* Center grid items horizontally */
+    gap: 20px; /* Space between grid items */
+}
 
+.home-block-container {
+    width: 100%; /* Full width of the grid column */
+}
+
+.home-content {
+    background-color: #069; /* Solid background color */
+    color: white; /* White font color */
+    padding: 20px; /* Inner spacing */
+    border-radius: 5px; /* Optional: rounded corners */
+}
+
+.home-links-content-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns of equal width */
+    grid-template-rows: auto; /* Rows take the height of their content */
+    gap: 20px; /* Space between grid items */
+    width: 100%; /* Fit the grid width to its content */
+}
+
+/* Common styles for all content blocks inside the grid */
+.home-links-content-container div {
+    background-color: #993399; /* Solid background color */
+    color: white; /* White font color */
+    padding: 20px; /* Inner spacing */
+    border-radius: 5px; /* Optional: rounded corners */
+}
+
+.home-links-content-container a {
+  color: white;
+  text-decoration: none;
+}
+
+.home-links-content-container h2 {
+    margin-top: 0; /* Removes the top margin */
+    padding-top: 0px; /* Optional: Adds some padding at the top if needed */
+    text-align: center; /* Optional: center the text */
+ }
