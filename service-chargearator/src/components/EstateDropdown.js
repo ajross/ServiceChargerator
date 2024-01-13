@@ -1,15 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
-const EstateDropdown = ({ onEstateSelect }) => {
-  const [estates, setEstates] = useState([]);
-
-  useEffect(() => {
-    fetch('/estates')
-      .then(response => response.json())
-      .then(data => setEstates(data))
-      .catch(error => console.error('Error:', error));
-  }, []);
-
+const EstateDropdown = ({ estates, onEstateSelect }) => {
   return (
     <select onChange={(e) => onEstateSelect(e.target.value)}>
       <option value="">Select Estate</option>

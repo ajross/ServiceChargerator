@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const ChargesTable = ({ estateId, blockId }) => {
+const BlockChargesTable = ({ estateId, blockId }) => {
   const [chargesData, setChargesData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -104,4 +104,4 @@ const ChargesTable = ({ estateId, blockId }) => {
   );
 };
 
-export default ChargesTable;
+export default BlockChargesTable;

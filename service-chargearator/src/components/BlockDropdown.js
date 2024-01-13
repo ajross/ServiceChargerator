@@ -1,19 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
-const BlockDropdown = ({ estateId, onBlockSelect }) => {
-  const [blocks, setBlocks] = useState([]);
-
-  useEffect(() => {
-    if (estateId) {
-      fetch(`/blocks/${estateId}`)
-        .then(response => response.json())
-        .then(data => setBlocks(data))
-        .catch(error => console.error('Error:', error));
-    }
-  }, [estateId]);
-
+const BlockDropdown = ({ blocks, onBlockSelect }) => {
   return (
-    <select onChange={(b) => onBlockSelect(b.target.value)}  disabled={!estateId}>
+    <select onChange={(b) => onBlockSelect(b.target.value)}  disabled={!blocks.length}>
       <option value="">Select Block</option>
       {blocks.map((block) => (
         <option key={block.ID} value={block.ID}>

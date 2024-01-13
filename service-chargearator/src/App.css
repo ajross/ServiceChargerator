@@ -99,3 +99,42 @@ th:first-child, td:first-child {
     z-index: 1;
 }
 
+/* Container for both estate and block info */
+.estate-block-info-container {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+/* Common styles for estate-info and block-info */
+.estate-info, .block-info {
+    background-color: #993399; /* Background color */
+    color: white; /* Font color */
+    padding: 10px;
+    border-radius: 5px; /* Optional: for rounded corners */
+    width: 45%; /* Adjust width as needed */
+}
+
+/* Styles for lists within estate-info and block-info */
+.estate-info ul, .block-info ul {
+    list-style-type: none; /* Removes bullet points */
+    padding: 0;
+}
+
+/* Styles for dropdown */
+select {
+    background-color: white; /* Background color for dropdown */
+    border: 1px solid #ddd; /* Flat border style */
+    color: #333; /* Font color */
+    padding: 5px 10px;
+    border-radius: 4px; /* Optional: for rounded corners */
+    width: 100%; /* Optional: makes the dropdown full width */
+    box-sizing: border-box; /* Ensures padding doesn't affect overall width */
+}
+
+/* Optional: Style for <option> elements */
+select option {
+    background-color: white;
+    color: #333;
+}
+
