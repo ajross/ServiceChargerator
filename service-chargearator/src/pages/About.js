@@ -8,8 +8,18 @@ const About = () => {
       <Header />
       <NavBar />
       <main>
-        <h2>About</h2>
-        {/* Add content specific to the home page */}
+        <div className="text-content-container">
+          <h2>About</h2>
+          <p>This tool has been created by a Lambeth leaseholder, fed up with being overcharged for poorly delivered services, and charged for services that were never event provided.</p>
+          <p>It is entirely independent of Lambeth Council and is powered by data provided by other residents and obtained through FOI requests.</p>
+          <p>Lambeth Council has a duty to provide services to maintain the buildings in which we live, and to charge a <strong>reasonable</strong> amount for doing so.</p>
+          <p>Unfortunately, they frequently make errors by charging for services that were not delivered, miscalculating charges, and overcharging for poor quality services.</p>
+          <p>This has a real impact on our lives and livelihoods.  Horrendous service charges are driving residents to try to sell up and move from their homes and communities.
+             Sadly, high service charges often make it difficult to find a buyer.</p>
+          <p>Lambeth does not seem to be making much effort to improve their management of the housing stock, or the way they manage service charges, so it is up to residents to
+             hold them to account for the quality and cost of services that are provided.</p>
+          <p>If you have any feedback on this site, a feature idea, or would like to help out, please send an email to: <a href="mailto:nobody@noone.com?subject=Service Chargerator Feedback">nobody@noone.com</a></p>
+        </div>
       </main>
     </div>
   );

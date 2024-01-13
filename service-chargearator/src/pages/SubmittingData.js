@@ -8,8 +8,10 @@ const SubmittingData = () => {
       <Header />
       <NavBar />
       <main>
-        <h2>SubmittingData</h2>
-        {/* Add content specific to the home page */}
+        <div className="text-content-container">
+          <h2>Submitting Data</h2>
+          {/* Add content specific to the home page */}
+        </div>
       </main>
     </div>
   );
