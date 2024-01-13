@@ -197,3 +197,50 @@ select option {
     padding-top: 0px; /* Optional: Adds some padding at the top if needed */
     text-align: center; /* Optional: center the text */
  }
+
+.text-content-container {
+    display: grid;
+    grid-template-columns: 1fr; /* Single column layout */
+    justify-items: center; /* Center grid items horizontally */
+    gap: 20px; /* Space between grid items */
+}
+
+.inner-container {
+    width: 100%; /* Adjust as needed */
+    justify-content: left;
+}
+
+.content-container {
+    display: grid;
+    grid-template-columns: 1fr; /* Single column layout */
+    justify-items: stretch; /* Stretch grid items to fill the container width */
+    gap: 20px; /* Space between rows */
+    margin: auto; /* Center the entire container on the page */
+}
+
+.content-container  a {
+  color: white;
+  font-weight: bold;
+}
+
+.text-row, .image-row {
+    background-color: #993399; /* Background color for text rows */
+    padding: 20px; /* Padding around the content */
+    color: white; /* White text for text rows */
+    text-align: left; /* Left-align the text */
+}
+
+.image-row {
+    background-color: #f0f0f0; /* Different background color for the image row */
+    display: flex;
+    justify-content: center; /* Center images within the row */
+    gap: 10px; /* Gap between images */
+    align-items: center; /* Align images vertically */
+    overflow: hidden; /* Prevents images from overflowing */
+}
+
+.image-row img {
+    width: 100%; /* Set the width to fill the container */
+    max-width: calc(50% - 10px); /* Max width of each image */
+    height: auto; /* Maintain aspect ratio */
+}

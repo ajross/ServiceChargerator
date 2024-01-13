@@ -8,9 +8,12 @@ const QueryingCharges = () => {
       <Header />
       <NavBar />
       <main>
-        <div className="text-content-container">
-          <h2>Querying Charges</h2>
-          {/* Add content specific to the home page */}
+      <p/>
+        <div className="content-container">
+          <div className="text-row">
+            <h2>Querying Charges</h2>
+            <p>Some info about querying charges.</p>
+          </div>
         </div>
       </main>
     </div>
