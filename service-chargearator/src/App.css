@@ -53,10 +53,21 @@ nav {
   padding: 10px;
 }
 
+nav .separator {
+    color: white;
+}
+
 nav a {
-  color: white;
-  margin-right: 10px;
-  text-decoration: none;
+    display: inline-block; /* Or flex, block, etc., depending on your layout */
+    padding: 5px 10px; /* Adjust padding as needed */
+    text-decoration: none; /* Optional: removes the underline from links */
+    color: white; /* Set your text color */
+    background-color: black; /* Set initial background color */
+    transition: background-color 0.3s; /* Smooth transition for the background color */
+}
+
+nav a:hover {
+    background-color: #993399; /* Background color on hover */
 }
 
 .table-container {
@@ -154,13 +165,17 @@ select option {
     padding: 20px; /* Inner spacing */
     border-radius: 5px; /* Optional: rounded corners */
 }
+.home-content a {
+  color: white;
+  font-weight: bold;
+}
 
 .home-links-content-container {
     display: grid;
     grid-template-columns: 1fr 1fr; /* Two columns of equal width */
-    grid-template-rows: auto; /* Rows take the height of their content */
     gap: 20px; /* Space between grid items */
     width: 100%; /* Fit the grid width to its content */
+    align-items: stretch; /* Stretches items to fill the container (this doesn't seem to work) */
 }
 
 /* Common styles for all content blocks inside the grid */
@@ -169,6 +184,7 @@ select option {
     color: white; /* White font color */
     padding: 20px; /* Inner spacing */
     border-radius: 5px; /* Optional: rounded corners */
+    min-height: 100px; /* Set this so blocks match their height to a minimum */
 }
 
 .home-links-content-container a {
