@@ -127,6 +127,14 @@ th:first-child, td:first-child {
     width: 45%; /* Adjust width as needed */
 }
 
+.first-block {
+    background-color: #993399; /* Background color */
+}
+
+.second-block {
+    background-color: #069; /* Background color */
+}
+
 /* Styles for lists within estate-info and block-info */
 .estate-info ul, .block-info ul, .premise-info ul {
     list-style-type: none; /* Removes bullet points */

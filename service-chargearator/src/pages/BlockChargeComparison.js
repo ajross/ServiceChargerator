@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '../components/Header';
 import NavBar from '../components/NavBar';
+import BlockComparisonData from '../components/BlockComparisonData';
 
 const BlockChargeComparison = () => {
   return (
@@ -9,7 +10,7 @@ const BlockChargeComparison = () => {
       <NavBar />
       <main>
         <h2>Block Charge Comparison</h2>
-        {/* Add content specific to the home page */}
+        <BlockComparisonData />
       </main>
     </div>
   );

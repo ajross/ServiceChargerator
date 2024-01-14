@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-const PremiseChargesTable = ({ estateId, blockId, estateRv, blockRv, premiseRv }) => {
+const BlockChargesComparisonTable = ({ estateId, blockId }) => {
   const [chargesData, setChargesData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (estateId && blockId && estateRv && blockRv && premiseRv > 0) {
+    if (estateId && blockId) {
       setIsLoading(true);
       fetch(`/charges/${estateId}/${blockId}`)
         .then(response => {
@@ -24,7 +24,7 @@ const PremiseChargesTable = ({ estateId, blockId, estateRv, blockRv, premiseRv }
           setIsLoading(false);
         });
     }
-  }, [estateId, blockId, estateRv, blockRv, premiseRv]);
+  }, [estateId, blockId]);
 
   const pivotData = (data) => {
   
@@ -92,11 +92,7 @@ const PremiseChargesTable = ({ estateId, blockId, estateRv, blockRv, premiseRv }
               <td>{row.chargeType.replace(/_/g, ' ')}</td>
               {chargesData.years.map(year => (
                 <td key={year}>
-                    £{row[year] != null ? Number(
-                    row.chargeType.startsWith("Block") ?
-                    row[year] / blockRv * premiseRv :
-                    row[year] / estateRv * premiseRv
-                    ).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '0.00'}
+                    £{row[year] != null ? Number(row[year]).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '0.00'}
                 </td>
               ))}
             </tr>
@@ -108,4 +104,4 @@ const PremiseChargesTable = ({ estateId, blockId, estateRv, blockRv, premiseRv }
   );
 };
 
-export default PremiseChargesTable;
+export default BlockChargesComparisonTable;

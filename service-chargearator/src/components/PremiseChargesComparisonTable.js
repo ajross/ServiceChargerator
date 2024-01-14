@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const PremiseChargesTable = ({ estateId, blockId, estateRv, blockRv, premiseRv }) => {
+const PremiseChargesComparisonTable = ({ estateId, blockId, estateRv, blockRv, premiseRv }) => {
   const [chargesData, setChargesData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -27,7 +27,7 @@ const PremiseChargesTable = ({ estateId, blockId, estateRv, blockRv, premiseRv }
   }, [estateId, blockId, estateRv, blockRv, premiseRv]);
 
   const pivotData = (data) => {
-  
+
     const chargeTypes = [
       'Block_Boiler_Repairs_and_Maintenance',
       'Block_Cleaning',
@@ -108,4 +108,4 @@ const PremiseChargesTable = ({ estateId, blockId, estateRv, blockRv, premiseRv }
   );
 };
 
-export default PremiseChargesTable;
+export default PremiseChargesComparisonTable;
