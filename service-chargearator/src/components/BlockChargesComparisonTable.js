@@ -1,34 +1,14 @@
 import React, { useState, useEffect } from 'react';
 
-const BlockChargesComparisonTable = ({ estateId, blockId }) => {
-  const [chargesData, setChargesData] = useState([]);
+const BlockChargesComparisonTable = ({ firstEstateId, firstBlockId, secondEstateId, secondBlockId }) => {
+  const [firstChargesData, setFirstChargesData] = useState([]);
+  const [secondChargesData, setSecondChargesData] = useState([]);
+  const [allYears, setAllYears] = useState([]);
+  const [allPivotData, setAllPivotData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    if (estateId && blockId) {
-      setIsLoading(true);
-      fetch(`/charges/${estateId}/${blockId}`)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Data not found');
-          }
-          return response.json();
-        })
-        .then(data => {
-          setChargesData(pivotData(data));
-          setIsLoading(false);
-        })
-        .catch(error => {
-          setError(error.message);
-          setIsLoading(false);
-        });
-    }
-  }, [estateId, blockId]);
-
-  const pivotData = (data) => {
-  
-    const chargeTypes = [
+  const chargeTypes = [
       'Block_Boiler_Repairs_and_Maintenance',
       'Block_Cleaning',
       'Block_Communal_Electricity',
@@ -58,6 +38,63 @@ const BlockChargesComparisonTable = ({ estateId, blockId }) => {
       'Estate_Tree_Maintenance'
     ];
 
+  useEffect(() => {
+    if (firstEstateId && firstBlockId && secondEstateId && secondBlockId) {
+      setIsLoading(true);
+      fetch(`/charges/${firstEstateId}/${firstBlockId}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Data not found');
+          }
+          return response.json();
+        })
+        .then(firstData => {
+          const firstPivotedData = pivotData(firstData);
+          setFirstChargesData(firstPivotedData);
+          fetch(`/charges/${secondEstateId}/${secondBlockId}`)
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Data not found');
+              }
+              return response.json();
+            })
+            .then(secondData => {
+              const secondPivotedData = pivotData(secondData);
+              setSecondChargesData(secondPivotedData);
+
+              const mergedArray = firstPivotedData.pivotedData.map((item, index) => {
+                  const arr2Item = secondPivotedData.pivotedData[index];
+                  let mergedItem = {};
+
+                  for (const year in item) {
+                      mergedItem[year] = {
+                          first: item[year],
+                          second: arr2Item[year]
+                      };
+                  }
+                  return mergedItem;
+              });
+
+              setAllPivotData(mergedArray);
+
+              const years = [...new Set([ ...firstData.map(item => item.Year_End), ...secondData.map(item => item.Year_End)])].sort();
+              setAllYears(years);
+              setIsLoading(false);
+            })
+            .catch(error => {
+              setError(error.message);
+              setIsLoading(false);
+          });
+        })
+        .catch(error => {
+          setError(error.message);
+          setIsLoading(false);
+        });
+    }
+  }, [firstEstateId, firstBlockId, secondEstateId, secondBlockId]);
+
+  const pivotData = (data) => {
+
       // Extract unique years
       const years = [...new Set(data.map(item => item.Year_End))].sort();
 
@@ -78,22 +115,29 @@ const BlockChargesComparisonTable = ({ estateId, blockId }) => {
     <div className="table-container">
       {isLoading && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
-      {chargesData.years && chargesData?.years.length > 0 && !isLoading && !error && (
+      {allYears?.length > 0 && !isLoading && !error && (
       <table>
         <thead>
           <tr>
             <th>Charge Type</th>
-            {chargesData.years.map(year => <th key={year}>{year}</th>)}
+            {allYears.map(year => [
+              <th key={`${year}-1`} className="first-block">{year}</th>,
+              <th key={`${year}-2`} className="second-block">{year}</th>
+            ])}
           </tr>
         </thead>
         <tbody>
-          {chargesData.pivotedData.map((row, index) => (
+          {allPivotData.map((row, index) => (
             <tr key={index}>
-              <td>{row.chargeType.replace(/_/g, ' ')}</td>
-              {chargesData.years.map(year => (
-                <td key={year}>
-                    £{row[year] != null ? Number(row[year]).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '0.00'}
+              <td>{chargeTypes[index].replace(/_/g, ' ')}</td>
+              {allYears.map(year => ([
+                <td key={`${year}-1`}>
+                    £{row[year].first != null ? Number(row[year].first).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '0.00'}
+                </td>,
+                <td key={`${year}-2`}>
+                    £{row[year].second != null ? Number(row[year].second).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '0.00'}
                 </td>
+                ]
               ))}
             </tr>
           ))}
