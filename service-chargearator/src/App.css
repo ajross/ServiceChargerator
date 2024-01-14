@@ -239,6 +239,10 @@ select option {
     text-align: left; /* Left-align the text */
 }
 
+.alt-color {
+    background-color: #069;
+}
+
 .image-row {
     background-color: #f0f0f0; /* Different background color for the image row */
     display: flex;
@@ -252,4 +256,19 @@ select option {
     width: 100%; /* Set the width to fill the container */
     max-width: calc(50% - 10px); /* Max width of each image */
     height: auto; /* Maintain aspect ratio */
+}
+
+.video-responsive {
+    overflow: hidden;
+    padding-bottom: 56.25%; /* Percentage for 16:9 aspect ratio */
+    position: relative;
+    height: 0;
+}
+
+.video-responsive iframe {
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
 }

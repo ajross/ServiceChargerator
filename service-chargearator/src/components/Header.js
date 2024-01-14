@@ -3,7 +3,7 @@ import React from 'react';
 const Header = () => {
   return (
     <header>
-      <h1>Lambeth Service Chargerator</h1>
+      <h1>Lambeth Service Charge Insights</h1>
     </header>
   );
 };

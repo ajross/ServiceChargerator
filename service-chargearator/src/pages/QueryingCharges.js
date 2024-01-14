@@ -22,13 +22,25 @@ const QueryingCharges = () => {
             <p>Unless you know the answer to these questions, you should be querying Lambeth to ensure you have been charged correctly.
             This is your money, your livelihood, and if you do not know how it is being spent, then how do you know it is not being wasted?</p>
           </div>
-          <div className="text-row">
+          <div className="text-row alt-color">
             <h2>What to Query?</h2>
-            <p>Some info about querying charges.</p>
+            <p>Start by looking at the most recent invoice you have received.</p>
+            <p>Watch this talk given at the AGM of the Lambeth Homeowners Association.  It will give you a examples of things you can query in your service charge invoice.</p>
+
+            <div className="video-responsive">
+              <iframe
+                src="https://www.youtube.com/embed/sGygJZQz6Eo"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                title="Embedded youtube"
+              />
+            </div>
           </div>
           <div className="text-row">
             <h2>How to Query?</h2>
-            <p>Some info about querying charges.</p>
+            <p>Email is your best route, as Lambeth does not have a good case management system in which you could raise a ticket.</p>
+            <p>Send your email to <a href="mailto:HMhomeownership@lambeth.gov.uk?subject=Service Charge Query">HMhomeownership@lambeth.gov.uk</a>.</p>
           </div>
         </div>
       </main>
