@@ -11,7 +11,6 @@ const BlockCharges = () => {
       <main>
         <h2>Block Charges</h2>
         <EstateBlockDropdowns />
-        {/* Add content specific to the home page */}
       </main>
     </div>
   );
