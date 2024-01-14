@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import EstateDropdown from './EstateDropdown';
 import BlockDropdown from './BlockDropdown';
-import BlockChargesTable from './BlockChargesTable';
+import PremiseChargesTable from './PremiseChargesTable';
 
 const PremiseData = () => {
   const [selectedEstate, setSelectedEstate] = useState(null);
   const [selectedBlock, setSelectedBlock] = useState(null);
+  const [estateRv, setEstateRv] = useState('');
+  const [blockRv, setBlockRv] = useState('');
+  const [numberInput, setNumberInput] = useState('');
   const [estates, setEstates] = useState([]);
   const [blocks, setBlocks] = useState([]);
 
@@ -13,7 +16,10 @@ const PremiseData = () => {
   useEffect(() => {
     fetch('/estates')
       .then(response => response.json())
-      .then(data => setEstates(data))
+      .then(data => {
+        setEstates(data);
+        setEstateRv(data[0].Estate_RV);
+        })
       .catch(error => console.error('Error:', error));
   }, []);
 
@@ -22,7 +28,10 @@ const PremiseData = () => {
     if (selectedEstate) {
       fetch(`/blocks/${selectedEstate}`)
         .then(response => response.json())
-        .then(data => setBlocks(data))
+        .then(data => {
+            setBlocks(data);
+            setBlockRv(data[0].Block_RV);
+        })
         .catch(error => console.error('Error:', error));
     } else {
       setBlocks([]); // Reset blocks if no estate is selected
@@ -38,6 +47,15 @@ const PremiseData = () => {
   const handleBlockSelect = (id) => {
     console.log('Selected Block ID:', id); // Debugging
     setSelectedBlock(id);
+  };
+
+  const handleNumberInputChange = (event) => {
+    setNumberInput(event.target.value);
+  };
+
+  const handleNumberInputSubmit = (event) => {
+    setNumberInput(event.target.value);
+    // Logic to update BlockChargesTable, maybe set another state or directly pass to BlockChargesTable
   };
 
   return (
@@ -61,8 +79,23 @@ const PremiseData = () => {
               </ul>
             )}
           </div>
+          <div className='premise-info'>
+            <p>Enter the rateable value for your property.</p>
+            <p>It will likely be a 3 digit number.</p>
+            <input
+              type="number"
+              value={numberInput}
+              onChange={handleNumberInputChange}
+              onBlur={handleNumberInputSubmit}
+              onKeyPress={event => {
+                if (event.key === 'Enter') {
+                  handleNumberInputSubmit();
+                }
+              }}
+            />
+          </div>
       </div>
-      <BlockChargesTable estateId={selectedEstate} blockId={selectedBlock} />
+      <PremiseChargesTable estateId={selectedEstate} blockId={selectedBlock} estateRv={estateRv} blockRv={blockRv} premiseRv={numberInput} />
     </div>
   );
 };

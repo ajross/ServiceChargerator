@@ -115,10 +115,11 @@ th:first-child, td:first-child {
     display: flex;
     justify-content: space-around;
     padding: 10px;
+    gap: 10px;
 }
 
 /* Common styles for estate-info and block-info */
-.estate-info, .block-info {
+.estate-info, .block-info, .premise-info {
     background-color: #993399; /* Background color */
     color: white; /* Font color */
     padding: 10px;
@@ -127,7 +128,7 @@ th:first-child, td:first-child {
 }
 
 /* Styles for lists within estate-info and block-info */
-.estate-info ul, .block-info ul {
+.estate-info ul, .block-info ul, .premise-info ul {
     list-style-type: none; /* Removes bullet points */
     padding: 0;
 }
