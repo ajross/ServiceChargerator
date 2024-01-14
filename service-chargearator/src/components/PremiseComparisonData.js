@@ -4,57 +4,109 @@ import BlockDropdown from './BlockDropdown';
 import PremiseChargesComparisonTable from './PremiseChargesComparisonTable';
 
 const PremiseComparisonData = () => {
-  const [selectedEstate, setSelectedEstate] = useState(null);
-  const [selectedBlock, setSelectedBlock] = useState(null);
-  const [estateRv, setEstateRv] = useState('');
-  const [blockRv, setBlockRv] = useState('');
-  const [numberInput, setNumberInput] = useState('');
-  const [estates, setEstates] = useState([]);
-  const [blocks, setBlocks] = useState([]);
+  const [firstSelectedEstate, setFirstSelectedEstate] = useState(null);
+  const [firstSelectedBlock, setFirstSelectedBlock] = useState(null);
+  const [firstEstates, setFirstEstates] = useState([]);
+  const [firstBlocks, setFirstBlocks] = useState([]);
+
+  const [firstEstateRv, setFirstEstateRv] = useState('');
+  const [firstBlockRv, setFirstBlockRv] = useState('');
+
+  const [firstNumberInput, setFirstNumberInput] = useState('');
+
+
+  const [secondSelectedEstate, setSecondSelectedEstate] = useState(null);
+  const [secondSelectedBlock, setSecondSelectedBlock] = useState(null);
+  const [secondEstates, setSecondEstates] = useState([]);
+  const [secondBlocks, setSecondBlocks] = useState([]);
+
+  const [secondEstateRv, setSecondEstateRv] = useState('');
+  const [secondBlockRv, setSecondBlockRv] = useState('');
+
+  const [secondNumberInput, setSecondNumberInput] = useState('');
+
 
   // Fetch estates data
   useEffect(() => {
     fetch('/estates')
       .then(response => response.json())
       .then(data => {
-        setEstates(data);
-        setEstateRv(data[0].Estate_RV);
+        setFirstEstates(data);
+        setFirstEstateRv(data[0].Estate_RV);
+        setSecondEstates(data);
+        setSecondEstateRv(data[0].Estate_RV);
         })
       .catch(error => console.error('Error:', error));
   }, []);
 
   // Fetch blocks data when selectedEstate changes
   useEffect(() => {
-    if (selectedEstate) {
-      fetch(`/blocks/${selectedEstate}`)
+    if (firstSelectedEstate) {
+      fetch(`/blocks/${firstSelectedEstate}`)
         .then(response => response.json())
         .then(data => {
-            setBlocks(data);
-            setBlockRv(data[0].Block_RV);
+            setFirstBlocks(data);
+            setFirstBlockRv(data[0].Block_RV);
         })
         .catch(error => console.error('Error:', error));
     } else {
-      setBlocks([]); // Reset blocks if no estate is selected
+      setFirstBlocks([]); // Reset blocks if no estate is selected
     }
-  }, [selectedEstate]);
+  }, [firstSelectedEstate]);
 
-  const handleEstateSelect = (id) => {
-    console.log('Selected Estate ID:', id); // Debugging
-    setSelectedEstate(id);
-    setSelectedBlock(null); // Reset block selection when estate changes
+  // Fetch blocks data when selectedEstate changes
+  useEffect(() => {
+    if (secondSelectedEstate) {
+      fetch(`/blocks/${secondSelectedEstate}`)
+        .then(response => response.json())
+        .then(data => {
+            setSecondBlocks(data);
+            setSecondBlockRv(data[0].Block_RV);
+        })
+        .catch(error => console.error('Error:', error));
+    } else {
+      setSecondBlocks([]); // Reset blocks if no estate is selected
+    }
+  }, [secondSelectedEstate]);
+
+
+  const handleFirstEstateSelect = (id) => {
+    console.log('First Selected Estate ID:', id); // Debugging
+    setFirstSelectedEstate(id);
+    setFirstSelectedBlock(null); // Reset block selection when estate changes
   };
 
-  const handleBlockSelect = (id) => {
-    console.log('Selected Block ID:', id); // Debugging
-    setSelectedBlock(id);
+  const handleFirstBlockSelect = (id) => {
+    console.log('First Selected Block ID:', id); // Debugging
+    setFirstSelectedBlock(id);
   };
 
-  const handleNumberInputChange = (event) => {
-    setNumberInput(event.target.value);
+  const handleFirstNumberInputChange = (event) => {
+    setFirstNumberInput(event.target.value);
   };
 
-  const handleNumberInputSubmit = (event) => {
-    setNumberInput(event.target.value);
+  const handleFirstNumberInputSubmit = (event) => {
+    setFirstNumberInput(event.target.value);
+    // Logic to update BlockChargesTable, maybe set another state or directly pass to BlockChargesTable
+  };
+
+  const handleSecondEstateSelect = (id) => {
+    console.log('Second Selected Estate ID:', id); // Debugging
+    setSecondSelectedEstate(id);
+    setSecondSelectedBlock(null); // Reset block selection when estate changes
+  };
+
+  const handleSecondBlockSelect = (id) => {
+    console.log('Second Selected Block ID:', id); // Debugging
+    setSecondSelectedBlock(id);
+  };
+
+  const handleSecondNumberInputChange = (event) => {
+    setSecondNumberInput(event.target.value);
+  };
+
+  const handleSecondNumberInputSubmit = (event) => {
+    setSecondNumberInput(event.target.value);
     // Logic to update BlockChargesTable, maybe set another state or directly pass to BlockChargesTable
   };
 
@@ -62,37 +114,37 @@ const PremiseComparisonData = () => {
     <div>
       <div className='estate-block-info-container'>
           <div className='estate-info first-block'>
-            <h2>Estate</h2>
-            <EstateDropdown estates={estates} onEstateSelect={handleEstateSelect} />
-            {estates && (
+            <h2>First Estate</h2>
+            <EstateDropdown estates={firstEstates} onEstateSelect={handleFirstEstateSelect} />
+            {firstEstates && (
               <ul>
-                <li>Estate Name: {estates?.find(item => item.ID === parseInt(selectedEstate))?.Estate_Name}</li>
-                <li>Estate Rateable Value: {estates?.find(item => item.ID === parseInt(selectedEstate))?.Estate_RV}</li>
+                <li>Estate Name: {firstEstates?.find(item => item.ID === parseInt(firstSelectedEstate))?.Estate_Name}</li>
+                <li>Estate Rateable Value: {firstEstates?.find(item => item.ID === parseInt(firstSelectedEstate))?.Estate_RV}</li>
               </ul>
             )}
           </div>
           <div className='block-info first-block'>
-            <h2>Block</h2>
-            <BlockDropdown blocks={blocks} onBlockSelect={handleBlockSelect} />
-            {blocks && (
+            <h2>First Block</h2>
+            <BlockDropdown blocks={firstBlocks} onBlockSelect={handleFirstBlockSelect} />
+            {firstBlocks && (
               <ul>
-                <li>Block Name: {blocks?.find(item => item.ID === parseInt(selectedBlock))?.Block_Name}</li>
-                <li>Block Rateable Value: {blocks?.find(item => item.ID === parseInt(selectedBlock))?.Block_RV}</li>
+                <li>Block Name: {firstBlocks?.find(item => item.ID === parseInt(firstSelectedBlock))?.Block_Name}</li>
+                <li>Block Rateable Value: {firstBlocks?.find(item => item.ID === parseInt(firstSelectedBlock))?.Block_RV}</li>
               </ul>
             )}
           </div>
           <div className='premise-info first-block'>
-            <h2>Premise</h2>
+            <h2>First Premise</h2>
             <p>Enter the rateable value for your property.</p>
             <p>It will likely be a 3 digit number.</p>
             <input
               type="number"
-              value={numberInput}
-              onChange={handleNumberInputChange}
-              onBlur={handleNumberInputSubmit}
+              value={firstNumberInput}
+              onChange={handleFirstNumberInputChange}
+              onBlur={handleFirstNumberInputSubmit}
               onKeyPress={event => {
                 if (event.key === 'Enter') {
-                  handleNumberInputSubmit();
+                  handleFirstNumberInputSubmit();
                 }
               }}
             />
@@ -100,43 +152,46 @@ const PremiseComparisonData = () => {
       </div>
       <div className='estate-block-info-container'>
           <div className='estate-info second-block'>
-            <h2>Estate</h2>
-            <EstateDropdown estates={estates} onEstateSelect={handleEstateSelect} />
-            {estates && (
+            <h2>Second Estate</h2>
+            <EstateDropdown estates={secondEstates} onEstateSelect={handleSecondEstateSelect} />
+            {secondEstates && (
               <ul>
-                <li>Estate Name: {estates?.find(item => item.ID === parseInt(selectedEstate))?.Estate_Name}</li>
-                <li>Estate Rateable Value: {estates?.find(item => item.ID === parseInt(selectedEstate))?.Estate_RV}</li>
+                <li>Estate Name: {secondEstates?.find(item => item.ID === parseInt(secondSelectedEstate))?.Estate_Name}</li>
+                <li>Estate Rateable Value: {secondEstates?.find(item => item.ID === parseInt(secondSelectedEstate))?.Estate_RV}</li>
               </ul>
             )}
           </div>
           <div className='block-info second-block'>
-            <h2>Block</h2>
-            <BlockDropdown blocks={blocks} onBlockSelect={handleBlockSelect} />
-            {blocks && (
+            <h2>Second Block</h2>
+            <BlockDropdown blocks={secondBlocks} onBlockSelect={handleSecondBlockSelect} />
+            {secondBlocks && (
               <ul>
-                <li>Block Name: {blocks?.find(item => item.ID === parseInt(selectedBlock))?.Block_Name}</li>
-                <li>Block Rateable Value: {blocks?.find(item => item.ID === parseInt(selectedBlock))?.Block_RV}</li>
+                <li>Block Name: {secondBlocks?.find(item => item.ID === parseInt(secondSelectedBlock))?.Block_Name}</li>
+                <li>Block Rateable Value: {secondBlocks?.find(item => item.ID === parseInt(secondSelectedBlock))?.Block_RV}</li>
               </ul>
             )}
           </div>
           <div className='premise-info second-block'>
-            <h2>Premise</h2>
+            <h2>Second Premise</h2>
             <p>Enter the rateable value for your property.</p>
             <p>It will likely be a 3 digit number.</p>
             <input
               type="number"
-              value={numberInput}
-              onChange={handleNumberInputChange}
-              onBlur={handleNumberInputSubmit}
+              value={secondNumberInput}
+              onChange={handleSecondNumberInputChange}
+              onBlur={handleSecondNumberInputSubmit}
               onKeyPress={event => {
                 if (event.key === 'Enter') {
-                  handleNumberInputSubmit();
+                  handleSecondNumberInputSubmit();
                 }
               }}
             />
           </div>
       </div>
-      <PremiseChargesComparisonTable estateId={selectedEstate} blockId={selectedBlock} estateRv={estateRv} blockRv={blockRv} premiseRv={numberInput} />
+      <PremiseChargesComparisonTable firstEstateId={firstSelectedEstate} firstBlockId={firstSelectedBlock}
+        firstEstateRv={firstEstateRv} firstBlockRv={firstBlockRv} firstPremiseRv={firstNumberInput}
+        secondEstateId={secondSelectedEstate} secondBlockId={secondSelectedBlock}
+        secondEstateRv={secondEstateRv} secondBlockRv={secondBlockRv} secondPremiseRv={secondNumberInput}/>
     </div>
   );
 };
