@@ -13,7 +13,7 @@ const HomePage = () => {
         <div className="home-content-container">
           <div className="home-block-container">
             <div className="home-content">
-              <h2>Welcome to the Lambeth Service Chargerator!</h2>
+              <h2>Welcome to Lambeth Service Charge Insights!</h2>
               <p>This tool has been created by Lambeth residents to help each other compare service charge costs across estates and blocks in the borough.</p>
               <p>You can use it to help spot anomalies in your service charge which you can then query with Lambeth Housing Management.</p>
               <p>Remember, under the terms of your lease, service charges must be "reasonable". Whilst this is subjective, you may be able to use these tools to show how you are being overcharged in your block.</p>
