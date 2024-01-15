@@ -20,7 +20,7 @@ const About = () => {
                Sadly, high service charges often make it difficult to find a buyer.</p>
             <p>Lambeth does not seem to be making much effort to improve their management of the housing stock, or the way they manage service charges, so it is up to residents to
                hold them to account for the quality and cost of services that are provided.</p>
-            <p>If you have any feedback on this site, a feature idea, or would like to help out, please send an email to: <a href="mailto:nobody@noone.com?subject=Service Chargerator Feedback">nobody@noone.com</a></p>
+            <p>If you have any feedback on this site, a feature idea, or would like to help out, please send an email to: <a href="mailto:hello@servicechargeinsights.com?subject=Service Chargerator Feedback">nobody@noone.com</a></p>
           </div>
         </div>
       </main>
