@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import ChargesRepository from '../services/ChargesRepository';
 
 const BlockChargesComparisonTable = ({ firstEstateId, firstBlockId, secondEstateId, secondBlockId }) => {
   const [allYears, setAllYears] = useState([]);
@@ -36,9 +37,7 @@ const BlockChargesComparisonTable = ({ firstEstateId, firstBlockId, secondEstate
           'Estate_Repairs_and_Maintenance',
           'Estate_Tree_Maintenance'
         ];
-    }, []);
-
-
+  }, []);
 
   useEffect(() => {
     const pivotData = (data) => {
@@ -59,49 +58,34 @@ const BlockChargesComparisonTable = ({ firstEstateId, firstBlockId, secondEstate
     };
 
     if (firstEstateId && firstBlockId && secondEstateId && secondBlockId) {
+      const chargesRepository = new ChargesRepository();
+
       setIsLoading(true);
-      fetch(`/charges/${firstEstateId}/${firstBlockId}`)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Data not found');
-          }
-          return response.json();
-        })
-        .then(firstData => {
+      chargesRepository.dataLoaded.then(() => {
+          const firstData = chargesRepository.getCharges(firstEstateId, firstBlockId);
           const firstPivotedData = pivotData(firstData);
-          fetch(`/charges/${secondEstateId}/${secondBlockId}`)
-            .then(response => {
-              if (!response.ok) {
-                throw new Error('Data not found');
+
+          const secondData = chargesRepository.getCharges(secondEstateId, secondBlockId);
+          const secondPivotedData = pivotData(secondData);
+
+          const mergedArray = firstPivotedData.pivotedData.map((item, index) => {
+              const arr2Item = secondPivotedData.pivotedData[index];
+              let mergedItem = {};
+
+              for (const year in item) {
+                  mergedItem[year] = {
+                      first: item[year],
+                      second: arr2Item[year]
+                  };
               }
-              return response.json();
-            })
-            .then(secondData => {
-              const secondPivotedData = pivotData(secondData);
-
-              const mergedArray = firstPivotedData.pivotedData.map((item, index) => {
-                  const arr2Item = secondPivotedData.pivotedData[index];
-                  let mergedItem = {};
-
-                  for (const year in item) {
-                      mergedItem[year] = {
-                          first: item[year],
-                          second: arr2Item[year]
-                      };
-                  }
-                  return mergedItem;
-              });
-
-              setAllPivotData(mergedArray);
-
-              const years = [...new Set([ ...firstData.map(item => item.Year_End), ...secondData.map(item => item.Year_End)])].sort();
-              setAllYears(years);
-              setIsLoading(false);
-            })
-            .catch(error => {
-              setError(error.message);
-              setIsLoading(false);
+              return mergedItem;
           });
+
+          setAllPivotData(mergedArray);
+
+          const years = [...new Set([ ...firstData.map(item => item.Year_End), ...secondData.map(item => item.Year_End)])].sort();
+          setAllYears(years);
+          setIsLoading(false);
         })
         .catch(error => {
           setError(error.message);

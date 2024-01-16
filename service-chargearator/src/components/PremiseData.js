@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import EstateDropdown from './EstateDropdown';
 import BlockDropdown from './BlockDropdown';
 import PremiseChargesTable from './PremiseChargesTable';
+import EstatesRepository from '../services/EstatesRepository';
+import BlocksRepository from '../services/BlocksRepository';
 
 const PremiseData = () => {
   const [selectedEstate, setSelectedEstate] = useState(null);
@@ -14,25 +16,25 @@ const PremiseData = () => {
 
   // Fetch estates data
   useEffect(() => {
-    fetch('/estates')
-      .then(response => response.json())
-      .then(data => {
-        setEstates(data);
-        setEstateRv(data[0].Estate_RV);
-        })
-      .catch(error => console.error('Error:', error));
+    const estatesRepository = new EstatesRepository();
+    estatesRepository.dataLoaded.then(() => {
+        const estates = estatesRepository.getEstates();
+        setEstates(estates);
+        setEstateRv(estates[0].Estate_RV);
+    })
+    .catch(error => console.error('Error:', error));
   }, []);
 
   // Fetch blocks data when selectedEstate changes
   useEffect(() => {
     if (selectedEstate) {
-      fetch(`/blocks/${selectedEstate}`)
-        .then(response => response.json())
-        .then(data => {
-            setBlocks(data);
-            setBlockRv(data[0].Block_RV);
-        })
-        .catch(error => console.error('Error:', error));
+      const blocksRepository = new BlocksRepository();
+      blocksRepository.dataLoaded.then(() => {
+        const blocks = blocksRepository.getBlocks(selectedEstate)
+        setBlocks(blocks);
+        setBlockRv(blocks[0].Block_RV);
+      })
+      .catch(error => console.error('Error:', error));
     } else {
       setBlocks([]); // Reset blocks if no estate is selected
     }
@@ -66,8 +68,8 @@ const PremiseData = () => {
             <EstateDropdown estates={estates} onEstateSelect={handleEstateSelect} />
             {estates && (
               <ul>
-                <li>Estate Name: {estates?.find(item => item.ID === parseInt(selectedEstate))?.Estate_Name}</li>
-                <li>Estate Rateable Value: {estates?.find(item => item.ID === parseInt(selectedEstate))?.Estate_RV}</li>
+                <li>Estate Name: {estates?.find(item => item.ID === selectedEstate)?.Estate_Name}</li>
+                <li>Estate Rateable Value: {estates?.find(item => item.ID === selectedEstate)?.Estate_RV}</li>
               </ul>
             )}
           </div>

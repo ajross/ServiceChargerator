@@ -1,34 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
+import ChargesRepository from '../services/ChargesRepository';
 
 const PremiseChargesTable = ({ estateId, blockId, estateRv, blockRv, premiseRv }) => {
   const [chargesData, setChargesData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    if (estateId && blockId && estateRv && blockRv && premiseRv > 0) {
-      setIsLoading(true);
-      fetch(`/charges/${estateId}/${blockId}`)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Data not found');
-          }
-          return response.json();
-        })
-        .then(data => {
-          setChargesData(pivotData(data));
-          setIsLoading(false);
-        })
-        .catch(error => {
-          setError(error.message);
-          setIsLoading(false);
-        });
-    }
-  }, [estateId, blockId, estateRv, blockRv, premiseRv]);
-
-  const pivotData = (data) => {
-  
-    const chargeTypes = [
+    const chargeTypes = useMemo(() => {
+      return [
       'Block_Boiler_Repairs_and_Maintenance',
       'Block_Cleaning',
       'Block_Communal_Electricity',
@@ -57,7 +36,10 @@ const PremiseChargesTable = ({ estateId, blockId, estateRv, blockRv, premiseRv }
       'Estate_Repairs_and_Maintenance',
       'Estate_Tree_Maintenance'
     ];
+  }, []);
 
+  useEffect(() => {
+    const pivotData = (data) => {
       // Extract unique years
       const years = [...new Set(data.map(item => item.Year_End))].sort();
 
@@ -72,7 +54,21 @@ const PremiseChargesTable = ({ estateId, blockId, estateRv, blockRv, premiseRv }
       });
 
       return { pivotedData, years };
-  };
+    };
+
+    if (estateId && blockId && estateRv && blockRv && premiseRv > 0) {
+      const chargesRepository = new ChargesRepository();
+      setIsLoading(true);
+      chargesRepository.dataLoaded.then(() => {
+        setChargesData(pivotData(chargesRepository.getCharges(estateId, blockId)));
+        setIsLoading(false);
+      })
+      .catch(error => {
+        setError(error.message);
+        setIsLoading(false);
+      });
+    }
+  }, [estateId, blockId, estateRv, blockRv, premiseRv, chargeTypes]);
 
   return (
     <div className="table-container">

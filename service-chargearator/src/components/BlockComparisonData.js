@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import EstateDropdown from './EstateDropdown';
 import BlockDropdown from './BlockDropdown';
 import BlockChargesComparisonTable from './BlockChargesComparisonTable';
+import EstatesRepository from '../services/EstatesRepository';
+import BlocksRepository from '../services/BlocksRepository';
 
 const BlockComparisonData = () => {
   const [firstSelectedEstate, setFirstSelectedEstate] = useState(null);
@@ -16,11 +18,11 @@ const BlockComparisonData = () => {
 
   // Fetch estates data
   useEffect(() => {
-    fetch('/estates')
-      .then(response => response.json())
-      .then(data => {
-        setFirstEstates(data);
-        setSecondEstates(data);
+    const estatesRepository = new EstatesRepository();
+    estatesRepository.dataLoaded.then(() => {
+        const estates = estatesRepository.getEstates();
+        setFirstEstates(estates);
+        setSecondEstates(estates);
       })
       .catch(error => console.error('Error:', error));
   }, []);
@@ -28,10 +30,11 @@ const BlockComparisonData = () => {
   // Fetch blocks data when selectedEstate changes
   useEffect(() => {
     if (firstSelectedEstate) {
-      fetch(`/blocks/${firstSelectedEstate}`)
-        .then(response => response.json())
-        .then(data => setFirstBlocks(data))
-        .catch(error => console.error('Error:', error));
+      const blocksRepository = new BlocksRepository();
+      blocksRepository.dataLoaded.then(() => {
+        setFirstBlocks(blocksRepository.getBlocks(firstSelectedEstate));
+      })
+      .catch(error => console.error('Error:', error));
     } else {
       setFirstBlocks([]); // Reset blocks if no estate is selected
     }
@@ -40,10 +43,11 @@ const BlockComparisonData = () => {
   // Fetch blocks data when selectedEstate changes
   useEffect(() => {
     if (secondSelectedEstate) {
-      fetch(`/blocks/${secondSelectedEstate}`)
-        .then(response => response.json())
-        .then(data => setSecondBlocks(data))
-        .catch(error => console.error('Error:', error));
+      const blocksRepository = new BlocksRepository();
+      blocksRepository.dataLoaded.then(() => {
+          setSecondBlocks(blocksRepository.getBlocks(secondSelectedEstate));
+      })
+      .catch(error => console.error('Error:', error));
     } else {
       setSecondBlocks([]); // Reset blocks if no estate is selected
     }
@@ -75,8 +79,8 @@ const BlockComparisonData = () => {
             <EstateDropdown estates={firstEstates} onEstateSelect={handleFirstEstateSelect} />
             {firstEstates && (
               <ul>
-                <li>Estate Name: {firstEstates?.find(item => item.ID === parseInt(firstSelectedEstate))?.Estate_Name}</li>
-                <li>Estate Rateable Value: {firstEstates?.find(item => item.ID === parseInt(firstSelectedEstate))?.Estate_RV}</li>
+                <li>Estate Name: {firstEstates?.find(item => item.ID === firstSelectedEstate)?.Estate_Name}</li>
+                <li>Estate Rateable Value: {firstEstates?.find(item => item.ID === firstSelectedEstate)?.Estate_RV}</li>
               </ul>
             )}
           </div>
@@ -85,8 +89,8 @@ const BlockComparisonData = () => {
             <BlockDropdown blocks={firstBlocks} onBlockSelect={handleFirstBlockSelect} />
             {firstBlocks && (
               <ul>
-                <li>Block Name: {firstBlocks?.find(item => item.ID === parseInt(firstSelectedBlock))?.Block_Name}</li>
-                <li>Block Rateable Value: {firstBlocks?.find(item => item.ID === parseInt(firstSelectedBlock))?.Block_RV}</li>
+                <li>Block Name: {firstBlocks?.find(item => item.ID === firstSelectedBlock)?.Block_Name}</li>
+                <li>Block Rateable Value: {firstBlocks?.find(item => item.ID === firstSelectedBlock)?.Block_RV}</li>
               </ul>
             )}
           </div>
@@ -97,8 +101,8 @@ const BlockComparisonData = () => {
             <EstateDropdown estates={secondEstates} onEstateSelect={handleSecondEstateSelect} />
             {secondEstates && (
               <ul>
-                <li>Estate Name: {secondEstates?.find(item => item.ID === parseInt(secondSelectedEstate))?.Estate_Name}</li>
-                <li>Estate Rateable Value: {secondEstates?.find(item => item.ID === parseInt(secondSelectedEstate))?.Estate_RV}</li>
+                <li>Estate Name: {secondEstates?.find(item => item.ID === secondSelectedEstate)?.Estate_Name}</li>
+                <li>Estate Rateable Value: {secondEstates?.find(item => item.ID === secondSelectedEstate)?.Estate_RV}</li>
               </ul>
             )}
           </div>
@@ -107,8 +111,8 @@ const BlockComparisonData = () => {
             <BlockDropdown blocks={secondBlocks} onBlockSelect={handleSecondBlockSelect} />
             {secondBlocks && (
               <ul>
-                <li>Block Name: {secondBlocks?.find(item => item.ID === parseInt(secondSelectedBlock))?.Block_Name}</li>
-                <li>Block Rateable Value: {secondBlocks?.find(item => item.ID === parseInt(secondSelectedBlock))?.Block_RV}</li>
+                <li>Block Name: {secondBlocks?.find(item => item.ID === secondSelectedBlock)?.Block_Name}</li>
+                <li>Block Rateable Value: {secondBlocks?.find(item => item.ID === secondSelectedBlock)?.Block_RV}</li>
               </ul>
             )}
           </div>
