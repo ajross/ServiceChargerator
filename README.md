@@ -2,6 +2,11 @@
 
 This project has been created to provide a tool to Lambeth residents to investigate service charges and compare them across estates.
 
+To deploy, run:
+```shell
+npm run deploy
+```
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
