@@ -27,9 +27,6 @@ class ChargesRepository {
         const charges = this.data.filter(item => item.Estate_ID === estate_id && item.Block_ID === block_id)
                         .sort((a, b) => a.Year_End - b.Year_End); // TODO: Can this be moved into the complete method?
 
-        //const charges_list = [{column.name: getattr(charge, column) for column in columnNames} for charge in charges];
-
-//        return charges_list;
         return charges;
     }
 }

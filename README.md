@@ -1,80 +1,72 @@
-# Intro
+# Service Charge Insights
 
-# DB Config and Setup
+This project has been created to provide a tool to Lambeth residents to investigate service charges and compare them across estates.
 
-## Setup
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Get the docker image: 
-`docker pull postgres`
+## Available Scripts
 
-Start the container and create the database:
-```shell
-docker run --name CHARGE_DATA_DB -e POSTGRES_PASSWORD=ServiceChargerator_pass -p 5432:5432 -d postgres
-````
+In the project directory, you can run:
 
-Check the container is running: `docker ps`
+### `npm start`
 
-Connect using the `psql` command line tool:
-```shell
-docker exec -it CHARGE_DATA_DB psql -U postgres
-```
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The DB can be stopped with
-```shell
-docker stop CHARGE_DATA_DB
-```
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-It can be started again with
-```shell
-docker start CHARGE_DATA_DB
-```
+### `npm test`
 
-## Create a DB User
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-Log in to the DB with `psql`: 
-`docker exec -it CHARGE_DATA_DB psql -U postgres`
+### `npm run build`
 
-Create a user for running the migrations:
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-```sql
-CREATE USER alembic WITH PASSWORD 'alembic_pass';
-ALTER USER alembic WITH SUPERUSER;
-\q
-```
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-## Migrations
-Install the migration tool:
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-```shell
-pip install psycopg2-binary
-pip install alembic
-```
+### `npm run eject`
 
-Initialise Alembic and create the initial config files.
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-`alembic init alembic`
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-## Copy over data to the container
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-```shell
-docker cp data.csv container_name:/path/to/data.csv
-```
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-```shell
-psql -U alembic -d CHARGE_DATA -c "COPY your_table_name FROM '/tmp/charges.csv' DELIMITER ',' CSV HEADER;"
-```
+## Learn More
 
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-# React App
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-```shell
-npx create-react-app service-chargearator
-cd service-chargearator
-npm start
-```
+### Code Splitting
 
-# Flask App
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-```shell
-python app.py
-```
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
