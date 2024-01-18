@@ -72,10 +72,11 @@ nav a:hover {
 
 .table-container {
     overflow-x: auto;
+    width: 100%; /* Full width */
 }
 
 table {
-    width: 100%;
+    //width: 100%;
     border-collapse: collapse;
 }
 
@@ -110,12 +111,20 @@ th:first-child, td:first-child {
     z-index: 1;
 }
 
+.page-content-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+}
+
 /* Container for both estate and block info */
 .estate-block-info-container {
     display: flex;
     justify-content: space-around;
     padding: 10px;
     gap: 10px;
+    width: 100%; /* Full width */
 }
 
 /* Common styles for estate-info and block-info */
@@ -129,10 +138,12 @@ th:first-child, td:first-child {
 
 .first-block {
     background-color: #993399; /* Background color */
+    border-radius: 5px; /* Optional: for rounded corners */
 }
 
 .second-block {
     background-color: #069; /* Background color */
+    border-radius: 5px; /* Optional: for rounded corners */
 }
 
 /* Styles for lists within estate-info and block-info */
@@ -157,6 +168,7 @@ select option {
     background-color: white;
     color: #333;
 }
+
 .home-content-container {
     display: grid;
     grid-template-columns: 1fr; /* Single column layout */
@@ -239,6 +251,11 @@ select option {
     text-align: left; /* Left-align the text */
 }
 
+.text-row table {
+    background-color: white;
+    color: black;
+}
+
 .alt-color {
     background-color: #069;
 }
@@ -268,7 +285,7 @@ select option {
 .video-responsive iframe {
     left: 0;
     top: 0;
-    height: 100%;
-    width: 100%;
+    height: 75%;
+    width: 75%;
     position: absolute;
 }

@@ -96,8 +96,8 @@ const PremiseData = () => {
             <BlockDropdown blocks={blocks} onBlockSelect={handleBlockSelect} />
             {blocks && (
               <ul>
-                <li>Block Name: {blocks?.find(item => item.ID === parseInt(selectedBlock))?.Block_Name}</li>
-                <li>Block Rateable Value: {blocks?.find(item => item.ID === parseInt(selectedBlock))?.Block_RV}</li>
+                <li>Block Name: {blocks?.find(item => item.ID === selectedBlock)?.Block_Name}</li>
+                <li>Block Rateable Value: {blocks?.find(item => item.ID === selectedBlock)?.Block_RV}</li>
               </ul>
             )}
           </div>
