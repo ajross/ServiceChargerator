@@ -4,6 +4,7 @@ import BlockDropdown from './BlockDropdown';
 import BlockChargesComparisonTable from './BlockChargesComparisonTable';
 import EstatesRepository from '../services/EstatesRepository';
 import BlocksRepository from '../services/BlocksRepository';
+import ReactGA4 from 'react-ga4';
 
 const BlockComparisonData = () => {
   const [firstSelectedEstate, setFirstSelectedEstate] = useState(null);
@@ -56,19 +57,43 @@ const BlockComparisonData = () => {
   const handleFirstEstateSelect = (id) => {
     setFirstSelectedEstate(id);
     setFirstSelectedBlock(null); // Reset block selection when estate changes
+    ReactGA4.event({
+      category: 'Block Comparison',
+      action: 'First Estate Selection',
+      label: 'BCmp First Estate',
+      value: parseInt(id)
+    });
   };
 
   const handleFirstBlockSelect = (id) => {
     setFirstSelectedBlock(id);
+    ReactGA4.event({
+      category: 'Block Comparison',
+      action: 'First Block Selection',
+      label: 'BCmp First Block',
+      value: parseInt(id)
+    });
   };
   
   const handleSecondEstateSelect = (id) => {
     setSecondSelectedEstate(id);
     setSecondSelectedBlock(null); // Reset block selection when estate changes
+    ReactGA4.event({
+      category: 'Block Comparison',
+      action: 'Second Estate Selection',
+      label: 'BCmp Second Estate',
+      value: parseInt(id)
+    });
   };
 
   const handleSecondBlockSelect = (id) => {
     setSecondSelectedBlock(id);
+    ReactGA4.event({
+      category: 'Block Comparison',
+      action: 'Second Block Selection',
+      label: 'BCmp Second Block',
+      value: parseInt(id)
+    });
   };
 
   return (

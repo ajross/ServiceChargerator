@@ -4,6 +4,7 @@ import BlockDropdown from './BlockDropdown';
 import BlockChargesTable from './BlockChargesTable';
 import EstatesRepository from '../services/EstatesRepository';
 import BlocksRepository from '../services/BlocksRepository';
+import ReactGA4 from 'react-ga4';
 
 const EstateBlockDropdowns = () => {
   const [selectedEstate, setSelectedEstate] = useState(null);
@@ -37,11 +38,23 @@ const EstateBlockDropdowns = () => {
     console.log('Selected Estate ID:', id); // Debugging
     setSelectedEstate(id);
     setSelectedBlock(null); // Reset block selection when estate changes
+    ReactGA4.event({
+      category: 'Block Charges',
+      action: 'Estate Selection',
+      label: 'BC Estate',
+      value: parseInt(id)
+    });
   };
 
   const handleBlockSelect = (id) => {
     console.log('Selected Block ID:', id); // Debugging
     setSelectedBlock(id);
+    ReactGA4.event({
+      category: 'Block Charges',
+      action: 'Block Selection',
+      label: 'BC Block',
+      value: parseInt(id)
+    });
   };
 
   return (

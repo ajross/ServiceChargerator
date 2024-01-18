@@ -4,6 +4,7 @@ import BlockDropdown from './BlockDropdown';
 import PremiseChargesTable from './PremiseChargesTable';
 import EstatesRepository from '../services/EstatesRepository';
 import BlocksRepository from '../services/BlocksRepository';
+import ReactGA4 from 'react-ga4';
 
 const PremiseData = () => {
   const [selectedEstate, setSelectedEstate] = useState(null);
@@ -44,11 +45,23 @@ const PremiseData = () => {
     console.log('Selected Estate ID:', id); // Debugging
     setSelectedEstate(id);
     setSelectedBlock(null); // Reset block selection when estate changes
+    ReactGA4.event({
+      category: 'Premise Charges',
+      action: 'Estate Selection',
+      label: 'PC Estate',
+      value: parseInt(id)
+    });
   };
 
   const handleBlockSelect = (id) => {
     console.log('Selected Block ID:', id); // Debugging
     setSelectedBlock(id);
+    ReactGA4.event({
+      category: 'Premise Charges',
+      action: 'Block Selection',
+      label: 'PC Block',
+      value: parseInt(id)
+    });
   };
 
   const handleNumberInputChange = (event) => {
@@ -57,7 +70,12 @@ const PremiseData = () => {
 
   const handleNumberInputSubmit = (event) => {
     setNumberInput(event.target.value);
-    // Logic to update BlockChargesTable, maybe set another state or directly pass to BlockChargesTable
+    ReactGA4.event({
+      category: 'Premise Charges',
+      action: 'Dwelling Value',
+      label: 'PC Dwelling',
+      value: parseInt(event.target.value)
+    });
   };
 
   return (

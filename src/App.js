@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import BlockCharges from './pages/BlockCharges';
@@ -8,8 +8,14 @@ import PremiseChargeComparison from './pages/PremiseChargeComparison';
 import QueryingCharges from './pages/QueryingCharges';
 import SubmittingData from './pages/SubmittingData';
 import About from './pages/About';
+import ReactGA4 from 'react-ga4';
 
 function App() {
+  useEffect(() => {
+    ReactGA4.initialize('G-86GSPYM5EK');
+    ReactGA4.send('pageview');
+  }, []);
+
   return (
     <Router>
       <Routes>
@@ -21,7 +27,6 @@ function App() {
         <Route path="/querying-charges" element={<QueryingCharges />} />
         <Route path="/submitting-data" element={<SubmittingData />} />
         <Route path="/about" element={<About />} />
-
       </Routes>
     </Router>
   );

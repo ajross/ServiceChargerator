@@ -4,6 +4,7 @@ import BlockDropdown from './BlockDropdown';
 import PremiseChargesComparisonTable from './PremiseChargesComparisonTable';
 import EstatesRepository from '../services/EstatesRepository';
 import BlocksRepository from '../services/BlocksRepository';
+import ReactGA4 from 'react-ga4';
 
 const PremiseComparisonData = () => {
   const [firstSelectedEstate, setFirstSelectedEstate] = useState(null);
@@ -76,11 +77,24 @@ const PremiseComparisonData = () => {
     console.log('First Selected Estate ID:', id); // Debugging
     setFirstSelectedEstate(id);
     setFirstSelectedBlock(null); // Reset block selection when estate changes
+    ReactGA4.event({
+      category: 'Premise Comparison',
+      action: 'First Estate Selection',
+      label: 'PCmp First Estate',
+      value: parseInt(id)
+    });
   };
 
   const handleFirstBlockSelect = (id) => {
     console.log('First Selected Block ID:', id); // Debugging
     setFirstSelectedBlock(id);
+
+    ReactGA4.event({
+      category: 'Premise Comparison',
+      action: 'First Block Selection',
+      label: 'PCmp First Block',
+      value: parseInt(id)
+    });
   };
 
   const handleFirstNumberInputChange = (event) => {
@@ -89,18 +103,35 @@ const PremiseComparisonData = () => {
 
   const handleFirstNumberInputSubmit = (event) => {
     setFirstNumberInput(event.target.value);
-    // Logic to update BlockChargesTable, maybe set another state or directly pass to BlockChargesTable
+    ReactGA4.event({
+      category: 'Premise Charges',
+      action: 'First Dwelling Value',
+      label: 'PCmp First Dwelling',
+      value: parseInt(event.target.value)
+    });
   };
 
   const handleSecondEstateSelect = (id) => {
     console.log('Second Selected Estate ID:', id); // Debugging
     setSecondSelectedEstate(id);
     setSecondSelectedBlock(null); // Reset block selection when estate changes
+    ReactGA4.event({
+      category: 'Premise Comparison',
+      action: 'Second Estate Selection',
+      label: 'PCmp Second Estate',
+      value: parseInt(id)
+    });
   };
 
   const handleSecondBlockSelect = (id) => {
     console.log('Second Selected Block ID:', id); // Debugging
     setSecondSelectedBlock(id);
+    ReactGA4.event({
+      category: 'Premise Comparison',
+      action: 'Second Block Selection',
+      label: 'PCmp Second Block',
+      value: parseInt(id)
+    });
   };
 
   const handleSecondNumberInputChange = (event) => {
@@ -109,7 +140,12 @@ const PremiseComparisonData = () => {
 
   const handleSecondNumberInputSubmit = (event) => {
     setSecondNumberInput(event.target.value);
-    // Logic to update BlockChargesTable, maybe set another state or directly pass to BlockChargesTable
+    ReactGA4.event({
+      category: 'Premise Charges',
+      action: 'Second Dwelling Value',
+      label: 'PCmp Second Dwelling',
+      value: parseInt(event.target.value)
+    });
   };
 
   return (
