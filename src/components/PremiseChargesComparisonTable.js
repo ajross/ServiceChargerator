@@ -72,11 +72,13 @@ const PremiseChargesComparisonTable = ({
           const secondData = chargesRepository.getCharges(secondEstateId, secondBlockId);
           const secondPivotedData = pivotData(secondData);
 
+          const years = [...new Set([ ...firstData.map(item => item.Year_End), ...secondData.map(item => item.Year_End)])].sort();
+
           const mergedArray = firstPivotedData.pivotedData.map((item, index) => {
               const arr2Item = secondPivotedData.pivotedData[index];
               let mergedItem = {};
 
-              for (const year in item) {
+              for (const year of years) {
                   mergedItem[year] = {
                       first: item[year],
                       second: arr2Item[year]
@@ -85,10 +87,9 @@ const PremiseChargesComparisonTable = ({
               return mergedItem;
           });
 
+          setAllYears(years);
           setAllPivotData(mergedArray);
 
-          const years = [...new Set([ ...firstData.map(item => item.Year_End), ...secondData.map(item => item.Year_End)])].sort();
-          setAllYears(years);
           setIsLoading(false);
         })
         .catch(error => {
@@ -122,18 +123,18 @@ const PremiseChargesComparisonTable = ({
               <td>{chargeTypes[index].replace(/_/g, ' ')}</td>
               {allYears.map(year => ([
                 <td key={`${year}-1`}>
-                    £{row[year] != null ? Number(
+                    {row[year].first != null ? '£' + Number(
                     chargeTypes[index].startsWith("Block") ?
                     row[year].first / firstBlockRv * firstPremiseRv :
                     row[year].first / firstEstateRv * firstPremiseRv
-                    ).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : 'N/A'}
+                    ).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : 'No Data'}
                 </td>,
                 <td key={`${year}-2`}>
-                    £{row[year] != null ? Number(
+                    {row[year].second != null ? '£' + Number(
                     chargeTypes[index].startsWith("Block") ?
                     row[year].second / secondBlockRv * secondPremiseRv :
                     row[year].second / secondEstateRv * secondPremiseRv
-                    ).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : 'N/A'}
+                    ).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : 'No Data'}
                 </td>
                 ]
               ))}

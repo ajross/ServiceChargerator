@@ -68,11 +68,13 @@ const BlockChargesComparisonTable = ({ firstEstateId, firstBlockId, secondEstate
           const secondData = chargesRepository.getCharges(secondEstateId, secondBlockId);
           const secondPivotedData = pivotData(secondData);
 
+          const years = [...new Set([ ...firstData.map(item => item.Year_End), ...secondData.map(item => item.Year_End)])].sort();
+
           const mergedArray = firstPivotedData.pivotedData.map((item, index) => {
               const arr2Item = secondPivotedData.pivotedData[index];
               let mergedItem = {};
 
-              for (const year in item) {
+              for (const year of years) {
                   mergedItem[year] = {
                       first: item[year],
                       second: arr2Item[year]
@@ -81,10 +83,10 @@ const BlockChargesComparisonTable = ({ firstEstateId, firstBlockId, secondEstate
               return mergedItem;
           });
 
+          setAllYears(years);
+
           setAllPivotData(mergedArray);
 
-          const years = [...new Set([ ...firstData.map(item => item.Year_End), ...secondData.map(item => item.Year_End)])].sort();
-          setAllYears(years);
           setIsLoading(false);
         })
         .catch(error => {
@@ -115,10 +117,10 @@ const BlockChargesComparisonTable = ({ firstEstateId, firstBlockId, secondEstate
               <td>{chargeTypes[index].replace(/_/g, ' ')}</td>
               {allYears.map(year => ([
                 <td key={`${year}-1`}>
-                    £{row[year].first != null ? Number(row[year].first).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : 'N/A'}
+                    {row[year]?.first != null ? '£' + Number(row[year].first).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : 'No Data'}
                 </td>,
                 <td key={`${year}-2`}>
-                    £{row[year].second != null ? Number(row[year].second).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : 'N/A'}
+                    {row[year]?.second != null ? '£' + Number(row[year].second).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : 'No Data'}
                 </td>
                 ]
               ))}
