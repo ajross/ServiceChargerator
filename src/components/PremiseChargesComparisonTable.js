@@ -126,14 +126,14 @@ const PremiseChargesComparisonTable = ({
                     chargeTypes[index].startsWith("Block") ?
                     row[year].first / firstBlockRv * firstPremiseRv :
                     row[year].first / firstEstateRv * firstPremiseRv
-                    ).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '0.00'}
+                    ).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : 'N/A'}
                 </td>,
                 <td key={`${year}-2`}>
                     £{row[year] != null ? Number(
                     chargeTypes[index].startsWith("Block") ?
                     row[year].second / secondBlockRv * secondPremiseRv :
                     row[year].second / secondEstateRv * secondPremiseRv
-                    ).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '0.00'}
+                    ).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : 'N/A'}
                 </td>
                 ]
               ))}

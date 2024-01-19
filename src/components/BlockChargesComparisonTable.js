@@ -115,10 +115,10 @@ const BlockChargesComparisonTable = ({ firstEstateId, firstBlockId, secondEstate
               <td>{chargeTypes[index].replace(/_/g, ' ')}</td>
               {allYears.map(year => ([
                 <td key={`${year}-1`}>
-                    £{row[year].first != null ? Number(row[year].first).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '0.00'}
+                    £{row[year].first != null ? Number(row[year].first).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : 'N/A'}
                 </td>,
                 <td key={`${year}-2`}>
-                    £{row[year].second != null ? Number(row[year].second).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '0.00'}
+                    £{row[year].second != null ? Number(row[year].second).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : 'N/A'}
                 </td>
                 ]
               ))}

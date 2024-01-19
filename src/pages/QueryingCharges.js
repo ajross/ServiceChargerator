@@ -70,7 +70,7 @@ const QueryingCharges = () => {
             <h2>How to Query?</h2>
             <p>Email is your best route, as Lambeth does not have a good case management system in which you could raise a ticket.</p>
             <p>Send your email to <a href="mailto:HMhomeownership@lambeth.gov.uk?subject=Service Charge Query">HMhomeownership@lambeth.gov.uk</a>.</p>
-            <p>Try to keep your email clear and to the point.  It will be helpful to try and deal just one or 2 issues at a time or the email chain will get confusing.</p>
+            <p>Try to keep your email clear and to the point.  It will be helpful to try and deal with just one or 2 issues at a time or the email chain will get confusing.</p>
             <p>If you use numbered lists in your email, it will make it easier to refer back to your points at a later date.</p>
             <p>Lambeth are not very prompt responding to these queries, so patience is a virtue.  However, you should chase them if you have not had a response within 10 working days.</p>
           </div>
