@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import NavBar from '../components/NavBar';
 
@@ -25,7 +26,7 @@ const QueryingCharges = () => {
           <div className="text-row alt-color">
             <h2>What to Query?</h2>
             <p>Service charge invoices are not simple, and a lot of information is witheld or obscured by Lambeth.  Do not worry if it seems complicated - just take it step by step.</p>
-            <p>This talk (given at the AGM of the Lambeth Homeowners Association) will talk you through a practical example of things you can look for in your invoice that you may want to query.</p>
+            <p><Link to="https://youtu.be/sGygJZQz6Eo">This talk</Link> (given at the AGM of the Lambeth Homeowners Association) will talk you through a practical example of things you can look for in your invoice that you may want to query.</p>
 
             <div className="video-responsive">
               <iframe
