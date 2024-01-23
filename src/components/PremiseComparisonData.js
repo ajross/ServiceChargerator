@@ -35,9 +35,7 @@ const PremiseComparisonData = () => {
     estatesRepository.dataLoaded.then(() => {
         const estates = estatesRepository.getEstates();
         setFirstEstates(estates);
-        setFirstEstateRv(estates[0].Estate_RV);
         setSecondEstates(estates);
-        setSecondEstateRv(estates[0].Estate_RV);
       })
       .catch(error => console.error('Error:', error));
   }, []);
@@ -49,7 +47,6 @@ const PremiseComparisonData = () => {
       blocksRepository.dataLoaded.then(() => {
         const blocks = blocksRepository.getBlocks(firstSelectedEstate);
         setFirstBlocks(blocks);
-        setFirstBlockRv(blocks[0].Block_RV);
       })
       .catch(error => console.error('Error:', error));
     } else {
@@ -76,6 +73,7 @@ const PremiseComparisonData = () => {
   const handleFirstEstateSelect = (id) => {
     console.log('First Selected Estate ID:', id); // Debugging
     setFirstSelectedEstate(id);
+    setFirstEstateRv(firstEstates.find(estate => estate.ID === id)?.Estate_RV);
     setFirstSelectedBlock(null); // Reset block selection when estate changes
     ReactGA4.event({
       category: 'Premise Comparison',
@@ -88,7 +86,7 @@ const PremiseComparisonData = () => {
   const handleFirstBlockSelect = (id) => {
     console.log('First Selected Block ID:', id); // Debugging
     setFirstSelectedBlock(id);
-
+    setFirstBlockRv(firstBlocks.find(block => block.ID === id)?.Block_RV);
     ReactGA4.event({
       category: 'Premise Comparison',
       action: 'First Block Selection',
@@ -114,6 +112,7 @@ const PremiseComparisonData = () => {
   const handleSecondEstateSelect = (id) => {
     console.log('Second Selected Estate ID:', id); // Debugging
     setSecondSelectedEstate(id);
+    setSecondEstateRv(secondEstates.find(estate => estate.ID === id)?.Estate_RV);
     setSecondSelectedBlock(null); // Reset block selection when estate changes
     ReactGA4.event({
       category: 'Premise Comparison',
@@ -126,6 +125,7 @@ const PremiseComparisonData = () => {
   const handleSecondBlockSelect = (id) => {
     console.log('Second Selected Block ID:', id); // Debugging
     setSecondSelectedBlock(id);
+    setSecondBlockRv(secondBlocks.find(block => block.ID === id)?.Block_RV);
     ReactGA4.event({
       category: 'Premise Comparison',
       action: 'Second Block Selection',
@@ -157,7 +157,7 @@ const PremiseComparisonData = () => {
             {firstEstates && (
               <ul>
                 <li>Estate Name: {firstEstates?.find(item => item.ID === firstSelectedEstate)?.Estate_Name}</li>
-                <li>Estate Rateable Value: {firstEstates?.find(item => item.ID === firstSelectedEstate)?.Estate_RV}</li>
+                <li>Estate Rateable Value: {firstEstateRv}</li>
               </ul>
             )}
           </div>
@@ -167,7 +167,7 @@ const PremiseComparisonData = () => {
             {firstBlocks && (
               <ul>
                 <li>Block Name: {firstBlocks?.find(item => item.ID === firstSelectedBlock)?.Block_Name}</li>
-                <li>Block Rateable Value: {firstBlocks?.find(item => item.ID === firstSelectedBlock)?.Block_RV}</li>
+                <li>Block Rateable Value: {firstBlockRv}</li>
               </ul>
             )}
           </div>
@@ -195,7 +195,7 @@ const PremiseComparisonData = () => {
             {secondEstates && (
               <ul>
                 <li>Estate Name: {secondEstates?.find(item => item.ID === secondSelectedEstate)?.Estate_Name}</li>
-                <li>Estate Rateable Value: {secondEstates?.find(item => item.ID === secondSelectedEstate)?.Estate_RV}</li>
+                <li>Estate Rateable Value: {secondEstateRv}</li>
               </ul>
             )}
           </div>
@@ -205,7 +205,7 @@ const PremiseComparisonData = () => {
             {secondBlocks && (
               <ul>
                 <li>Block Name: {secondBlocks?.find(item => item.ID === secondSelectedBlock)?.Block_Name}</li>
-                <li>Block Rateable Value: {secondBlocks?.find(item => item.ID === secondSelectedBlock)?.Block_RV}</li>
+                <li>Block Rateable Value: {secondBlockRv}</li>
               </ul>
             )}
           </div>

@@ -9,8 +9,8 @@ import ReactGA4 from 'react-ga4';
 const PremiseData = () => {
   const [selectedEstate, setSelectedEstate] = useState(null);
   const [selectedBlock, setSelectedBlock] = useState(null);
-  const [estateRv, setEstateRv] = useState('');
-  const [blockRv, setBlockRv] = useState('');
+  const [estateRv, setEstateRv] = useState(null);
+  const [blockRv, setBlockRv] = useState(null);
   const [numberInput, setNumberInput] = useState('');
   const [estates, setEstates] = useState([]);
   const [blocks, setBlocks] = useState([]);
@@ -21,7 +21,6 @@ const PremiseData = () => {
     estatesRepository.dataLoaded.then(() => {
         const estates = estatesRepository.getEstates();
         setEstates(estates);
-        setEstateRv(estates[0].Estate_RV);
     })
     .catch(error => console.error('Error:', error));
   }, []);
@@ -33,7 +32,6 @@ const PremiseData = () => {
       blocksRepository.dataLoaded.then(() => {
         const blocks = blocksRepository.getBlocks(selectedEstate)
         setBlocks(blocks);
-        setBlockRv(blocks[0].Block_RV);
       })
       .catch(error => console.error('Error:', error));
     } else {
@@ -44,6 +42,7 @@ const PremiseData = () => {
   const handleEstateSelect = (id) => {
     console.log('Selected Estate ID:', id); // Debugging
     setSelectedEstate(id);
+    setEstateRv(estates.find(estate => estate.ID === id)?.Estate_RV);
     setSelectedBlock(null); // Reset block selection when estate changes
     ReactGA4.event({
       category: 'Premise Charges',
@@ -56,6 +55,7 @@ const PremiseData = () => {
   const handleBlockSelect = (id) => {
     console.log('Selected Block ID:', id); // Debugging
     setSelectedBlock(id);
+    setBlockRv(blocks.find(block => block.ID === id)?.Block_RV);
     ReactGA4.event({
       category: 'Premise Charges',
       action: 'Block Selection',
@@ -87,7 +87,7 @@ const PremiseData = () => {
             {estates && (
               <ul>
                 <li>Estate Name: {estates?.find(item => item.ID === selectedEstate)?.Estate_Name}</li>
-                <li>Estate Rateable Value: {estates?.find(item => item.ID === selectedEstate)?.Estate_RV}</li>
+                <li>Estate Rateable Value: {estateRv}</li>
               </ul>
             )}
           </div>
@@ -97,7 +97,7 @@ const PremiseData = () => {
             {blocks && (
               <ul>
                 <li>Block Name: {blocks?.find(item => item.ID === selectedBlock)?.Block_Name}</li>
-                <li>Block Rateable Value: {blocks?.find(item => item.ID === selectedBlock)?.Block_RV}</li>
+                <li>Block Rateable Value: {blockRv}</li>
               </ul>
             )}
           </div>
