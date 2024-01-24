@@ -90,8 +90,8 @@ const PremiseChargesTable = ({ estateId, blockId, estateRv, blockRv, premiseRv }
                 <td key={year}>
                     £{row[year] != null ? Number(
                     row.chargeType.startsWith("Block") ?
-                    row[year] / blockRv * premiseRv :
-                    row[year] / estateRv * premiseRv
+                    Math.round(row[year] / blockRv * premiseRv * 100) / 100 :
+                    Math.round(row[year] / estateRv * premiseRv * 100) / 100
                     ).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '0.00'}
                 </td>
               ))}
