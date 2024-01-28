@@ -22,6 +22,8 @@ const BlockCharges = () => {
               <p>Select your estate and block from the drop-downs to see the charges applied to the estate/block.</p>
               <p>You can use this to spot trends and anomolies such as large cost differences from year to year, or steady increases far above inflation.</p>
               <p>If you do not see your estate/block listed, it means we need more data.  Check out <Link to="/submitting-data">Submitting Data</Link> to see how you can help.</p>
+              <p>If a cell is highlighted red, then it means we have seen evidence has miscalculated the premise charges for this service.  You should compare the value on the invoice that Lambeth sent you against the value shown on the <Link to="/premise-charges">Premise Charges</Link> page.
+                 If there is a difference then you should contact Lambeth and ask them to fix their mistake and refund you any over-payment.</p>
             </div>
             <EstateBlockDropdowns />
           </div>

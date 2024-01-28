@@ -27,6 +27,8 @@ const PremiseChargeComparison = () => {
               <p>You can also use this data to spot how trends and anomolies impact residents across estates.  For example whether communal energy costs disproportionately impact residents in one flat compared to another.</p>
               <p>If you sent the Dwelling Rateable Value to "1", you can get a sense of the "unit cost" for a service in each block/estate.  e.g. How much does a unit of Cleaning compare between blocks?</p>
               <p>If you do not see your estate/block listed, it means we need more data.  Check out <Link to="/submitting-data">Submitting Data</Link> to see how you can help.</p>
+              <p>If a cell is highlighted red, then it means we have seen evidence Lambeth has miscalculated the premise charges for this service.  You should compare the value on the invoice that Lambeth sent you against the value shown here.
+                 If there is a difference then you should contact Lambeth and ask them to fix their mistake and refund you any over-payment.</p>
             </div>
             <PremiseComparisonData />
           </div>

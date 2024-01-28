@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import ChargesRepository from '../services/ChargesRepository';
+import ChargeErrorsRepository from '../services/ChargeErrorsRepository';
 
 const PremiseChargesTable = ({ estateId, blockId, estateRv, blockRv, premiseRv }) => {
   const [chargesData, setChargesData] = useState([]);
+  const [chargeErrors, setChargeErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-    const chargeTypes = useMemo(() => {
+  const chargeTypes = useMemo(() => {
       return [
       'Block_Boiler_Repairs_and_Maintenance',
       'Block_Cleaning',
@@ -58,9 +60,16 @@ const PremiseChargesTable = ({ estateId, blockId, estateRv, blockRv, premiseRv }
 
     if (estateId && blockId && estateRv && blockRv && premiseRv > 0) {
       const chargesRepository = new ChargesRepository();
+      const chargeErrorsRepository = new ChargeErrorsRepository();
       setIsLoading(true);
       chargesRepository.dataLoaded.then(() => {
         setChargesData(pivotData(chargesRepository.getCharges(estateId, blockId)));
+        chargeErrorsRepository.dataLoaded.then(() => {
+            setChargeErrors(pivotData(chargeErrorsRepository.getCharges(estateId, blockId)));
+        }).catch(error => {
+          setError(error.message);
+          setIsLoading(false);
+        });
         setIsLoading(false);
       })
       .catch(error => {
@@ -87,7 +96,7 @@ const PremiseChargesTable = ({ estateId, blockId, estateRv, blockRv, premiseRv }
             <tr key={index}>
               <td>{row.chargeType.replace(/_/g, ' ')}</td>
               {chargesData.years.map(year => (
-                <td key={year}>
+                <td key={year} className={chargeErrors.pivotedData[index][year] === true ? "error-cell" : "no-error"}>
                     £{row[year] != null ? Number(
                     row.chargeType.startsWith("Block") ?
                     Math.round(row[year] / blockRv * premiseRv * 100) / 100 :

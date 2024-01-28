@@ -103,6 +103,10 @@ tr:nth-child(even) {
     background-color: #f2f2f2;
 }
 
+.error-cell {
+    background-color: #F4C7C3;
+}
+
 /* Sticky header and first column */
 th:first-child, td:first-child {
     text-align: right;
