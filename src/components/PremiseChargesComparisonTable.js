@@ -115,12 +115,11 @@ const PremiseChargesComparisonTable = ({
               return mergedItem;
             });
             setChargeErrors(mergedErrorArray);
+            setIsLoading(false);
           }).catch(error => {
             setError(error.message);
             setIsLoading(false);
           });
-
-          setIsLoading(false);
         })
         .catch(error => {
           setError(error.message);
