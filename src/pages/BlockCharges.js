@@ -8,9 +8,11 @@ import EstateBlockDropdowns from '../components/EstateBlockDropdowns';
 const BlockCharges = () => {
   return (
     <div>
-      <Helmet>
-        <title>Service Charge Insights - Explore Block Charges</title>
-      </Helmet>
+      <>
+        <Helmet>
+          <title>Service Charge Insights - Explore Block Charges</title>
+        </Helmet>
+      </>
       <Header />
       <NavBar />
       <main>

@@ -8,9 +8,11 @@ import BlockComparisonData from '../components/BlockComparisonData';
 const BlockChargeComparison = () => {
   return (
     <div>
-      <Helmet>
-        <title>Service Charge Insights - Compare Block Charges</title>
-      </Helmet>
+      <>
+        <Helmet>
+          <title>Service Charge Insights - Compare Block Charges</title>
+        </Helmet>
+      </>
       <Header />
       <NavBar />
       <main>

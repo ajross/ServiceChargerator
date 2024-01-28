@@ -8,9 +8,11 @@ import PremiseData from '../components/PremiseData'
 const PremiseCharges = () => {
   return (
     <div>
-      <Helmet>
-        <title>Service Charge Insights - Explore Premise Charges</title>
-      </Helmet>
+      <>
+        <Helmet>
+          <title>Service Charge Insights - Explore Premise Charges</title>
+        </Helmet>
+      </>
       <Header />
       <NavBar />
       <main>

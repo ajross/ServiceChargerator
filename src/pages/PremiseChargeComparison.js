@@ -8,9 +8,11 @@ import PremiseComparisonData from '../components/PremiseComparisonData';
 const PremiseChargeComparison = () => {
   return (
     <div>
-      <Helmet>
-        <title>Service Charge Insights - Compare Premise Charges</title>
-      </Helmet>
+      <>
+        <Helmet>
+          <title>Service Charge Insights - Compare Premise Charges</title>
+        </Helmet>
+      </>
       <Header />
       <NavBar />
       <main>

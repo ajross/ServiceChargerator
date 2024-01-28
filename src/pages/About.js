@@ -6,9 +6,11 @@ import NavBar from '../components/NavBar';
 const About = () => {
   return (
     <div>
-      <Helmet>
-        <title>Service Charge Insights - About This Site</title>
-      </Helmet>
+      <>
+        <Helmet>
+          <title>Service Charge Insights - About This Site</title>
+        </Helmet>
+      </>
       <Header />
       <NavBar />
       <main>

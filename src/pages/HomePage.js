@@ -7,9 +7,11 @@ import NavBar from '../components/NavBar';
 const HomePage = () => {
   return (
     <div>
-      <Helmet>
-        <title>Service Charge Insights - Explore Lambeth Service Charges</title>
-      </Helmet>
+      <>
+        <Helmet>
+          <title>Service Charge Insights - Explore Lambeth Service Charges</title>
+        </Helmet>
+      </>
       <Header />
       <NavBar />
       <main>

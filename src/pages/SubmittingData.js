@@ -8,9 +8,11 @@ import Page2 from '../static/page2.jpg';
 const SubmittingData = () => {
   return (
     <div>
-      <Helmet>
-        <title>Service Charge Insights - Contribute Your Data</title>
-      </Helmet>
+      <>
+        <Helmet>
+          <title>Service Charge Insights - Contribute Your Data</title>
+        </Helmet>
+      </>
       <Header />
       <NavBar />
       <main>

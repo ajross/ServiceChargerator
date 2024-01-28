@@ -7,9 +7,11 @@ import NavBar from '../components/NavBar';
 const QueryingCharges = () => {
   return (
     <div>
-      <Helmet>
-        <title>Service Charge Insights - Querying Service Charges</title>
-      </Helmet>
+      <>
+        <Helmet>
+          <title>Service Charge Insights - Querying Service Charges</title>
+        </Helmet>
+      </>
       <Header />
       <NavBar />
       <main>
