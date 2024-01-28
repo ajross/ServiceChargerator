@@ -6,6 +6,7 @@ import BlockChargeComparison from './pages/BlockChargeComparison';
 import PremiseCharges from './pages/PremiseCharges';
 import PremiseChargeComparison from './pages/PremiseChargeComparison';
 import QueryingCharges from './pages/QueryingCharges';
+import MajorWorks from './pages/MajorWorks';
 import SubmittingData from './pages/SubmittingData';
 import About from './pages/About';
 import ReactGA4 from 'react-ga4';
@@ -30,6 +31,7 @@ function App() {
         <Route path="/premise-charges" element={<PremiseCharges />} />
         <Route path="/premise-charge-comparison" element={<PremiseChargeComparison />} />
         <Route path="/querying-charges" element={<QueryingCharges />} />
+        <Route path="/major-works" element={<MajorWorks />} />
         <Route path="/submitting-data" element={<SubmittingData />} />
         <Route path="/about" element={<About />} />
       </Routes>

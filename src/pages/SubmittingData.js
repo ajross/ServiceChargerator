@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Header from '../components/Header';
 import NavBar from '../components/NavBar';
@@ -23,7 +24,7 @@ const SubmittingData = () => {
             <p>This site is only as good as the data we have available.  We need your help to provide service charge data across the borough.</p>
             <p>Only one person from each block needs to send us their data, and we can calculate the charges per flat using the same formula as Lambeth uses.</p>
             <p>To submit your data, scan or take a photo of the <strong>Actual</strong> (not the estimate) service charge invoice that you were sent by Lambeth in September.</p>
-            <p>Email these images to <a href="mailto:hello@servicechargeinsights.com?subject=Service Charge Data">hello@servicechargeinsights.com</a>.</p>
+            <p>Email these images to <Link to="mailto:hello@servicechargeinsights.com?subject=Service Charge Data">hello@servicechargeinsights.com</Link>.</p>
             <p>You are welcome to mask off the Property Address, Invoice Number, Account Number, and Property Reference Number.</p>
             <p>Below is an example of the pictures to send in.</p>
             <p>The sections in the red boxes must be clearly visible or we will not be able to use the data.</p>
