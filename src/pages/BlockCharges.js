@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import Header from '../components/Header';
 import NavBar from '../components/NavBar';
 import EstateBlockDropdowns from '../components/EstateBlockDropdowns';
@@ -7,6 +8,9 @@ import EstateBlockDropdowns from '../components/EstateBlockDropdowns';
 const BlockCharges = () => {
   return (
     <div>
+      <Helmet>
+        <title>Service Charge Insights - Explore Block Charges</title>
+      </Helmet>
       <Header />
       <NavBar />
       <main>

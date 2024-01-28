@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import Header from '../components/Header';
 import NavBar from '../components/NavBar';
 import PremiseData from '../components/PremiseData'
@@ -7,6 +8,9 @@ import PremiseData from '../components/PremiseData'
 const PremiseCharges = () => {
   return (
     <div>
+      <Helmet>
+        <title>Service Charge Insights - Explore Premise Charges</title>
+      </Helmet>
       <Header />
       <NavBar />
       <main>

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { HashRouter as Router, Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import BlockCharges from './pages/BlockCharges';
 import BlockChargeComparison from './pages/BlockChargeComparison';
@@ -11,13 +11,18 @@ import About from './pages/About';
 import ReactGA4 from 'react-ga4';
 
 function App() {
+  const location = useLocation();
+
   useEffect(() => {
     ReactGA4.initialize('G-86GSPYM5EK');
-    ReactGA4.send('pageview');
   }, []);
 
+  useEffect(() => {
+    const currentPath = location.pathname + location.search;
+    ReactGA4.send({ hitType: "pageview", page: currentPath });
+  }, [location]);
+
   return (
-    <Router>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/block-charges" element={<BlockCharges />} />
@@ -28,7 +33,6 @@ function App() {
         <Route path="/submitting-data" element={<SubmittingData />} />
         <Route path="/about" element={<About />} />
       </Routes>
-    </Router>
   );
 }
 

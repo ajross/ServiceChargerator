@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import Header from '../components/Header';
 import NavBar from '../components/NavBar';
 import Page1 from '../static/page1.jpg';
@@ -7,6 +8,9 @@ import Page2 from '../static/page2.jpg';
 const SubmittingData = () => {
   return (
     <div>
+      <Helmet>
+        <title>Service Charge Insights - Contribute Your Data</title>
+      </Helmet>
       <Header />
       <NavBar />
       <main>
