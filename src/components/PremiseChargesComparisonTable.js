@@ -152,14 +152,14 @@ const PremiseChargesComparisonTable = ({
             <tr key={index}>
               <td>{chargeTypes[index].replace(/_/g, ' ')}</td>
               {allYears.map(year => ([
-                <td key={`${year}-1`} className={chargeErrors[index][year].first === true ? "error-cell" : "no-error"}>
+                <td key={`${year}-1`} className={chargeErrors[index][year]?.first === true ? "error-cell" : "no-error"}>
                     {row[year].first != null ? '£' + Number(
                     chargeTypes[index].startsWith("Block") ?
                     Math.round(row[year].first / firstBlockRv * firstPremiseRv * 100) / 100 :
                     Math.round(row[year].first / firstEstateRv * firstPremiseRv * 100) / 100
                     ).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : 'No Data'}
                 </td>,
-                <td key={`${year}-2`} className={chargeErrors[index][year].second === true ? "error-cell" : "no-error"}>
+                <td key={`${year}-2`} className={chargeErrors[index][year]?.second === true ? "error-cell" : "no-error"}>
                     {row[year].second != null ? '£' + Number(
                     chargeTypes[index].startsWith("Block") ?
                     Math.round(row[year].second / secondBlockRv * secondPremiseRv * 100) / 100 :
