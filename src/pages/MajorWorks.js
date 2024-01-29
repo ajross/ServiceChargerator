@@ -34,14 +34,16 @@ const MajorWorks = () => {
           </div>
           <div className="text-row">
             <h2>What to do</h2>
-            <p>Have a look through the documentation you have received regarding Major Works in your block.  Try to build a timeline of events (Section 20 received, work started, Section 20B receiveed, work completed, invoice received, ...).</p>
+            <p>Have a look through the documentation you have received regarding Major Works in your block.  Try to build a timeline of events (Section 20 received, work started, Section 20B received, work completed, invoice received, ...).</p>
             <p>If you have received an invoice, check whether you have received the correct Section 20 notices and whether your invoice was within 18 months of Lambeth being billed.
                You may need to contact Lambeth to verify whether notices were sent, or when they were invoiced by the contractors doing the works.</p>
             <p>Have a look through the list below and see if any of the works have already been contested successfully by other residents.</p>
-            <p>If you find you are not liable to pay some or all of the invoice, you can contact us by emailing <Link to="mailto:hello@servicechargeinsights.com?subject=Major Works">hello@servicechargeinsights.com</Link> with details of the scheme works ID, and what you have found out.</p>
+            <p>If you find you are not liable to pay some or all of the invoice, you can help others by contacting us by emailing <Link to="mailto:hello@servicechargeinsights.com?subject=Major Works">hello@servicechargeinsights.com</Link> with details of the scheme works ID, and what you have found out.</p>
+            <p>We can then add the info to the list below and potentially put residents in touch with each other.</p>
           </div>
           <div className="text-row alt-color">
-            <h2>Cotton Gardens Estate - Ebenezer House</h2>
+            <h2>List of Major Works Already Contested</h2>
+            <h3>Cotton Gardens Estate - Ebenezer House</h3>
             <ul>
               <li>Scheme Reference: 915305/1</li>
               <li>Actual: 2015/2016 - LIFT WORKS</li>
@@ -56,7 +58,7 @@ const MajorWorks = () => {
                 </ul>
               </li>
             </ul>
-            <h2>Southwyck House Estate - Southwyck House</h2>
+            <h3>Southwyck House Estate - Southwyck House</h3>
             <ul>
               <li>Scheme Reference: 913049/1</li>
               <li>Actual: CENTRAL AREA HEATING AND GAS WORKS</li>

@@ -190,6 +190,7 @@ select option {
     padding: 20px; /* Inner spacing */
     border-radius: 5px; /* Optional: rounded corners */
 }
+
 .home-content a {
   color: white;
   font-weight: bold;
@@ -223,11 +224,17 @@ select option {
     text-align: center; /* Optional: center the text */
  }
 
+.error-text {
+    color: #F4C7C3;
+    font-weight: bold;
+}
+
 .text-content-container {
     display: grid;
     grid-template-columns: 1fr; /* Single column layout */
     justify-items: center; /* Center grid items horizontally */
     gap: 20px; /* Space between grid items */
+    width: 80%;
 }
 
 .inner-container {
@@ -238,14 +245,23 @@ select option {
 .content-container {
     display: grid;
     grid-template-columns: 1fr; /* Single column layout */
-    justify-items: stretch; /* Stretch grid items to fill the container width */
+    justify-items: center; /* Stretch grid items to fill the container width */
     gap: 20px; /* Space between rows */
     margin: auto; /* Center the entire container on the page */
+    width: 90%;
 }
 
-.content-container  a {
+.content-container p {
+    max-width: 100%;
+}
+
+.content-container a {
   color: white;
   font-weight: bold;
+}
+
+.content-container div {
+    border-radius: 5px; /* Optional: rounded corners */
 }
 
 .text-row, .image-row {
@@ -253,6 +269,7 @@ select option {
     padding: 20px; /* Padding around the content */
     color: white; /* White text for text rows */
     text-align: left; /* Left-align the text */
+    max-width: 75%;
 }
 
 .text-row table {
@@ -289,7 +306,7 @@ select option {
 .video-responsive iframe {
     left: 0;
     top: 0;
-    height: 75%;
-    width: 75%;
+    height: 100%;
+    width: 100%;
     position: absolute;
 }

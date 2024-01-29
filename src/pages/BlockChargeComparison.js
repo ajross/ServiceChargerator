@@ -24,8 +24,9 @@ const BlockChargeComparison = () => {
               <p>Select your 2 estates and blocks from the drop-downs to see the charges applied to both estate/blocks side by side.</p>
               <p>You can use this to identify large differences in costs between like-for-like blocks (e.g. 2 blocks on the same estate).</p>
               <p>If you do not see your estate/block listed, it means we need more data.  Check out <Link to="/submitting-data">Submitting Data</Link> to see how you can help.</p>
-              <p>If a cell is highlighted red, then it means we have seen evidence Lambeth has miscalculated the premise charges for this service.  You should compare the value on the invoice that Lambeth sent you against the value shown on the <Link to="/premise-charges">Premise Charges</Link> page.
-                 If there is a difference then you should contact Lambeth and ask them to fix their mistake and refund you any over-payment.</p>
+              <p>If a cell is highlighted <span className="error-text">pink</span>, then it means we have seen evidence has miscalculated the premise charges for this service.</p>
+              <p>You should compare the value on the invoice that Lambeth sent you against the value shown on the <Link to="/premise-charges">Premise Charges</Link> page.</p>
+              <p>If there is a difference then you should contact Lambeth and ask them to fix their mistake and refund you any over-payment.</p>
             </div>
             <BlockComparisonData />
           </div>

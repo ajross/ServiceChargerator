@@ -10,9 +10,7 @@ const NavBar = () => {
       <Link to="/premise-charges">Premise Charges</Link><span className="separator">|</span>
       <Link to="/premise-charge-comparison">Premise Charge Comparison</Link><span className="separator">|</span>
       <Link to="/querying-charges">Querying Charges</Link><span className="separator">|</span>
-      {
-      //<Link to="/major-works">Major Works</Link><span className="separator">|</span>
-      }
+      <Link to="/major-works">Major Works</Link><span className="separator">|</span>
       <Link to="/submitting-data">Submitting Data</Link><span className="separator">|</span>
       <Link to="/about">About</Link>
     </nav>
