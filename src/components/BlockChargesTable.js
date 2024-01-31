@@ -87,7 +87,7 @@ const BlockChargesTable = ({ estateId, blockId }) => {
       <table>
         <thead>
           <tr>
-            <th>Charge Type</th>
+            <th>Charge Type/Year Ending</th>
             {chargesData.years.map(year => <th key={year}>{year}</th>)}
           </tr>
         </thead>

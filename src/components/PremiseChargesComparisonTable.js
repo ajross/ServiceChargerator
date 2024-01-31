@@ -139,7 +139,7 @@ const PremiseChargesComparisonTable = ({
       <table>
         <thead>
           <tr>
-            <th>Charge Type</th>
+            <th>Charge Type/Year Ending</th>
             {allYears.map(year => [
               <th key={`${year}-1`} className="first-block">{year}</th>,
               <th key={`${year}-2`} className="second-block">{year}</th>
