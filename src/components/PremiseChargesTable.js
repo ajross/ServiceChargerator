@@ -66,11 +66,11 @@ const PremiseChargesTable = ({ estateId, blockId, estateRv, blockRv, premiseRv }
         setChargesData(pivotData(chargesRepository.getCharges(estateId, blockId)));
         chargeErrorsRepository.dataLoaded.then(() => {
             setChargeErrors(pivotData(chargeErrorsRepository.getCharges(estateId, blockId)));
+            setIsLoading(false);
         }).catch(error => {
           setError(error.message);
           setIsLoading(false);
         });
-        setIsLoading(false);
       })
       .catch(error => {
         setError(error.message);
