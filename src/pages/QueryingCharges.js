@@ -19,7 +19,7 @@ const QueryingCharges = () => {
         <div className="content-container">
           <div className="text-row">
             <h2>Why Query Your Service Charge?</h2>
-            <p>Every April Lambeth sends you an estimate for your service charge bill for the year, and expects you to either pay it all at once, or make monthly installments.
+            <p>Every April Lambeth sends you an estimate for your service charge bill for the year, and expects you to either pay it all at once, or make monthly instalments.
             18 Months later you get an "actual" bill once Lambeth have worked out how much they actually spent, and they will either credit you back any over-payment, or (more likely)
             they will ask for more money from you.</p>
             <p>You have very little control over what services are provided to your block, and have very little control over how much the council decides to spend.</p>
@@ -31,7 +31,7 @@ const QueryingCharges = () => {
           </div>
           <div className="text-row alt-color">
             <h2>What to Query?</h2>
-            <p>Service charge invoices are not simple, and a lot of information is witheld or obscured by Lambeth.  Do not worry if it seems complicated - just take it step by step.</p>
+            <p>Service charge invoices are not simple, and a lot of information is withheld or obscured by Lambeth.  Do not worry if it seems complicated - just take it step by step.</p>
             <p><Link to="https://youtu.be/sGygJZQz6Eo">This talk</Link> (given at the AGM of the Lambeth Homeowners Association) will talk you through a practical example of things you can look for in your invoice that you may want to query.</p>
 
             <div className="video-responsive">

@@ -50,10 +50,10 @@ const MajorWorks = () => {
               <li>Approx Bill: £1000 per flat</li>
               <li>Status:
                 <ul>
-                  <li>Lambeth has admitted Section 20 and Section 20B notices were not correctly issued.</li>
+                  <li>Lambeth Council has admitted Section 20 and Section 20B notices were not correctly issued.</li>
                   <li>Leaseholders have requested their invoice be cancelled or refunded.</li>
                   <li>Contact Lambeth informing them that you are aware of this fact and request they remove the invoice from your account.</li>
-                  <li>If Lambeth have contacted your mortgage provider, speak to them and tell them you are contesting the charge and that they should not pay on your behalf.</li>
+                  <li>If Lambeth Council has contacted your mortgage provider, speak to your mortgage provider and tell them you are contesting the charge and that they should not pay on your behalf.</li>
                   <li>If you have already made payments towards this invoice, demand that the money be refunded immediately.</li>
                 </ul>
               </li>
@@ -65,10 +65,10 @@ const MajorWorks = () => {
               <li>Approx Bill: £18,000 per flat</li>
               <li>Status:
                 <ul>
-                  <li>Lambeth has admitted Section 20 and Section 20B notices were not correctly issued.</li>
+                  <li>Lambeth Council has admitted Section 20 and Section 20B notices were not correctly issued.</li>
                   <li>Leaseholders have successfully had their bills capped at £250 and had their money refunded.</li>
                   <li>Contact Lambeth informing them that you are aware of this fact and request they remove the invoice from your account.</li>
-                  <li>If Lambeth have contacted your mortgage provider, speak to them and tell them you are contesting the charge and that they should not pay on your behalf.</li>
+                  <li>If Lambeth have contacted your mortgage provider, speak to your mortgage provider and tell them you are contesting the charge and that they should not pay on your behalf.</li>
                   <li>If you have already made payments towards this invoice, demand that the money be refunded immediately.</li>
                 </ul>
               </li>
