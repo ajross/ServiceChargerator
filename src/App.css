@@ -48,6 +48,12 @@ header {
   text-align: center;
 }
 
+.kofiButton {
+  position: fixed;
+  top: 40px;
+  right: 20px;
+}
+
 nav {
   background-color: #000;
   padding: 10px;
