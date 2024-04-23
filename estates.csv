@@ -1,21 +1,183 @@
 ID,Estate_Name,Estate_RV
-1,Southwyck House Estate,52320
-2,Wyvil Estate,70849
-3,Spurgeon Estate,87117
-4,Penwith Manor Estate,61580
-5,Vauxhall Gardens Estate,304866
-6,Springfield Estate,205142
-7,Weir Estate,46032
-8,Wellington Mills Estate,37163
-9,Rosendale Gardens Estate,55998
-10,Cowley Estate,139809
-11,Tanswell Estate,81033
-12,Leigham Court Estate,175220
-13,Cotton Gardens Estate,72733
-14,Hope Park Estate,13930
-15,Larkhall Estate,78970
-16,Br2 Non-Estate,53176
-17,NI7 Non-Estate,107430
-18,Foxley Road Estate,2783
-19,Kingscroft Estate,3699
-20,Canterbury Gardens Estate,69612
+EA001,Albert Carr Gardens Estate,31880
+EB002,Alexandra Walk Estate,4925
+EB003,Argyll Court Estate,4932
+EA004,Arlington Lodge Estate,34423
+EB004,Ascot Court Estate,6274
+EB007,Barry Court Flats,3218
+EA006,Becondale Estate,28490
+EB008,Belenoyd Court Estate,4933
+EB009,Bentley Court Flats,1772
+EA007,Bentons Lane Estate,40014
+EA009,Black Prince Road Estate,21848
+EA011,Bloomfield Estate,27966
+EB011,Bobbin Close Flats,5824
+EA012,Bonham Estate,26308
+EA013,Bonneville/Deauville Esta,27686
+EA014,Boscombe Gardens Estate,10346
+EB012,Bournevale Road Estate,2071
+EB013,Bowater Close Estate,11305
+EA015,Bowlands Road Estate,65983
+ENBR2,Br2 Non-Estate,53176
+EA016,Briant Estate,30695
+EA017,Brighton Terrace Estate,20993
+EB014,Broadgates Court Estate,4235
+EA018,Brockwell Park Estate,19089
+EB017,Calidore Close Estate,12733
+EB018,Candide Lodge Estate,1051
+EA020,Canterbury Gardens Estate,69612
+EA021,Carfax Estate,29481
+EB019,Carlton Mansions Estate,2151
+EB021,Cautley Avenue Flats,5230
+EA023,Central Hill Estate,104731
+EB023,Charles Barry Estate,16282
+EB024,Charles Mills Court Estat,3102
+EB025,Charlotte Row Flats,4871
+EA024,Charters Close Estate,21738
+EB026,Chelsham House Estate,3624
+EB027,Cherry Laurel Walk Estate,4202
+EA026,China Walk Estate,123318
+EB029,Christchurch Road Estate,2384
+EA027,Clapham Manor Estate,67122
+EA029,Clapham Road Estate,45690
+EA030,Claremont Estate East,27607
+EA031,Claremont Estate West,27823
+EA032,Clarence Avenue Estate,50723
+EB030,Clarke House Flats,3909
+EB031,Claylands Court Estate,5586
+EB033,Climsland House Estate,4616
+EA033,Clive Road Estate,25915
+EB034,Clytha Court Estate,2670
+EB036,Conway House Estate,3610
+EA035,Cotton Gardens Estate,72733
+EA036,Cowley Estate,139809
+EA037,Cressingham Gardens Estate,73964
+EB039,Crewdson Road Estate,3972
+EA038,Deronda Estate,42585
+EB041,Douglas Robinson Court Es,2243
+EA039,Dumbarton Court Estate,52299
+EA040,Dunbar Dunelm Estate,32668
+EA041,Edmundsbury Court Estate,32054
+EB043,Elliot Road Estate,4720
+EB044,Emily Mansions Estate,2205
+EA043,Ethelred Towers Estate,76586
+EA044,Fenwick Estate,99884
+EA045,Fern Lodge Estate,53045
+EB046,Fitzalan Street Estate,3528
+EB048,Foster Court Flats,1870
+EA046,Foxley Road Estate,2783
+EB049,Frazier Street Estate,6658
+EA047,Gaskell Street Estate,44452
+EA048,Gauden Estate,21464
+EB052,Gleneldon Road Estate,3672
+EB053,Gordon Grove Flats,4688
+EB054,Grasmere Road Estate,3864
+EA050,Hainthorpe Estate,42038
+EB059,Harleyford Court Estate,6465
+EA051,Heath Road Estate,88017
+EA052,Hemans Estate,51304
+EB061,Herne Hill Flats,5388
+EB062,Herne Hill Road Flats,1212
+EA053,Hertford Estate,44031
+EA054,Hillside Gardens Estate,16782
+EA055,Holderness Estate,45666
+EA058,Hope Park Estate,13930
+EB064,Hopton Court Estate,1553
+EA059,Hurst Street Estate,35516
+EA061,James Hayward Estate,13116
+EA062,Kennings Estate,34786
+EB068,Kings Avenue Flats,2451
+EB069,Kingscroft Estate,3699
+EA065,Lairdale Estate,26841
+EA066,Lambeth Towers Estate,8492
+EB072,Lambourn Court Flats,1541
+EA067,Lanercost Close Estate,12167
+EA068,Larkhall Estate,78970
+EA069,Leigham Court Estate,175220
+EB074,Lessar Court Flats,6164
+EA070,Lilford Estate,49185
+EB075,Lilford Road Flats,2478
+EA071,Linton Grove Estate,35056
+EA072,Lothian Estate,22523
+EA074,Macaulay Estate,20905
+EB077,Mackie Estate,6448
+EB078,Magnolia Place Flats,5656
+EA076,Mawbey Brough Estate,89942
+EA077,Meath Estate,14978
+EA078,Minet Estate,23498
+EB082,Mount Pleasant Estate,7656
+EA079,Mursell Estate,112685
+EA081,Myatts Field South Estate,91987
+EA082,Nelsons Row Estate,40613
+ENNL7,NI7 Non-Estate,107430
+EB084,Norwood Road Estate,2264
+EA083,Notre Dame Estate,99583
+EA084,Oaklands Estate,94665
+EB087,Oborne Close Flats,7280
+EB088,Orlando Court Flats,1415
+EA085,Palace Road Estate,91356
+EB089,Park Court Flats,4787
+EA086,Paulet Road Estate,27428
+EA087,Penwith Manor Estate,61580
+EA088,Portobello Estate,65578
+EA089,Poynders Gardens Estate,64738
+EA090,Railton Road Estate,23445
+EA091,Renton Close Estate,13949
+EB093,Rita Road Estate,2270
+EB094,Rollscourt Avenue Flats,3040
+EB095,Rommany Court Estate,3054
+EB096,Rommany Road Flats,2530
+EA093,Rosendale Gardens Estate,55998
+EB097,Roupell Road Estate,5610
+EA095,Rushcroft Road Estate,4736
+EA096,Rusper Court Estate,16682
+EB098,Russell Court Estate,9984
+EA097,Ryan Court Estate,15122
+EA098,Sackville Estate,47969
+EB100,Sanders House Estate,9040
+EA099,Saxby Road Estate,14427
+EA100,Sinclair Estate,19028
+EA101,Solon Estate,41035
+EB102,Somerville Court Estate,4752
+EB103,South Island Place Estate,4384
+EA102,South Lambeth Estate,53118
+EB106,Southwell Road Flats,4820
+EA103,Southwyck House Estate,52320
+EA104,Springfield Estate,205142
+EA105,Spurgeon Estate,87117
+EA106,St Alphonsus Estate,8188
+EB107,St Anselms Court Estate,10568
+EB108,St Gothard Road Estate,9912
+EA107,St Louis Estate,8907
+EA108,St Matthews Estate,99192
+EB109,Stanthorpe Close Estate,6345
+EA110,Streatham Hill Estate,60320
+EX01,Street Property,0
+EA111,Tanswell Estate,81033
+EB110,Teignmouth Close Flats,5040
+EB112,Thorne Rd Estate,4812
+EB113,Tradescant Estate,2570
+EA115,Tulse Hill Estate,225515
+EB114,Union Road Estate,7248
+EA116,Valley Road Estate,64860
+EA117,Vauxhall Gardens Estate,304866
+EA118,Victoria Estate,15877
+EA119,Vincennes Estate,32598
+EB115,Virginia Walk Estate,4592
+EB116,Walnut Tree Walk Estate,6400
+EA121,Weir Estate,46032
+EA122,Wellington Mills Estate,37163
+EA123,Westbury Estate,62460
+EA124,Whitgift Estate,19528
+EA125,Willard Estate,28129
+EA126,William Bonney Estate,40859
+EB117,William Brown Court Estat,5880
+EA127,Wiltshire Road Estate,9064
+EA128,Windmill House Estate,9316
+EB118,Windsor Close Estate,13406
+EB119,Wiseman Court Estate,7105
+EB120,Woodland Close Flats,1212
+EA129,Woodvale Estate,52674
+EA130,Wyvil Estate,70849
+EA131,York Hill Estate,44238
+EB121,Zaire Court Estate,1696
