@@ -91,8 +91,7 @@ class UnitChargesRepository {
     }
 
     getUnitCharges(estate_id, block_id) {
-        const charges = this.data.filter(item => item.Estate_ID === estate_id && item.Block_ID === block_id)
-                        .sort((a, b) => a.Year_End - b.Year_End); // TODO: Can this be moved into the complete method?
+        const charges = this.data.find(item => item.Estate_ID === estate_id && item.Block_ID === block_id); // Finds the first row, assuming there is only 1 year of data
 
         return charges;
     }

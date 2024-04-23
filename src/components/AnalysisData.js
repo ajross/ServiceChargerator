@@ -4,6 +4,7 @@ import BlockDropdown from './BlockDropdown';
 import EstatesRepository from '../services/EstatesRepository';
 import BlocksRepository from '../services/BlocksRepository';
 import AnalysisContent from './AnalysisContent';
+import ScrollToTopButton from './ScrollToTopButton';
 import ReactGA4 from 'react-ga4';
 
 const AnalysisData = () => {
@@ -82,6 +83,7 @@ const AnalysisData = () => {
           </div>
       </div>
       <AnalysisContent estateId={selectedEstate} blockId={selectedBlock} estateRv={estates?.find(item => item.ID === selectedEstate)?.Estate_RV} blockRv={blocks?.find(item => item.ID === selectedBlock)?.Block_RV} />
+      <ScrollToTopButton />
     </div>
   );
 };
