@@ -1,6 +1,7 @@
 ID,Estate_Name,Estate_RV
 EA001,Albert Carr Gardens Estate,31880
 EB002,Alexandra Walk Estate,4925
+EA002,Angell Park Gardens Estate,23354
 EB003,Argyll Court Estate,4932
 EA004,Arlington Lodge Estate,34423
 EB004,Ascot Court Estate,6274
@@ -9,6 +10,7 @@ EA006,Becondale Estate,28490
 EB008,Belenoyd Court Estate,4933
 EB009,Bentley Court Flats,1772
 EA007,Bentons Lane Estate,40014
+EA008,Berridge Road Estate,43439
 EA009,Black Prince Road Estate,21848
 EA011,Bloomfield Estate,27966
 EB011,Bobbin Close Flats,5824
@@ -23,6 +25,7 @@ EA016,Briant Estate,30695
 EA017,Brighton Terrace Estate,20993
 EB014,Broadgates Court Estate,4235
 EA018,Brockwell Park Estate,19089
+EA019,Caldwell Gardens Estate Sv,0
 EB017,Calidore Close Estate,12733
 EB018,Candide Lodge Estate,1051
 EA020,Canterbury Gardens Estate,69612
@@ -48,6 +51,7 @@ EB031,Claylands Court Estate,5586
 EB033,Climsland House Estate,4616
 EA033,Clive Road Estate,25915
 EB034,Clytha Court Estate,2670
+EB035,Coniston Court Estate,1682
 EB036,Conway House Estate,3610
 EA035,Cotton Gardens Estate,72733
 EA036,Cowley Estate,139809
@@ -69,10 +73,12 @@ EA046,Foxley Road Estate,2783
 EB049,Frazier Street Estate,6658
 EA047,Gaskell Street Estate,44452
 EA048,Gauden Estate,21464
+EB051,Gipsy Road Flats,1644
 EB052,Gleneldon Road Estate,3672
 EB053,Gordon Grove Flats,4688
 EB054,Grasmere Road Estate,3864
 EA050,Hainthorpe Estate,42038
+EB057,Hamilton Road Flats,1720
 EB059,Harleyford Court Estate,6465
 EA051,Heath Road Estate,88017
 EA052,Hemans Estate,51304
@@ -81,6 +87,7 @@ EB062,Herne Hill Road Flats,1212
 EA053,Hertford Estate,44031
 EA054,Hillside Gardens Estate,16782
 EA055,Holderness Estate,45666
+EA056,Holland Town Estate Sv,0
 EA058,Hope Park Estate,13930
 EB064,Hopton Court Estate,1553
 EA059,Hurst Street Estate,35516
@@ -102,6 +109,7 @@ EA072,Lothian Estate,22523
 EA074,Macaulay Estate,20905
 EB077,Mackie Estate,6448
 EB078,Magnolia Place Flats,5656
+EB079,Maranda Court Estate,1016
 EA076,Mawbey Brough Estate,89942
 EA077,Meath Estate,14978
 EA078,Minet Estate,23498
@@ -134,6 +142,7 @@ EA096,Rusper Court Estate,16682
 EB098,Russell Court Estate,9984
 EA097,Ryan Court Estate,15122
 EA098,Sackville Estate,47969
+EB099,Saltoun Road Flats,3746
 EB100,Sanders House Estate,9040
 EA099,Saxby Road Estate,14427
 EA100,Sinclair Estate,19028
@@ -156,6 +165,7 @@ EX01,Street Property,0
 EA111,Tanswell Estate,81033
 EB110,Teignmouth Close Flats,5040
 EB112,Thorne Rd Estate,4812
+EA114,Thornton Gardens Estate,26734
 EB113,Tradescant Estate,2570
 EA115,Tulse Hill Estate,225515
 EB114,Union Road Estate,7248
