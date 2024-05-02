@@ -22,12 +22,17 @@ class UnitChargesRepository {
 
     calculateStats(columns, data) {
         let aggregateStatistics = {};
+        let estatesSeen = {};
 
         // Iterate over the headers and initialize aggregate statistics for each column
         columns.forEach(header => {
             // Ignore headers that should be ignored
             if (header === 'Year_Start' || header === 'Year_End' || header === 'Estate_ID' || header === 'Estate_Name' || header === 'Estate_RV' || header === 'Block_ID' || header === 'Block_Name' || header === 'Block_RV') {
                 return;
+            }
+
+            if(header.startsWith('Estate')) {
+                estatesSeen[header] = new Set();
             }
 
             // Initialize aggregate statistics object for the current column
@@ -53,14 +58,27 @@ class UnitChargesRepository {
                 if(isNaN(value)) {
                     console.log("Value is NaN");
                 }
+
                 if(value > 0) {
-                    // Update aggregate statistics for the current column
-                    const columnStats = aggregateStatistics[header];
-                    columnStats.max = Math.max(columnStats.max, value);
-                    columnStats.min = Math.min(columnStats.min, value);
-                    columnStats.sum += value;
-                    columnStats.count++;
-                    columnStats.values.push(value);
+                    if(header.startsWith('Estate') && !estatesSeen[header].has(row['Estate_Name'])) {
+                        estatesSeen[header].add(row['Estate_Name'])
+                        // Update aggregate statistics for the current column for unique estate values
+                        const columnStats = aggregateStatistics[header];
+                        columnStats.max = Math.max(columnStats.max, value);
+                        columnStats.min = Math.min(columnStats.min, value);
+                        columnStats.sum += value;
+                        columnStats.count++;
+                        columnStats.values.push(value);
+                    }
+                    else if(header.startsWith('Block')) {
+                        // Update aggregate statistics for the current column
+                        const columnStats = aggregateStatistics[header];
+                        columnStats.max = Math.max(columnStats.max, value);
+                        columnStats.min = Math.min(columnStats.min, value);
+                        columnStats.sum += value;
+                        columnStats.count++;
+                        columnStats.values.push(value);
+                    }
                 }
             });
         });
@@ -104,7 +122,17 @@ class UnitChargesRepository {
     }
 
     getSimilarEstateCharges(estate_rv) {
-        const charges = this.data.filter(item => parseInt(item.Estate_RV) >= (parseInt(estate_rv) - 500) && parseInt(item.Estate_RV) <= (parseInt(estate_rv) + 500))
+        const estatesSeen = new Set();
+        const charges = this.data.filter(item => {
+                                    if(!estatesSeen.has(item.Estate_ID)) {
+                                        estatesSeen.add(item.Estate_ID);
+                                        return true;
+                                    }
+                                    else {
+                                        return false;
+                                    }
+                                })
+                                 .filter(item => parseInt(item.Estate_RV) >= (parseInt(estate_rv) - (parseInt(estate_rv) / 10)) && parseInt(item.Estate_RV) <= (parseInt(estate_rv) + (parseInt(estate_rv) / 10)))
                         .sort((a, b) => b.Estate_RV - a.Estate_RV); // Sort in descending order
         return charges;
     }
@@ -116,7 +144,17 @@ class UnitChargesRepository {
     }
 
     getSimilarEstateStats(estate_rv) {
-        const charges = this.data.filter(item => parseInt(item.Estate_RV) >= (parseInt(estate_rv) - 500) && parseInt(item.Estate_RV) <= (parseInt(estate_rv) + 500))
+        const estatesSeen = new Set();
+        const charges = this.data.filter(item => {
+                                    if(!estatesSeen.has(item.Estate_ID)) {
+                                        estatesSeen.add(item.Estate_ID);
+                                        return true;
+                                    }
+                                    else {
+                                        return false;
+                                    }
+                                })
+                                 .filter(item => parseInt(item.Estate_RV) >= (parseInt(estate_rv) - (parseInt(estate_rv) / 10)) && parseInt(item.Estate_RV) <= (parseInt(estate_rv) + (parseInt(estate_rv) / 10)))
                         .sort((a, b) => b.Estate_RV - a.Estate_RV); // Sort in descending order
         return this.calculateStats(this.columnNames, charges);
     }
