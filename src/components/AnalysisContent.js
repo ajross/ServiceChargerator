@@ -76,7 +76,7 @@ const AnalysisContent = ({ estateId, blockId, estateRv, blockRv }) => {
   }, [estateId, blockId, estateRv, blockRv, unitChargesRepository, chargeTypes]);
 
   function roundToCurrency(num) {
-      return Math.round(num).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      return parseFloat(num).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
 
   function roundToUnitPrice(num) {
@@ -111,7 +111,7 @@ const AnalysisContent = ({ estateId, blockId, estateRv, blockRv }) => {
                   <p>You were charged £{roundToCurrency(unitChargesData[type])} for {type.replace(/_/g, ' ')}.</p>
                   <p>This is {percentageText(unitChargesData[type], unitChargesRepository.stats[type]?.mean)} than the average paid across the borough, which is £{roundToCurrency(unitChargesRepository.stats[type]?.mean)}.</p>
                   <p>You pay an effective unit price of £{roundToUnitPrice(unitChargesData[type + "_Unit"])} per unit of {type.replace(/_/g, ' ')}.</p>
-                  <p>This is % higher/lower than the average paid across the borough, which is £{roundToUnitPrice(unitChargesRepository.stats[type + "_Unit"]?.mean)} per unit.</p>
+                  <p>This is {percentageText(unitChargesData[type + "_Unit"], unitChargesRepository.stats[type + "_Unit"]?.mean)} than the average paid across the borough, which is £{roundToUnitPrice(unitChargesRepository.stats[type + "_Unit"]?.mean)} per unit.</p>
                 </div>
                 <div className="stats-table-container">
                 <table>
@@ -191,7 +191,8 @@ const AnalysisContent = ({ estateId, blockId, estateRv, blockRv }) => {
 
                 <h3>Statistics comparing your block to similar sized blocks.</h3>
                 <div className="summary-text">
-                  <p>Your block's rateable value is {blockRv}.  Comparable blocks would have rateable values between {parseInt(blockRv) - 500} and {parseInt(blockRv) + 500}.</p>
+                  <p>Your block's rateable value is {blockRv}.  There are {similarBlockStats[type]?.count} comparable blocks with rateable values between {parseInt(blockRv) - 500} and {parseInt(blockRv) + 500}.
+                  You can expand the section below to see the full data.</p>
                   <p>Your charge of £{roundToCurrency(unitChargesData[type])} is {percentageText(unitChargesData[type], similarBlockStats[type]?.mean)} than the average paid at similar sized blocks, which is £{roundToCurrency(similarBlockStats[type]?.mean)}.</p>
                   <p>The effective unit price you pay of £{roundToUnitPrice(unitChargesData[type + "_Unit"])} is {percentageText(unitChargesData[type + "_Unit"], similarBlockStats[type + "_Unit"]?.mean)} than the average paid across similar sized blocks, which is £{roundToUnitPrice(similarBlockStats[type + "_Unit"]?.mean)} per unit.</p>
                 </div>
@@ -270,6 +271,20 @@ const AnalysisContent = ({ estateId, blockId, estateRv, blockRv }) => {
                   </tbody>
                 </table>
                 </div>
+                <h3>What does this mean?</h3>
+                {parseFloat(calcPercentageIncrease(unitChargesData[type], similarBlockStats[type]?.mean)) > 10 ?
+                <>
+                  <p>As your charge is {percentageText(unitChargesData[type], similarBlockStats[type]?.mean)} than the average for similar sized blocks, you should consider writing to Lambeth to ask for an explanation.</p>
+                  <p>You can ask why there is such a big difference in the charge for your block compared to other blocks of similar size.</p>
+                  <p>If you look at the charge for your block, you should also consider whether this feels like a reasonable price to pay for the work that was done.</p>
+                </>
+                :
+                <>
+                  <p>As your charge is within 10% of, or is lower than, the average for similar sized blocks, you should consider whether this charge needs to be contested.</p>
+                  <p>Although the charge may be similar to that at other blocks, you should still consider whether you have received value for money, and whether the absolute cost seems reasonable for the work provided.</p>
+                </>
+                }
+                <p></p>
 
                 <h3 onClick={() => toggleExpand(type)}>
                   Click to expand and see {type.replace(/_/g, ' ')} charges for similar sized blocks {expandedTypes.has(type) ? '-' : '+'}
@@ -298,7 +313,7 @@ const AnalysisContent = ({ estateId, blockId, estateRv, blockRv }) => {
                                       <td>{item.Estate_RV}</td>
                                       <td>{item.Block_Name}</td>
                                       <td>{item.Block_RV}</td>
-                                      <td>£{item[type]}</td>
+                                      <td>£{roundToCurrency(item[type])}</td>
                                       <td>£{roundToUnitPrice(item[type + "_Unit"])}</td>
                                     </tr>
                                   );
@@ -314,7 +329,7 @@ const AnalysisContent = ({ estateId, blockId, estateRv, blockRv }) => {
                                       <td>{item.Estate_RV}</td>
                                       <td>{item.Block_Name}</td>
                                       <td>{item.Block_RV}</td>
-                                      <td>£{item[type]}</td>
+                                      <td>£{roundToCurrency(item[type])}</td>
                                       <td>£{roundToUnitPrice(item[type + "_Unit"])}</td>
                                     </tr>
                                   );
