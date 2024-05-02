@@ -96,6 +96,26 @@ nav a:hover {
   display: block; /* Show button when needed */
 }
 
+.home-content h3 {
+  cursor: pointer;
+}
+
+.stats-table-container {
+  display: flex;
+  justify-content: flex-start;
+  padding: 10px;
+}
+
+.stats-table-container table {
+  margin-right: 10px
+}
+
+.collapsible-content {
+  padding: 20px;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+}
+
 .table-container {
     overflow-x: auto;
     width: 100%; /* Full width */

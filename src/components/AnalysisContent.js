@@ -6,7 +6,10 @@ const AnalysisContent = ({ estateId, blockId, estateRv, blockRv }) => {
   const [error, setError] = useState(null);
   const [unitChargesData, setUnitChargesData] = useState([]);
   const [similarBlockCharges, setSimilarBlockCharges] = useState([]);
+  const [similarBlockStats, setSimilarBlockStats] = useState({});
   const [similarEstateCharges, setSimilarEstateCharges] = useState([]);
+  const [similarEstateStats, setSimilarEstateStats] = useState({});
+  const [expandedTypes, setExpandedTypes] = useState(new Set());
 
   const chargeTypes = useMemo(() => {
       return [
@@ -42,13 +45,27 @@ const AnalysisContent = ({ estateId, blockId, estateRv, blockRv }) => {
 
   const unitChargesRepository = useMemo(() => new UnitChargesRepository(), []);
 
+  const toggleExpand = (type) => {
+    setExpandedTypes(prevExpandedTypes => {
+      const newExpandedTypes = new Set(prevExpandedTypes);
+      if (newExpandedTypes.has(type)) {
+        newExpandedTypes.delete(type);
+      } else {
+        newExpandedTypes.add(type);
+      }
+      return newExpandedTypes;
+    });
+  };
+
   useEffect(() => {
     if (estateId && blockId && estateRv && blockRv) {
       setIsLoading(true);
       unitChargesRepository.dataLoaded.then(() => {
         setUnitChargesData(unitChargesRepository.getUnitCharges(estateId, blockId));
         setSimilarBlockCharges(unitChargesRepository.getSimilarBlockCharges(blockRv));
+        setSimilarBlockStats(unitChargesRepository.getSimilarBlockStats(blockRv));
         setSimilarEstateCharges(unitChargesRepository.getSimilarEstateCharges(estateRv));
+        setSimilarEstateStats(unitChargesRepository.getSimilarEstateStats(estateRv));
         setIsLoading(false);
       })
       .catch(error => {
@@ -57,6 +74,23 @@ const AnalysisContent = ({ estateId, blockId, estateRv, blockRv }) => {
       });
     }
   }, [estateId, blockId, estateRv, blockRv, unitChargesRepository, chargeTypes]);
+
+  function roundToCurrency(num) {
+      return Math.round(num).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  function roundToUnitPrice(num) {
+      return parseFloat(num).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 4 });
+  }
+
+  function calcPercentageIncrease(cost, average) {
+      return (100 * ((parseFloat(cost) - parseFloat(average)) / parseFloat(average))).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  function percentageText(cost, average) {
+      const percentageIncrease = calcPercentageIncrease(cost, average);
+      return percentageIncrease + "% " + (parseFloat(percentageIncrease) > 0 ? "higher" : "lower");
+  }
 
   return (
     <div className="home-content-container">
@@ -67,63 +101,60 @@ const AnalysisContent = ({ estateId, blockId, estateRv, blockRv }) => {
         chargeTypes.map(type => (
           parseFloat(unitChargesData[type]) > 0 ?
             <div className="home-content">
+            <h2>
+              {type.replace(/_/g, ' ')}
+            </h2>
             <div className="table-container">
               <div key={type}>
-                <h2>{type.replace(/_/g, ' ')}</h2>
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Estate Name</th>
-                      <th>Estate RV</th>
-                      <th>Block Name</th>
-                      <th>Block RV</th>
-                      <th>Cost</th>
-                      <th>Unit Cost</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {
-                      type.startsWith('Block') ?
-                          similarBlockCharges?.map((item, index) => {
-                            if (item[type] > 0) {
-                              return (
-                                <tr key={index} className={item.Block_ID === blockId ? "error-cell" : "no-error"}>
-                                  <td>{item.Estate_Name}</td>
-                                  <td>{item.Estate_RV}</td>
-                                  <td>{item.Block_Name}</td>
-                                  <td>{item.Block_RV}</td>
-                                  <td>£{item[type]}</td>
-                                  <td>£{parseFloat(item[type + "_Unit"]).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 4 })}</td>
-                                </tr>
-                              );
-                            }
-                            return null;
-                          })
-                      :
-                      similarEstateCharges?.map((item, index) => {
-                            if (item[type] > 0) {
-                              return (
-                                <tr key={index} className={item.Block_ID === blockId ? "error-cell" : "no-error"}>
-                                  <td>{item.Estate_Name}</td>
-                                  <td>{item.Estate_RV}</td>
-                                  <td>{item.Block_Name}</td>
-                                  <td>{item.Block_RV}</td>
-                                  <td>£{item[type]}</td>
-                                  <td>£{parseFloat(item[type + "_Unit"]).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 4 })}</td>
-                                </tr>
-                              );
-                            }
-                            return null;
-                          })
-                    }
-                  </tbody>
-                </table>
-                <h3>Statistics</h3>
+                <h3>Statistics comparing your block to the rest of the borough</h3>
+                <div className="summary-text">
+                  <p>You were charged £{roundToCurrency(unitChargesData[type])} for {type.replace(/_/g, ' ')}.</p>
+                  <p>This is {percentageText(unitChargesData[type], unitChargesRepository.stats[type]?.mean)} than the average paid across the borough, which is £{roundToCurrency(unitChargesRepository.stats[type]?.mean)}.</p>
+                  <p>You pay an effective unit price of £{roundToUnitPrice(unitChargesData[type + "_Unit"])} per unit of {type.replace(/_/g, ' ')}.</p>
+                  <p>This is % higher/lower than the average paid across the borough, which is £{roundToUnitPrice(unitChargesRepository.stats[type + "_Unit"]?.mean)} per unit.</p>
+                </div>
+                <div className="stats-table-container">
                 <table>
                   <thead>
                     <tr>
                         <th></th>
                         <th>Cost</th>
+                        <th>Meaning</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Your Charge</td>
+                      <td className="error-cell">£{roundToCurrency(unitChargesData[type])}</td>
+                      <td className="error-cell">The amount your block was charged for {type.replace(/_/g, ' ')}</td>
+                    </tr>
+                    <tr>
+                      <td>Min</td>
+                      <td>£{roundToCurrency(unitChargesRepository.stats[type]?.min)}</td>
+                      <td>The minimum cost of {type.replace(/_/g, ' ')} across all blocks charged for this service</td>
+                    </tr>
+                    <tr>
+                      <td>Max</td>
+                      <td>£{roundToCurrency(unitChargesRepository.stats[type]?.max)}</td>
+                      <td>The maximum cost of {type.replace(/_/g, ' ')} across all blocks charged for this service</td>
+                    </tr>
+                    <tr>
+                      <td>Mean</td>
+                      <td>£{roundToCurrency(unitChargesRepository.stats[type]?.mean)}</td>
+                      <td>The average cost of {type.replace(/_/g, ' ')} across all blocks charged for this service</td>
+                    </tr>
+                    <tr>
+                      <td>Median</td>
+                      <td>£{roundToCurrency(unitChargesRepository.stats[type]?.median)}</td>
+                      <td>The middle cost of {type.replace(/_/g, ' ')} across all blocks charged for this service</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <table>
+                  <thead>
+                    <tr>
+                        <th></th>
                         <th>Unit Cost</th>
                         <th>Meaning</th>
                     </tr>
@@ -131,36 +162,170 @@ const AnalysisContent = ({ estateId, blockId, estateRv, blockRv }) => {
                   <tbody>
                     <tr>
                       <td>Your Charge</td>
-                      <td>£{Math.round(unitChargesData[type]).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
-                      <td>£{parseFloat(unitChargesData[type + "_Unit"]).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 4 })}</td>
-                      <td>The amount your block was charged for {type.replace(/_/g, ' ')}</td>
+                      <td className="error-cell">£{roundToUnitPrice(unitChargesData[type + "_Unit"])}</td>
+                      <td className="error-cell">The unit cost for {type.replace(/_/g, ' ')} in your block</td>
                     </tr>
                     <tr>
                       <td>Min</td>
-                      <td>£{Math.round(unitChargesRepository.stats[type]?.min).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
-                      <td>£{parseFloat(unitChargesRepository.stats[type + "_Unit"]?.min).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 4 })}</td>
-                      <td>The minimum cost of {type.replace(/_/g, ' ')} across all blocks charged for this service</td>
+                      <td>£{roundToUnitPrice(unitChargesRepository.stats[type + "_Unit"]?.min)}</td>
+                      <td>The minimum unit cost of {type.replace(/_/g, ' ')} across all blocks charged for this service</td>
                     </tr>
                     <tr>
                       <td>Max</td>
-                      <td>£{Math.round(unitChargesRepository.stats[type]?.max).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
-                      <td>£{parseFloat(unitChargesRepository.stats[type + "_Unit"]?.max).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 4 })}</td>
-                      <td>The maximum cost of {type.replace(/_/g, ' ')} across all blocks charged for this service</td>
+                      <td>£{roundToUnitPrice(unitChargesRepository.stats[type + "_Unit"]?.max)}</td>
+                      <td>The maximum unit cost of {type.replace(/_/g, ' ')} across all blocks charged for this service</td>
                     </tr>
                     <tr>
                       <td>Mean</td>
-                      <td>£{Math.round(unitChargesRepository.stats[type]?.mean).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
-                      <td>£{parseFloat(unitChargesRepository.stats[type + "_Unit"]?.mean).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 4 })}</td>
-                      <td>The average cost of {type.replace(/_/g, ' ')} across all blocks charged for this service</td>
+                      <td>£{roundToUnitPrice(unitChargesRepository.stats[type + "_Unit"]?.mean)}</td>
+                      <td>The average unit cost of {type.replace(/_/g, ' ')} across all blocks charged for this service</td>
                     </tr>
                     <tr>
                       <td>Median</td>
-                      <td>£{Math.round(unitChargesRepository.stats[type]?.median).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
-                      <td>£{parseFloat(unitChargesRepository.stats[type + "_Unit"]?.median).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 4 })}</td>
-                      <td>The middle cost of {type.replace(/_/g, ' ')} across all blocks charged for this service</td>
+                      <td>£{roundToUnitPrice(unitChargesRepository.stats[type + "_Unit"]?.median)}</td>
+                      <td>The middle unit cost of {type.replace(/_/g, ' ')} across all blocks charged for this service</td>
                     </tr>
                   </tbody>
                 </table>
+                </div>
+
+                <h3>Statistics comparing your block to similar sized blocks.</h3>
+                <div className="summary-text">
+                  <p>Your block's rateable value is {blockRv}.  Comparable blocks would have rateable values between {parseInt(blockRv) - 500} and {parseInt(blockRv) + 500}.</p>
+                  <p>Your charge of £{roundToCurrency(unitChargesData[type])} is {percentageText(unitChargesData[type], similarBlockStats[type]?.mean)} than the average paid at similar sized blocks, which is £{roundToCurrency(similarBlockStats[type]?.mean)}.</p>
+                  <p>The effective unit price you pay of £{roundToUnitPrice(unitChargesData[type + "_Unit"])} is {percentageText(unitChargesData[type + "_Unit"], similarBlockStats[type + "_Unit"]?.mean)} than the average paid across similar sized blocks, which is £{roundToUnitPrice(similarBlockStats[type + "_Unit"]?.mean)} per unit.</p>
+                </div>
+                <div className="stats-table-container">
+                <table>
+                  <thead>
+                    <tr>
+                        <th></th>
+                        <th>Cost</th>
+                        <th>Meaning</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Your Charge</td>
+                      <td className="error-cell">£{roundToCurrency(unitChargesData[type])}</td>
+                      <td className="error-cell">The amount your block was charged for {type.replace(/_/g, ' ')}</td>
+                    </tr>
+                    <tr>
+                      <td>Min</td>
+                      <td>£{roundToCurrency(similarBlockStats[type]?.min)}</td>
+                      <td>The minimum cost of {type.replace(/_/g, ' ')} across similar sized blocks charged for this service</td>
+                    </tr>
+                    <tr>
+                      <td>Max</td>
+                      <td>£{roundToCurrency(similarBlockStats[type]?.max)}</td>
+                      <td>The maximum cost of {type.replace(/_/g, ' ')} across similar sized blocks charged for this service</td>
+                    </tr>
+                    <tr>
+                      <td>Mean</td>
+                      <td>£{roundToCurrency(similarBlockStats[type]?.mean)}</td>
+                      <td>The average cost of {type.replace(/_/g, ' ')} across similar sized blocks charged for this service</td>
+                    </tr>
+                    <tr>
+                      <td>Median</td>
+                      <td>£{roundToCurrency(similarBlockStats[type]?.median)}</td>
+                      <td>The middle cost of {type.replace(/_/g, ' ')} across similar sized blocks charged for this service</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <table>
+                  <thead>
+                    <tr>
+                        <th></th>
+                        <th>Unit Cost</th>
+                        <th>Meaning</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Your Charge</td>
+                      <td className="error-cell">£{roundToUnitPrice(unitChargesData[type + "_Unit"])}</td>
+                      <td className="error-cell">The unit cost for {type.replace(/_/g, ' ')} in your block</td>
+                    </tr>
+                    <tr>
+                      <td>Min</td>
+                      <td>£{roundToUnitPrice(similarBlockStats[type + "_Unit"]?.min)}</td>
+                      <td>The minimum unit cost of {type.replace(/_/g, ' ')} across similar sized blocks charged for this service</td>
+                    </tr>
+                    <tr>
+                      <td>Max</td>
+                      <td>£{roundToUnitPrice(similarBlockStats[type + "_Unit"]?.max)}</td>
+                      <td>The maximum unit cost of {type.replace(/_/g, ' ')} across similar sized blocks charged for this service</td>
+                    </tr>
+                    <tr>
+                      <td>Mean</td>
+                      <td>£{roundToUnitPrice(similarBlockStats[type + "_Unit"]?.mean)}</td>
+                      <td>The average unit cost of {type.replace(/_/g, ' ')} across similar sized blocks charged for this service</td>
+                    </tr>
+                    <tr>
+                      <td>Median</td>
+                      <td>£{roundToUnitPrice(similarBlockStats[type + "_Unit"]?.median)}</td>
+                      <td>The middle unit cost of {type.replace(/_/g, ' ')} across similar sized blocks charged for this service</td>
+                    </tr>
+                  </tbody>
+                </table>
+                </div>
+
+                <h3 onClick={() => toggleExpand(type)}>
+                  Click to expand and see {type.replace(/_/g, ' ')} charges for similar sized blocks {expandedTypes.has(type) ? '-' : '+'}
+                </h3>
+                {expandedTypes.has(type) && (
+                <div>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Estate Name</th>
+                          <th>Estate RV</th>
+                          <th>Block Name</th>
+                          <th>Block RV</th>
+                          <th>Cost</th>
+                          <th>Unit Cost</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {
+                          type.startsWith('Block') ?
+                              similarBlockCharges?.map((item, index) => {
+                                if (item[type] > 0) {
+                                  return (
+                                    <tr key={index} className={item.Block_ID === blockId ? "error-cell" : "no-error"}>
+                                      <td>{item.Estate_Name}</td>
+                                      <td>{item.Estate_RV}</td>
+                                      <td>{item.Block_Name}</td>
+                                      <td>{item.Block_RV}</td>
+                                      <td>£{item[type]}</td>
+                                      <td>£{roundToUnitPrice(item[type + "_Unit"])}</td>
+                                    </tr>
+                                  );
+                                }
+                                return null;
+                              })
+                          :
+                          similarEstateCharges?.map((item, index) => {
+                                if (item[type] > 0) {
+                                  return (
+                                    <tr key={index} className={item.Block_ID === blockId ? "error-cell" : "no-error"}>
+                                      <td>{item.Estate_Name}</td>
+                                      <td>{item.Estate_RV}</td>
+                                      <td>{item.Block_Name}</td>
+                                      <td>{item.Block_RV}</td>
+                                      <td>£{item[type]}</td>
+                                      <td>£{roundToUnitPrice(item[type + "_Unit"])}</td>
+                                    </tr>
+                                  );
+                                }
+                                return null;
+                              })
+                        }
+                      </tbody>
+                    </table>
+                </div>
+                )}
               </div>
             </div>
             </div>

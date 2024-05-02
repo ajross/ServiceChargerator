@@ -53,7 +53,7 @@ class UnitChargesRepository {
                 if(isNaN(value)) {
                     console.log("Value is NaN");
                 }
-                if(value !== 0) {
+                if(value > 0) {
                     // Update aggregate statistics for the current column
                     const columnStats = aggregateStatistics[header];
                     columnStats.max = Math.max(columnStats.max, value);
@@ -98,9 +98,7 @@ class UnitChargesRepository {
 
     // This assumes there is only one year's worth of data in the dataset
     getSimilarBlockCharges(block_rv) {
-        const charges = this.data.filter(item => {
-        return parseInt(item.Block_RV) >= (parseInt(block_rv) - 500) && parseInt(item.Block_RV) <= (parseInt(block_rv) + 500);
-        })
+        const charges = this.data.filter(item => parseInt(item.Block_RV) >= (parseInt(block_rv) - 500) && parseInt(item.Block_RV) <= (parseInt(block_rv) + 500))
                         .sort((a, b) => b.Block_RV - a.Block_RV); // Sort in descending order
         return charges;
     }
@@ -109,6 +107,18 @@ class UnitChargesRepository {
         const charges = this.data.filter(item => parseInt(item.Estate_RV) >= (parseInt(estate_rv) - 500) && parseInt(item.Estate_RV) <= (parseInt(estate_rv) + 500))
                         .sort((a, b) => b.Estate_RV - a.Estate_RV); // Sort in descending order
         return charges;
+    }
+
+    getSimilarBlockStats(block_rv) {
+        const charges = this.data.filter(item => parseInt(item.Block_RV) >= (parseInt(block_rv) - 500) && parseInt(item.Block_RV) <= (parseInt(block_rv) + 500))
+                        .sort((a, b) => b.Block_RV - a.Block_RV); // Sort in descending order
+        return this.calculateStats(this.columnNames, charges);
+    }
+
+    getSimilarEstateStats(estate_rv) {
+        const charges = this.data.filter(item => parseInt(item.Estate_RV) >= (parseInt(estate_rv) - 500) && parseInt(item.Estate_RV) <= (parseInt(estate_rv) + 500))
+                        .sort((a, b) => b.Estate_RV - a.Estate_RV); // Sort in descending order
+        return this.calculateStats(this.columnNames, charges);
     }
 }
 
