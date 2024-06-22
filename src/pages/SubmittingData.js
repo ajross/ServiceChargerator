@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import NavBar from '../components/NavBar';
 import Page1 from '../static/page1.jpg';
 import Page2 from '../static/page2.jpg';
+import Footer from '../components/Footer';
 
 const SubmittingData = () => {
   return (
@@ -33,17 +34,9 @@ const SubmittingData = () => {
             <img src={Page1} alt="Front page of the service charge invoice." />
             <img src={Page2} alt="Back page of the service charge invoice." />
         </div>
-        <div className="text-row">
-           <h2>What will happen to my data/images?</h2>
-            <ul>
-              <li>We will enter the block level data into our database which will make it available on this site.</li>
-              <li>We will <strong>NOT</strong> store your name, address, or any personally identifiable information.</li>
-              <li>We will email you back to let you know that your data is available in the tool.</li>
-              <li>Any images you sent us will be deleted.</li>
-            </ul>
-        </div>
       </div>
       </main>
+      <Footer />
     </div>
   );
 };

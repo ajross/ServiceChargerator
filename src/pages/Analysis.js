@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet';
 import Header from '../components/Header';
 import NavBar from '../components/NavBar';
 import AnalysisData from '../components/AnalysisData';
+import Footer from '../components/Footer';
 
 const Analysis = () => {
   return (
@@ -50,6 +51,7 @@ const Analysis = () => {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   );
 };

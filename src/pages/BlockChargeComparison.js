@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet';
 import Header from '../components/Header';
 import NavBar from '../components/NavBar';
 import BlockComparisonData from '../components/BlockComparisonData';
+import Footer from '../components/Footer';
 
 const BlockChargeComparison = () => {
   return (
@@ -32,6 +33,7 @@ const BlockChargeComparison = () => {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   );
 };

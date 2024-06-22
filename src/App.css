@@ -48,6 +48,16 @@ header {
   text-align: center;
 }
 
+footer {
+  background-color: #069;
+  color: white;
+  margin-top: 10px;
+  align-items: center; /* Vertically center the content */
+  text-align: center;
+  padding: 5px; /* Adds padding for some breathing room */
+  font-size: 10px;
+}
+
 .kofiButton {
   position: fixed;
   top: 40px;
@@ -234,7 +244,6 @@ select option {
 .home-block-container {
     width: 100%; /* Full width of the grid column */
     gap: 20px; /* Space between grid items */
-
 }
 
 .home-content {
@@ -244,6 +253,7 @@ select option {
     border-radius: 5px; /* Optional: rounded corners */
     margin-bottom: 10px;
 }
+
 
 .home-content a {
   color: white;
@@ -262,6 +272,24 @@ select option {
     width: 100%; /* Fit the grid width to its content */
     align-items: stretch; /* Stretches items to fill the container (this doesn't seem to work) */
 }
+.analysis-content {
+    background-color: #993399; /* Solid background color */
+    color: white; /* White font color */
+    padding: 20px; /* Inner spacing */
+    border-radius: 5px; /* Optional: rounded corners */
+    min-height: 100px; /* Set this so blocks match their height to a minimum */
+}
+
+.home-block-container a {
+  color: white;
+  text-decoration: none;
+}
+
+.analysis-content h2 {
+    margin-top: 0; /* Removes the top margin */
+    padding-top: 0px; /* Optional: Adds some padding at the top if needed */
+    text-align: center; /* Optional: center the text */
+ }
 
 /* Common styles for all content blocks inside the grid */
 .home-links-content-container div {

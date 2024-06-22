@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Header from '../components/Header';
 import NavBar from '../components/NavBar';
+import Footer from '../components/Footer';
 
 const HomePage = () => {
   return (
@@ -26,6 +27,17 @@ const HomePage = () => {
               <p>See the page on <Link to="/querying-charges">Querying Charges</Link> for more advice about what to challenge, and how.</p>
               <p>This site is only as good as the data we have available.  You can help!  See our page on <Link to="Submitting Data">Submitting Data</Link> to see how you can help!</p>
             </div>
+          </div>
+          <div className="home-block-container">
+            <Link to="/analysis">
+              <div className="analysis-content">
+                <h2>2022-2023 Service Charge Analysis</h2>
+                <p>See how the service charge for your block compares against the rest of the blocks in the borough.</p>
+                <p>Identify how each charge compares to the average cost across the borough, and to similar sized blocks.</p>
+                <p>Dive into the data to see the charges for all blocks/estates of a similar size.</p>
+                <p>Use this information to identify anomalies in your service charges which you can then query.</p>
+              </div>
+            </Link>
           </div>
           <div className="home-links-content-container">
             <Link to="/block-charges">
@@ -64,6 +76,7 @@ const HomePage = () => {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   );
 };
