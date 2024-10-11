@@ -10,8 +10,6 @@ const BoroughNavBar = ({ borough }) => {
       <Link to={`/${borough}/block-charge-comparison`}>Block Charge Comparison</Link><span className="separator">|</span>
       <Link to={`/${borough}/premise-charges`}>Premise Charges</Link><span className="separator">|</span>
       <Link to={`/${borough}/premise-charge-comparison`}>Premise Charge Comparison</Link><span className="separator">|</span>
-      <Link to={`/${borough}/querying-charges`}>Querying Charges</Link><span className="separator">|</span>
-      <Link to={`/${borough}/major-works`}>Major Works</Link>
     </nav>
   );
 };

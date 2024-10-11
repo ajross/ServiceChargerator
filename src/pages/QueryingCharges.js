@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import Header from '../../components/Header';
-import NavBar from '../../components/NavBar';
-import Footer from '../../components/Footer';
+import Header from '../components/Header';
+import NavBar from '../components/NavBar';
+import Footer from '../components/Footer';
 
 const QueryingCharges = () => {
   return (
@@ -20,20 +20,21 @@ const QueryingCharges = () => {
         <div className="content-container">
           <div className="text-row">
             <h2>Why Query Your Service Charge?</h2>
-            <p>Every April Lambeth sends you an estimate for your service charge bill for the year, and expects you to either pay it all at once, or make monthly instalments.
-            18 Months later you get an "actual" bill once Lambeth have worked out how much they actually spent, and they will either credit you back any over-payment, or (more likely)
+            <p>Every April your council sends you an estimate for your service charge bill for the year, and expects you to either pay it all at once, or make monthly instalments.</p>
+            <p>18 Months later you get an "actual" bill once your council has worked out how much they actually spent, and they will either credit you back any over-payment, or (more likely)
             they will ask for more money from you.</p>
             <p>You have very little control over what services are provided to your block, and have very little control over how much the council decides to spend.</p>
-            <p>As your freeholder, Lambeth is obliged under the terms of your lease to charge a "reasonable" amount for the services it provides.</p>
+            <p>As your freeholder, your council is obliged under the terms of your lease to charge a "reasonable" amount for the services it provides.</p>
             <p>If you look at your service charge bill, can you honestly say you are clear what service is being provided for the amount you are being charged?</p>
-            <p>Do you have any idea how Lambeth justifies the prices it charges?</p>
-            <p>Unless you know the answer to these questions, you should be querying Lambeth to ensure you have been charged correctly.</p>
+            <p>Do you have any idea how your council justifies the prices it charges?</p>
+            <p>Unless you know the answer to these questions, you should be querying your council to ensure you have been charged correctly.</p>
             <p><strong>This is your money, your livelihood, and if you do not know how it is being spent, then how do you know it is not being wasted?</strong></p>
           </div>
           <div className="text-row alt-color">
             <h2>What to Query?</h2>
-            <p>Service charge invoices are not simple, and a lot of information is withheld or obscured by Lambeth.  Do not worry if it seems complicated - just take it step by step.</p>
-            <p><Link to="https://youtu.be/sGygJZQz6Eo">This talk</Link> (given at the AGM of the Lambeth Homeowners Association) will talk you through a practical example of things you can look for in your invoice that you may want to query.</p>
+            <p>Service charge invoices are not simple, and a lot of information is often withheld or obscured.  Do not worry if it seems complicated - just take it step by step.</p>
+            <p><Link to="https://youtu.be/sGygJZQz6Eo">This talk</Link> was given at the AGM of the Lambeth Homeowners Association.  It runs through and example of a service charge invoice from Lambeth council
+             and talks you through a practical example of things you can look for in your invoice that you may want to query.</p>
 
             <div className="video-responsive">
               <iframe
@@ -47,7 +48,8 @@ const QueryingCharges = () => {
           </div>
           <div className="text-row">
             <h2>An Example</h2>
-            <p>Below is a subset of the data for the last 2 years at Southwyck House.  If we look at the figures, we can spot some unusual charges that we might want to query.</p>
+            <p>Below is a subset of the data for the last 2 years at Southwyck House, a large block in Lambeth.  If we look at the figures, we can spot some unusual charges that we might want to query.</p>
+            <p>Although the line items on your invoice vary by council/borough, you can use this example as inspiration for questions to raise about your invoice.</p>
             <p>The notes in the table could form a numbered list of questions that you could send to housing management.</p>
             <p>The goal is to either get a reasonable explanation as to why the costs are high, or to have the costs corrected to reasonable values.</p>
             <div className="table-container">
@@ -76,11 +78,11 @@ const QueryingCharges = () => {
           </div>
           <div className="text-row alt-color">
             <h2>How to Query?</h2>
-            <p>Email is your best route, as Lambeth does not have a good case management system in which you could raise a ticket.</p>
-            <p>Send your email to <Link to="mailto:HMhomeownership@lambeth.gov.uk?subject=Service Charge Query">HMhomeownership@lambeth.gov.uk</Link>.</p>
+            <p>Email is likely your best route, as it will give you a paper trail of your queries and the council's response in case you need to escalate the matter.</p>
+            <p>You should send the email to your council's housing management department.</p>
             <p>Try to keep your email clear and to the point.  It will be helpful to try and deal with just one or 2 issues at a time or the email chain will get confusing.</p>
             <p>If you use numbered lists in your email, it will make it easier to refer back to your points at a later date.</p>
-            <p>Lambeth are not very prompt responding to these queries, so patience is a virtue.  However, you should chase them if you have not had a response within 10 working days.</p>
+            <p>Some councils are not very prompt responding to these queries, so patience is a virtue.  However, you should chase them if you have not had a response within 10 working days.</p>
           </div>
         </div>
       </main>

@@ -1,16 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import Header from '../../components/Header';
-import NavBar from '../../components/NavBar';
-import Footer from '../../components/Footer';
+import Header from '../components/Header';
+import NavBar from '../components/NavBar';
+import Footer from '../components/Footer';
 
 const MajorWorks = () => {
   return (
     <div>
       <>
         <Helmet>
-          <title>Service Charge Insights - Major Works Invoice Errors</title>
+          <title>Service Charge Insights - Disputing Major Works Invoices</title>
         </Helmet>
       </>
       <Header />
@@ -21,30 +21,31 @@ const MajorWorks = () => {
           <div className="text-row">
             <h2>What are Major Works?</h2>
             <p>Major Works are large scale repairs and maintenance works performed on your block.  They may include lift refurbishment, installation of double glazing, significant repairs to a roof, or any works that would cost more than £250 for any single leaseholder.</p>
-            <p>Lambeth have described more about how they handle Major Works on their <Link to="https://www.lambeth.gov.uk/housing/housing-repairs/major-works-your-home">website</Link>.  They also describe the Section 20 and Section 20B notices that they must send out as part of the process.</p>
+            <p>Your council will likely have a description of how they handle Major Works on their website.  For example, Lambeth's is <Link to="https://www.lambeth.gov.uk/housing/housing-repairs/major-works-your-home">here</Link>.  They will also describe the Section 20 and Section 20B notices that they must send out as part of the process.</p>
             <p>More information about what qualifies as Major Works can be found on the <Link to="https://www.lease-advice.org/advice-guide/section-20-consultation-private-landlords-resident-management-companies-agents/#s-4">Lease Advice site</Link>.</p>
           </div>
           <div className="text-row alt-color">
             <h2>Should I pay for Major Works?</h2>
             <p>Major works are undertaken to maintain, or perform significant improvements to, the places we live.  It is only fair that everyone contributes to the upkeep of the buildings in which we live.</p>
-            <p>However, as the freeholder, Lambeth has certain obligations when it undertakes major works.  It is important that they notify leaseholders correctly, undertake consultations, and provide value for money for the works that are performed.</p>
-            <p>There are circumstances in which you may not be technically liable to pay some or all of a major works bill, if Lambeth have not correctly performed their obligations.</p>
-            <p>For example, if Lambeth did not correctly send Section 20 or Section 20B notifications you may not be liable to pay for the works.  If Lambeth sent you the invoice over 18 months after they were billed by the contractor, you may not be liable to pay for the works.</p>
-            <p>This area is a tricky subject to navigate, and you should do your own investigations to confirm whether you are legally liable for the bills.  However, this page intends to list major works invoices where leaseholders have successfully removed or reduced their bill by querying Lambeth.</p>
-            <p>The Lease Advice site has <Link to="https://www.lease-advice.org/advice-guide/section-20-consultation-private-landlords-resident-management-companies-agents/#s-9">further information</Link> on potential penalties if Lambeth (or any freeholder) does not comply with the rules.</p>
+            <p>However, as the freeholder, the council has certain obligations when it undertakes major works.  It is important that they notify leaseholders correctly, undertake consultations, and provide value for money for the works that are performed.</p>
+            <p>There are circumstances in which you may not be technically liable to pay some or all of a major works bill, if the council have not correctly performed their obligations.</p>
+            <p>For example, if the council did not correctly send Section 20 or Section 20B notifications you may not be liable to pay for the works.</p>
+            <p>If the council sent you the invoice over 18 months after they were billed by the contractor, you may not be liable to pay for the works.</p>
+            <p>This area is a tricky subject to navigate, and you should do your own investigations to confirm whether you are legally liable for the bills.  However, this page intends to list major works invoices where leaseholders have successfully removed or reduced their bill by querying their council.</p>
+            <p>The Lease Advice site has <Link to="https://www.lease-advice.org/advice-guide/section-20-consultation-private-landlords-resident-management-companies-agents/#s-9">further information</Link> on potential penalties if the council (or any freeholder) does not comply with the rules.</p>
           </div>
           <div className="text-row">
             <h2>What to do</h2>
             <p>Have a look through the documentation you have received regarding Major Works in your block.  Try to build a timeline of events (Section 20 received, work started, Section 20B received, work completed, invoice received, ...).</p>
-            <p>If you have received an invoice, check whether you have received the correct Section 20 notices and whether your invoice was within 18 months of Lambeth being billed.
-               You may need to contact Lambeth to verify whether notices were sent, or when they were invoiced by the contractors doing the works.</p>
+            <p>If you have received an invoice, check whether you have received the correct Section 20 notices and whether your invoice was within 18 months of the council being billed by the contractor.
+               You may need to contact the council to verify whether notices were sent, or when they were invoiced by the contractors doing the works.</p>
             <p>Have a look through the list below and see if any of the works have already been contested successfully by other residents.</p>
-            <p>If you find you are not liable to pay some or all of the invoice, you can help others by contacting us by emailing <Link to="mailto:hello@servicechargeinsights.com?subject=Major Works">hello@servicechargeinsights.com</Link> with details of the scheme works ID, and what you have found out.</p>
+            <p>If you find you are not liable to pay some or all of the invoice, you can help others by contacting us via email at <Link to="mailto:hello@servicechargeinsights.com?subject=Major Works">hello@servicechargeinsights.com</Link> with details of the scheme works ID, and what you have found out.</p>
             <p>We can then add the info to the list below and potentially put residents in touch with each other.</p>
           </div>
           <div className="text-row alt-color">
-            <h2>List of Major Works Already Contested</h2>
-            <h3>Cotton Gardens Estate - Ebenezer House</h3>
+            <h2>List of Major Works Already Disputed by Leaseholders</h2>
+            <h3>Lambeth Council - Cotton Gardens Estate - Ebenezer House</h3>
             <ul>
               <li>Scheme Reference: 915305/1</li>
               <li>Actual: 2015/2016 - LIFT WORKS</li>
@@ -59,7 +60,7 @@ const MajorWorks = () => {
                 </ul>
               </li>
             </ul>
-            <h3>Southwyck House Estate - Southwyck House</h3>
+            <h3>Lambeth Council - Southwyck House Estate - Southwyck House</h3>
             <ul>
               <li>Scheme Reference: 913049/1</li>
               <li>Actual: CENTRAL AREA HEATING AND GAS WORKS</li>

@@ -7,10 +7,10 @@ import BlockCharges from './pages/borough/BlockCharges';
 import BlockChargeComparison from './pages/borough/BlockChargeComparison';
 import PremiseCharges from './pages/borough/PremiseCharges';
 import PremiseChargeComparison from './pages/borough/PremiseChargeComparison';
-import QueryingCharges from './pages/borough/QueryingCharges';
-import MajorWorks from './pages/borough/MajorWorks';
 import SubmittingData from './pages/borough/SubmittingData';
 import Analysis from './pages/borough/Analysis';
+import MajorWorks from './pages/MajorWorks';
+import QueryingCharges from './pages/QueryingCharges';
 import About from './pages/About';
 import ReactGA4 from 'react-ga4';
 
@@ -21,14 +21,14 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/borough-analysis-2022-2023" element={<BoroughAnalysis20222023 />} />
+        <Route path="/major-works" element={<PageWrapper Component={MajorWorks} />} />
+        <Route path="/querying-charges" element={<PageWrapper Component={QueryingCharges} />} />
         <Route path="/about" element={<About />} />
         <Route path="/:borough" element={<PageWrapper Component={BoroughHomePage} />} />
         <Route path="/:borough/block-charges" element={<PageWrapper Component={BlockCharges} />} />
         <Route path="/:borough/block-charge-comparison" element={<PageWrapper Component={BlockChargeComparison} />} />
         <Route path="/:borough/premise-charges" element={<PageWrapper Component={PremiseCharges} />} />
         <Route path="/:borough/premise-charge-comparison" element={<PageWrapper Component={PremiseChargeComparison} />} />
-        <Route path="/:borough/querying-charges" element={<PageWrapper Component={QueryingCharges} />} />
-        <Route path="/:borough/major-works" element={<PageWrapper Component={MajorWorks} />} />
         <Route path="/:borough/submitting-data" element={<PageWrapper Component={SubmittingData} />} />
         <Route path="/:borough/analysis" element={<PageWrapper Component={Analysis} />} />
       </Routes>

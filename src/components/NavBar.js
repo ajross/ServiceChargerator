@@ -11,6 +11,8 @@ const NavBar = () => {
       <Link to="/lewisham">Lewisham</Link><span className="separator">|</span>
       <Link to="/southwark">Southwark</Link><span className="separator">|</span>
       <Link to="/tower-hamlets">Tower Hamlets</Link><span className="separator">|</span>
+      <Link to={"/querying-charges"}>Querying Charges</Link><span className="separator">|</span>
+      <Link to={"/major-works"}>Major Works</Link><span className="separator">|</span>
       <Link to="/about">About</Link><br/>
     </nav>
   );
