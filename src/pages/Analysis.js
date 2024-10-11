@@ -1,11 +1,11 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import Header from '../components/Header';
-import NavBar from '../components/NavBar';
+import BoroughNavBar from '../components/BoroughNavBar';
 import AnalysisData from '../components/AnalysisData';
 import Footer from '../components/Footer';
 
-const Analysis = () => {
+const Analysis = ({ borough }) => {
   return (
     <div>
       <>
@@ -14,7 +14,7 @@ const Analysis = () => {
         </Helmet>
       </>
       <Header />
-      <NavBar />
+      <BoroughNavBar borough={borough}/>
       <main>
         <div className="home-content-container">
           <div className="home-block-container">

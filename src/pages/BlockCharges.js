@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Header from '../components/Header';
-import NavBar from '../components/NavBar';
+import BoroughNavBar from '../components/BoroughNavBar';
 import EstateBlockDropdowns from '../components/EstateBlockDropdowns';
 import Footer from '../components/Footer';
 
@@ -15,7 +15,7 @@ const BlockCharges = () => {
         </Helmet>
       </>
       <Header />
-      <NavBar />
+      <BoroughNavBar />
       <main>
         <div className="home-content-container">
           <div className="home-block-container">

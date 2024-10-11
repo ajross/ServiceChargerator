@@ -5,15 +5,13 @@ const NavBar = () => {
   return (
     <nav>
       <Link to="/">Home</Link><span className="separator">|</span>
-      <Link to="/analysis">2022-2023 Analysis</Link><span className="separator">|</span>
-      <Link to="/block-charges">Block Charges</Link><span className="separator">|</span>
-      <Link to="/block-charge-comparison">Block Charge Comparison</Link><span className="separator">|</span>
-      <Link to="/premise-charges">Premise Charges</Link><span className="separator">|</span>
-      <Link to="/premise-charge-comparison">Premise Charge Comparison</Link><span className="separator">|</span>
-      <Link to="/querying-charges">Querying Charges</Link><span className="separator">|</span>
-      <Link to="/major-works">Major Works</Link><span className="separator">|</span>
-      <Link to="/submitting-data">Submitting Data</Link><span className="separator">|</span>
-      <Link to="/about">About</Link>
+      <Link to="/borough-analysis-2022-2023">Borough Analysis 2022-2023</Link><span className="separator">|</span>
+      <Link to="/greenwich">Greenwich</Link><span className="separator">|</span>
+      <Link to="/lambeth">Lambeth</Link><span className="separator">|</span>
+      <Link to="/lewisham">Lewisham</Link><span className="separator">|</span>
+      <Link to="/southwark">Southwark</Link><span className="separator">|</span>
+      <Link to="/tower-hamlets">Tower Hamlets</Link><span className="separator">|</span>
+      <Link to="/about">About</Link><br/>
     </nav>
   );
 };

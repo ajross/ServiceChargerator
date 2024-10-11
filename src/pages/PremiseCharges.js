@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Header from '../components/Header';
-import NavBar from '../components/NavBar';
+import BoroughNavBar from '../components/BoroughNavBar';
 import PremiseData from '../components/PremiseData'
 import Footer from '../components/Footer';
 
@@ -15,7 +15,7 @@ const PremiseCharges = () => {
         </Helmet>
       </>
       <Header />
-      <NavBar />
+      <BoroughNavBar />
       <main>
         <div className="home-content-container">
           <div className="home-block-container">

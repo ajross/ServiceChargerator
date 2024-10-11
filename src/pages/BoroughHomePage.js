@@ -2,25 +2,27 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Header from '../components/Header';
-import NavBar from '../components/NavBar';
+import BoroughNavBar from '../components/BoroughNavBar';
 import Footer from '../components/Footer';
+import { formatBoroughFromProp } from '../utils/TextUtils';
 
-const HomePage = () => {
+
+const BoroughHomePage = ({ borough }) => {
   return (
     <div>
       <>
         <Helmet>
-          <title>Service Charge Insights - Explore Lambeth Service Charges</title>
+          <title>Service Charge Insights - Explore {formatBoroughFromProp(borough)} Service Charges</title>
         </Helmet>
       </>
       <Header />
-      <NavBar />
+      <BoroughNavBar borough={borough}/>
       <main>
         <p/>
         <div className="home-content-container">
           <div className="home-block-container">
             <div className="home-content">
-              <h2>Welcome to Service Charge Insights!</h2>
+              <h2>Welcome to {formatBoroughFromProp(borough)} Service Charge Insights!</h2>
               <p>This tool has been created by Lambeth residents to help each other compare leasehold service charge costs across estates and blocks in the borough.</p>
               <p>You can use it to help spot anomalies in your service charge which you can then query with Lambeth Housing Management.</p>
               <p>Remember, under the terms of your lease, service charges must be "reasonable". Whilst this is subjective, you may be able to use these tools to show how you are being overcharged in your block.</p>
@@ -31,7 +33,7 @@ const HomePage = () => {
           <div className="home-block-container">
             <Link to="/analysis">
               <div className="analysis-content">
-                <h2>2022-2023 Service Charge Analysis</h2>
+                <h2>{formatBoroughFromProp(borough)} 2022-2023 Service Charge Analysis</h2>
                 <p>See how the service charge for your block compares against the rest of the blocks in the borough.</p>
                 <p>Identify how each charge compares to the average cost across the borough, and to similar sized blocks.</p>
                 <p>Dive into the data to see the charges for all blocks/estates of a similar size.</p>
@@ -81,4 +83,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default BoroughHomePage;

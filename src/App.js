@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes, useLocation, useParams } from 'react-router-dom';
 import HomePage from './pages/HomePage';
+import BoroughHomePage from './pages/BoroughHomePage';
 import BlockCharges from './pages/BlockCharges';
 import BlockChargeComparison from './pages/BlockChargeComparison';
 import PremiseCharges from './pages/PremiseCharges';
@@ -13,6 +14,27 @@ import About from './pages/About';
 import ReactGA4 from 'react-ga4';
 
 function App() {
+  return (
+    <Router>
+      <Analytics />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/:borough" element={<PageWrapper Component={BoroughHomePage} />} />
+        <Route path="/:borough/block-charges" element={<PageWrapper Component={BlockCharges} />} />
+        <Route path="/:borough/block-charge-comparison" element={<PageWrapper Component={BlockChargeComparison} />} />
+        <Route path="/:borough/premise-charges" element={<PageWrapper Component={PremiseCharges} />} />
+        <Route path="/:borough/premise-charge-comparison" element={<PageWrapper Component={PremiseChargeComparison} />} />
+        <Route path="/:borough/querying-charges" element={<PageWrapper Component={QueryingCharges} />} />
+        <Route path="/:borough/major-works" element={<PageWrapper Component={MajorWorks} />} />
+        <Route path="/:borough/submitting-data" element={<PageWrapper Component={SubmittingData} />} />
+        <Route path="/:borough/analysis" element={<PageWrapper Component={Analysis} />} />
+      </Routes>
+    </Router>
+  );
+}
+
+function Analytics() {
   const location = useLocation();
 
   useEffect(() => {
@@ -24,20 +46,12 @@ function App() {
     ReactGA4.send({ hitType: "pageview", page: currentPath });
   }, [location]);
 
-  return (
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/block-charges" element={<BlockCharges />} />
-        <Route path="/block-charge-comparison" element={<BlockChargeComparison />} />
-        <Route path="/premise-charges" element={<PremiseCharges />} />
-        <Route path="/premise-charge-comparison" element={<PremiseChargeComparison />} />
-        <Route path="/analysis" element={<Analysis />} />
-        <Route path="/querying-charges" element={<QueryingCharges />} />
-        <Route path="/major-works" element={<MajorWorks />} />
-        <Route path="/submitting-data" element={<SubmittingData />} />
-        <Route path="/about" element={<About />} />
-      </Routes>
-  );
+  return null;
+}
+
+function PageWrapper({ Component }) {
+  const { borough } = useParams();
+  return <Component borough={borough} />;
 }
 
 export default App;
