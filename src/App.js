@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { HashRouter as Router, Route, Routes, useLocation, useParams } from 'react-router-dom';
 import HomePage from './pages/HomePage';
-import BoroughAnalysisTwTwTwTh from './pages/BoroughAnalysisTwTwTwTh';
+import BoroughAnalysis20222023 from './pages/BoroughAnalysis20222023';
 import BoroughHomePage from './pages/borough/BoroughHomePage';
 import BlockCharges from './pages/borough/BlockCharges';
 import BlockChargeComparison from './pages/borough/BlockChargeComparison';
@@ -20,7 +20,7 @@ function App() {
       <Analytics />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/borough-analysis-2022-2023" element={<BoroughAnalysisTwTwTwTh />} />
+        <Route path="/borough-analysis-2022-2023" element={<BoroughAnalysis20222023 />} />
         <Route path="/about" element={<About />} />
         <Route path="/:borough" element={<PageWrapper Component={BoroughHomePage} />} />
         <Route path="/:borough/block-charges" element={<PageWrapper Component={BlockCharges} />} />

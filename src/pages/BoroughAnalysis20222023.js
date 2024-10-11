@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 
-const BoroughAnalysisTwTwTwTh = () => {
+const BoroughAnalysis20222023 = () => {
   return (
     <div>
       <>
@@ -28,4 +28,4 @@ const BoroughAnalysisTwTwTwTh = () => {
   );
 };
 
-export default BoroughAnalysisTwTwTwTh;
+export default BoroughAnalysis20222023;
