@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react';
 import { HashRouter as Router, Route, Routes, useLocation, useParams } from 'react-router-dom';
 import HomePage from './pages/HomePage';
-import BoroughHomePage from './pages/BoroughHomePage';
-import BlockCharges from './pages/BlockCharges';
-import BlockChargeComparison from './pages/BlockChargeComparison';
-import PremiseCharges from './pages/PremiseCharges';
-import PremiseChargeComparison from './pages/PremiseChargeComparison';
-import QueryingCharges from './pages/QueryingCharges';
-import MajorWorks from './pages/MajorWorks';
-import SubmittingData from './pages/SubmittingData';
-import Analysis from './pages/Analysis';
+import BoroughAnalysisTwTwTwTh from './pages/BoroughAnalysisTwTwTwTh';
+import BoroughHomePage from './pages/borough/BoroughHomePage';
+import BlockCharges from './pages/borough/BlockCharges';
+import BlockChargeComparison from './pages/borough/BlockChargeComparison';
+import PremiseCharges from './pages/borough/PremiseCharges';
+import PremiseChargeComparison from './pages/borough/PremiseChargeComparison';
+import QueryingCharges from './pages/borough/QueryingCharges';
+import MajorWorks from './pages/borough/MajorWorks';
+import SubmittingData from './pages/borough/SubmittingData';
+import Analysis from './pages/borough/Analysis';
 import About from './pages/About';
 import ReactGA4 from 'react-ga4';
 
@@ -19,6 +20,7 @@ function App() {
       <Analytics />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/borough-analysis-2022-2023" element={<BoroughAnalysisTwTwTwTh />} />
         <Route path="/about" element={<About />} />
         <Route path="/:borough" element={<PageWrapper Component={BoroughHomePage} />} />
         <Route path="/:borough/block-charges" element={<PageWrapper Component={BlockCharges} />} />

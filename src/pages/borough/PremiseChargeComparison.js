@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import Header from '../components/Header';
-import BoroughNavBar from '../components/BoroughNavBar';
-import PremiseComparisonData from '../components/PremiseComparisonData';
-import Footer from '../components/Footer';
+import Header from '../../components/Header';
+import BoroughNavBar from '../../components/BoroughNavBar';
+import PremiseComparisonData from '../../components/PremiseComparisonData';
+import Footer from '../../components/Footer';
 
 const PremiseChargeComparison = () => {
   return (

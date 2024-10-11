@@ -1,9 +1,9 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import Header from '../components/Header';
-import BoroughNavBar from '../components/BoroughNavBar';
-import AnalysisData from '../components/AnalysisData';
-import Footer from '../components/Footer';
+import Header from '../../components/Header';
+import BoroughNavBar from '../../components/BoroughNavBar';
+import AnalysisData from '../../components/AnalysisData';
+import Footer from '../../components/Footer';
 
 const Analysis = ({ borough }) => {
   return (

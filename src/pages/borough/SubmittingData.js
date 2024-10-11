@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import Header from '../components/Header';
-import NavBar from '../components/NavBar';
-import Page1 from '../static/page1.jpg';
-import Page2 from '../static/page2.jpg';
-import Footer from '../components/Footer';
+import Header from '../../components/Header';
+import NavBar from '../../components/NavBar';
+import Page1 from '../../static/page1.jpg';
+import Page2 from '../../static/page2.jpg';
+import Footer from '../../components/Footer';
 
 const SubmittingData = () => {
   return (

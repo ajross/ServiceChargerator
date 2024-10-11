@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import Header from '../components/Header';
-import BoroughNavBar from '../components/BoroughNavBar';
-import Footer from '../components/Footer';
-import { formatBoroughFromProp } from '../utils/TextUtils';
+import Header from '../../components/Header';
+import BoroughNavBar from '../../components/BoroughNavBar';
+import Footer from '../../components/Footer';
+import { formatBoroughFromProp } from '../../utils/TextUtils';
 
 
 const BoroughHomePage = ({ borough }) => {
