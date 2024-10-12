@@ -7,7 +7,6 @@ import BlockCharges from './pages/borough/BlockCharges';
 import BlockChargeComparison from './pages/borough/BlockChargeComparison';
 import PremiseCharges from './pages/borough/PremiseCharges';
 import PremiseChargeComparison from './pages/borough/PremiseChargeComparison';
-import SubmittingData from './pages/borough/SubmittingData';
 import Analysis from './pages/borough/Analysis';
 import MajorWorks from './pages/MajorWorks';
 import QueryingCharges from './pages/QueryingCharges';
@@ -29,7 +28,6 @@ function App() {
         <Route path="/:borough/block-charge-comparison" element={<PageWrapper Component={BlockChargeComparison} />} />
         <Route path="/:borough/premise-charges" element={<PageWrapper Component={PremiseCharges} />} />
         <Route path="/:borough/premise-charge-comparison" element={<PageWrapper Component={PremiseChargeComparison} />} />
-        <Route path="/:borough/submitting-data" element={<PageWrapper Component={SubmittingData} />} />
         <Route path="/:borough/analysis" element={<PageWrapper Component={Analysis} />} />
       </Routes>
     </Router>
