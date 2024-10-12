@@ -1,5 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
@@ -28,6 +29,13 @@ const About = () => {
             <p>Experiences of leaseholders show that the councils do not seem to be making much effort to improve their management of the housing stock, or the way they manage service charges, so it is up to residents to
                hold them to account for the quality and cost of services that are provided.</p>
             <p>If you have any feedback on this site, a feature idea, or would like to help out, please send an email to: <a href="mailto:hello@servicechargeinsights.com?subject=Service Charge Insights Feedback">hello@servicechargeinsights.com</a></p>
+          </div>
+          <div className="text-row">
+            <h2>How was this site made?</h2>
+            <p>I have built the site in ReactJS, and the code is open source.  All the data is available too.</p>
+            <p>I encourage you to send me your feedback on the site, how you use it, and what would make it more useful.
+            Just send me an email at <a href="mailto:hello@servicechargeinsights.com?subject=Service Charge Insights Feedback">hello@servicechargeinsights.com</a>.</p>
+            <p>I've built this in my spare time and spent many hours cleaning up the data and analysing it.  It you think that's valuable to you, perhaps you'd consider <Link to="https://ko-fi.com/alasdairross">"buying me a coffee"</Link>  to say thanks.</p>
           </div>
           <div className="text-row">
             <h2>Is your borough missing?</h2>
