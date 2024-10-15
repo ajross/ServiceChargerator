@@ -37,19 +37,33 @@
   }
 }
 
+:root {
+  --header-color: #122d42;
+  --footer-color: #122d42;
+  --nav-color: #000;
+  --hover-color: #123;
+  --main-color: #122d42;
+  --secondary-color: #1d486a;
+  --link-block-color: #29b3ad;
+  --link-block-highlight: #122d42;
+  --error-highlight: #F4C7C3;
+  --table-header: #333;
+  --alternate-row: #F2F2F2;
+}
+
 body {
   font-family: Arial, sans-serif;
 }
 
 header {
-  background-color: #069;
+  background-color: var(--header-color);
   color: white;
   padding: 10px;
   text-align: center;
 }
 
 footer {
-  background-color: #069;
+  background-color: var(--footer-color);
   color: white;
   margin-top: 10px;
   align-items: center; /* Vertically center the content */
@@ -65,7 +79,7 @@ footer {
 }
 
 nav {
-  background-color: #000;
+  background-color: var(--nav-color);
   padding: 10px;
 }
 
@@ -83,7 +97,7 @@ nav a {
 }
 
 nav a:hover {
-    background-color: #993399; /* Background color on hover */
+    background-color: var(--hover-color); /* Background color on hover */
 }
 
 .scrollToTopButton {
@@ -94,7 +108,7 @@ nav a:hover {
   width: 50px;
   font-size: 24px;
   border-radius: 50%;
-  background-color: #069;
+  background-color: var(--footer-color);
   color: white;
   border: none;
   cursor: pointer;
@@ -106,8 +120,130 @@ nav a:hover {
   display: block; /* Show button when needed */
 }
 
-.home-content h3 {
-  cursor: pointer;
+.home-layout {
+  width: 100%; /* Set the container width to 80% of the window */
+  margin: 0 auto; /* Center the container horizontally */
+  display: grid;
+  grid:
+    "home-section home-section home-section home-section home-section home-section home-section home-section . . . ." auto
+    ". . . . querying-section querying-section querying-section querying-section querying-section querying-section querying-section querying-section" auto
+    "cross-borough-analysis cross-borough-analysis cross-borough-analysis cross-borough-analysis cross-borough-analysis cross-borough-analysis cross-borough-analysis cross-borough-analysis cross-borough-analysis cross-borough-analysis cross-borough-analysis cross-borough-analysis" auto
+    "borough-blocks borough-blocks borough-blocks borough-blocks borough-blocks borough-blocks borough-blocks borough-blocks borough-blocks borough-blocks borough-blocks borough-blocks" auto
+    / 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  gap: 16px 8px;
+  align-content: start;
+  align-items: start;
+}
+
+.home-layout a {
+  text-decoration: none;
+}
+
+.home-borough-layout a {
+  color: white;
+}
+
+.borough-blocks { grid-area: borough-blocks; }
+.cross-borough-analysis { grid-area: cross-borough-analysis; }
+.querying-section { grid-area: querying-section; }
+.home-section { grid-area: home-section; }
+
+.home-content {
+    background-color: var(--main-color); /* Solid background color */
+    align-items: center;
+    justify-content: center;
+    color: white; /* White font color */
+    padding: 20px; /* Inner spacing */
+}
+
+.home-content h2, .home-content h3 {
+    margin-top: 0; /* Removes the top margin */
+    padding-top: 0px; /* Optional: Adds some padding at the top if needed */
+    text-align: center; /* Optional: center the text */
+ }
+
+ .home-content a {
+  color: white;
+  font-weight: bold;
+}
+
+ .querying-content {
+    background-color: var(--secondary-color); /* Solid background color */
+    align-items: center;
+    justify-content: center;
+    color: white; /* White font color */
+    padding: 20px; /* Inner spacing */
+}
+
+.querying-content h2, .querying-content h3 {
+    margin-top: 0; /* Removes the top margin */
+    padding-top: 0px; /* Optional: Adds some padding at the top if needed */
+    text-align: center; /* Optional: center the text */
+ }
+
+.querying-content a {
+  color: white;
+  font-weight: bold;
+}
+/*
+.home-content table {
+    background-color: white;
+    color: black;
+}*/
+
+.analysis-content {
+    background-color: var(--link-block-color); /* Solid background color */
+    align-items: center;
+    justify-content: center;
+    color: white; /* White font color */
+    padding: 20px; /* Inner spacing */
+}
+
+.analysis-content:hover {
+  background-color: var(--link-block-highlight); /* Change this to the color you want on hover */
+  transition: background-color 0.3s ease; /* Smooth transition effect */
+}
+
+.analysis-content h2, .analysis-content h3 {
+    margin-top: 0; /* Removes the top margin */
+    padding-top: 0px; /* Optional: Adds some padding at the top if needed */
+    text-align: center; /* Optional: center the text */
+ }
+
+.home-borough-layout {
+  width: 100%;
+
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+
+  justify-content: space-between;
+}
+
+.home-borough-layout > div {
+  flex: 1 1 calc(20% - 16px); /* Set the width to roughly equal size, taking into account the gap */
+  padding-bottom: calc(20% - 16px); /* Set height equal to width */
+  box-sizing: border-box;
+  position: relative; /* Allow inner element to be absolutely positioned */
+  min-width: 175px; /* Optional: Set a minimum width to ensure content readability */
+  min-height: 175px; /* Optional: Set a minimum width to ensure content readability */
+}
+
+.borough-block {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--link-block-color); /* Optional: Add a background color for better visibility */
+}
+
+.borough-block:hover {
+  background-color: var(--link-block-highlight); /* Change this to the color you want on hover */
+  transition: background-color 0.3s ease; /* Smooth transition effect */
 }
 
 .stats-table-container {
@@ -143,28 +279,28 @@ th, td {
 }
 
 th {
-    background-color: #333;
+    background-color: var(--table-header);
     color: white;
     text-align: center;
 }
 
 /* Style for the first column */
 td:first-child, th:first-child {
-    background-color: #333;
+    background-color: var(--table-header);
     color: white;
     text-align: center;
 }
 
 td.error-cell {
-    background-color: #F4C7C3;
+    background-color: var(--error-highlight);
 }
 
 tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: var(--alternate-row);
 }
 
 tr.error-cell {
-    background-color: #F4C7C3;
+    background-color: var(--error-highlight);
 }
 
 
@@ -194,7 +330,7 @@ th:first-child, td:first-child {
 
 /* Common styles for estate-info and block-info */
 .estate-info, .block-info, .premise-info {
-    background-color: #993399; /* Background color */
+    background-color: var(--secondary-color); /* Background color */
     color: white; /* Font color */
     padding: 10px;
     border-radius: 5px; /* Optional: for rounded corners */
@@ -202,12 +338,12 @@ th:first-child, td:first-child {
 }
 
 .first-block {
-    background-color: #993399; /* Background color */
+    background-color: var(--main-color); /* Background color */
     border-radius: 5px; /* Optional: for rounded corners */
 }
 
 .second-block {
-    background-color: #069; /* Background color */
+    background-color: var(--secondary-color); /* Background color */
     border-radius: 5px; /* Optional: for rounded corners */
 }
 
@@ -246,24 +382,7 @@ select option {
     gap: 20px; /* Space between grid items */
 }
 
-.home-content {
-    background-color: #069; /* Solid background color */
-    color: white; /* White font color */
-    padding: 20px; /* Inner spacing */
-    border-radius: 5px; /* Optional: rounded corners */
-    margin-bottom: 10px;
-}
 
-
-.home-content a {
-  color: white;
-  font-weight: bold;
-}
-
-.home-content table {
-    background-color: white;
-    color: black;
-}
 
 .home-links-content-container {
     display: grid;
@@ -272,28 +391,16 @@ select option {
     width: 100%; /* Fit the grid width to its content */
     align-items: stretch; /* Stretches items to fill the container (this doesn't seem to work) */
 }
-.analysis-content {
-    background-color: #993399; /* Solid background color */
-    color: white; /* White font color */
-    padding: 20px; /* Inner spacing */
-    border-radius: 5px; /* Optional: rounded corners */
-    min-height: 100px; /* Set this so blocks match their height to a minimum */
-}
+
 
 .home-block-container a {
   color: white;
   text-decoration: none;
 }
 
-.analysis-content h2 {
-    margin-top: 0; /* Removes the top margin */
-    padding-top: 0px; /* Optional: Adds some padding at the top if needed */
-    text-align: center; /* Optional: center the text */
- }
-
 /* Common styles for all content blocks inside the grid */
 .home-links-content-container div {
-    background-color: #993399; /* Solid background color */
+    background-color: var(--secondary-color); /* Solid background color */
     color: white; /* White font color */
     padding: 20px; /* Inner spacing */
     border-radius: 5px; /* Optional: rounded corners */
@@ -352,7 +459,7 @@ select option {
 }
 
 .text-row, .image-row {
-    background-color: #993399; /* Background color for text rows */
+    background-color: var(--main-color); /* Background color for text rows */
     padding: 20px; /* Padding around the content */
     color: white; /* White text for text rows */
     text-align: left; /* Left-align the text */
@@ -365,7 +472,7 @@ select option {
 }
 
 .alt-color {
-    background-color: #069;
+    background-color: var(--secondary-color);
 }
 
 .image-row {
