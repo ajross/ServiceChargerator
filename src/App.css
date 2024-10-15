@@ -68,7 +68,7 @@ footer {
   margin-top: 10px;
   align-items: center; /* Vertically center the content */
   text-align: center;
-  padding: 5px; /* Adds padding for some breathing room */
+  padding: 5px 10px; /* Adds padding for some breathing room */
   font-size: 10px;
 }
 
@@ -119,6 +119,8 @@ nav a:hover {
 .scrollToTopButton.show {
   display: block; /* Show button when needed */
 }
+
+/* Homepage styles */
 
 .home-layout {
   width: 100%; /* Set the container width to 80% of the window */
@@ -185,11 +187,6 @@ nav a:hover {
   color: white;
   font-weight: bold;
 }
-/*
-.home-content table {
-    background-color: white;
-    color: black;
-}*/
 
 .analysis-content {
     background-color: var(--link-block-color); /* Solid background color */
@@ -245,6 +242,45 @@ nav a:hover {
   background-color: var(--link-block-highlight); /* Change this to the color you want on hover */
   transition: background-color 0.3s ease; /* Smooth transition effect */
 }
+
+/* Borough Analysis, Querying Charges, Major Works, and About pages */
+
+.content-container {
+    width: 100%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr; /* Single column layout */
+    justify-items: center; /* Stretch grid items to fill the container width */
+    box-sizing: border-box; /* Ensure padding is included in the width */
+    gap: 20px; /* Space between rows */
+}
+
+.content-container p {
+    max-width: 100%;
+}
+
+.content-container a {
+  color: white;
+  font-weight: bold;
+}
+
+.text-row, .image-row {
+    background-color: var(--main-color); /* Background color for text rows */
+    padding: 10px; /* Padding around the content */
+    color: white; /* White text for text rows */
+    text-align: left; /* Left-align the text */
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box; /* Include padding in the width calculation */
+}
+
+/* TBD */
+
+/*
+.home-content table {
+    background-color: white;
+    color: black;
+}*/
 
 .stats-table-container {
   display: flex;
@@ -436,58 +472,8 @@ select option {
     justify-content: left;
 }
 
-.content-container {
-    display: grid;
-    grid-template-columns: 1fr; /* Single column layout */
-    justify-items: center; /* Stretch grid items to fill the container width */
-    gap: 20px; /* Space between rows */
-    margin: auto; /* Center the entire container on the page */
-    width: 90%;
-}
-
-.content-container p {
-    max-width: 100%;
-}
-
-.content-container a {
-  color: white;
-  font-weight: bold;
-}
-
-.content-container div {
-    border-radius: 5px; /* Optional: rounded corners */
-}
-
-.text-row, .image-row {
-    background-color: var(--main-color); /* Background color for text rows */
-    padding: 20px; /* Padding around the content */
-    color: white; /* White text for text rows */
-    text-align: left; /* Left-align the text */
-    max-width: 75%;
-}
-
-.text-row table {
-    background-color: white;
-    color: black;
-}
-
 .alt-color {
     background-color: var(--secondary-color);
-}
-
-.image-row {
-    background-color: #f0f0f0; /* Different background color for the image row */
-    display: flex;
-    justify-content: center; /* Center images within the row */
-    gap: 10px; /* Gap between images */
-    align-items: center; /* Align images vertically */
-    overflow: hidden; /* Prevents images from overflowing */
-}
-
-.image-row img {
-    width: 100%; /* Set the width to fill the container */
-    max-width: calc(50% - 10px); /* Max width of each image */
-    height: auto; /* Maintain aspect ratio */
 }
 
 .video-responsive {

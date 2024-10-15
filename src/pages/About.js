@@ -30,7 +30,7 @@ const About = () => {
                hold them to account for the quality and cost of services that are provided.</p>
             <p>If you have any feedback on this site, a feature idea, or would like to help out, please send an email to: <a href="mailto:hello@servicechargeinsights.com?subject=Service Charge Insights Feedback">hello@servicechargeinsights.com</a></p>
           </div>
-          <div className="text-row">
+          <div className="text-row alt-color">
             <h2>How was this site made?</h2>
             <p>I have built the site in ReactJS, and the code is open source.  All the data is available too.</p>
             <p>I encourage you to send me your feedback on the site, how you use it, and what would make it more useful.
