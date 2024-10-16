@@ -334,10 +334,16 @@ nav a:hover {
     box-sizing: border-box;
 }
 
-.borough-analysis-page-content h2, .borough-analysis-page-content h3 {
+.borough-analysis-page-content h2 {
     margin-top: 0; /* Removes the top margin */
     padding-top: 0px; /* Optional: Adds some padding at the top if needed */
     text-align: center; /* Optional: center the text */
+ }
+
+ .borough-analysis-page-content h3 {
+    margin-top: 0; /* Removes the top margin */
+    padding-top: 0px; /* Optional: Adds some padding at the top if needed */
+    text-align: left; /* Optional: center the text */
  }
 
 .borough-analysis-page-content a {
