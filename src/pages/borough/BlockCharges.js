@@ -24,12 +24,12 @@ const BlockCharges = ({ borough }) => {
               <h2>Block Charges</h2>
               <p>Select your estate and block from the drop-downs to see the charges applied to the estate/block.</p>
               <p>You can use this to spot trends and anomalies such as large cost differences from year to year, or steady increases far above inflation.</p>
-              <p>If you do not see your estate/block listed, it means we need more data.  Check out <Link to="/submitting-data">Submitting Data</Link> to see how you can help.</p>
-              <p>If a cell is highlighted <span className="error-text">pink</span>, then it means we have seen evidence Lambeth has miscalculated the premise charges for this service.</p>
-              <p>You should compare the value on the invoice that Lambeth sent you against the value shown on the <Link to="/premise-charges">Premise Charges</Link> page.</p>
-              <p>If there is a difference then you should contact Lambeth and ask them to fix their mistake and refund you any over-payment.</p>
+              <p>If you don't see your estate or block listed, please get in touch by sending an email to: <a href="mailto:hello@servicechargeinsights.com?subject=Service Chargerator Feedback">hello@servicechargeinsights.com</a>.</p>
+              <p>If a cell is <span className="error-text">highlighted</span>, then it means we have seen evidence that your council has miscalculated the premise charges for this service.
+              <br/>You should compare the value on the invoice that your council sent you against the value shown on the <Link to="/premise-charges">Premise Charges</Link> page.
+              <br/>If there is a difference then you should contact your council and ask them to fix their mistake and refund you any over-payment.</p>
             </div>
-            <EstateBlockDropdowns />
+            <EstateBlockDropdowns borough={borough}/>
           </div>
         </div>
       </main>

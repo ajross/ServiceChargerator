@@ -472,6 +472,8 @@ nav a:hover {
 .table-container {
     overflow-x: auto;
     width: 100%; /* Full width */
+    background-color: var(--secondary-color);
+    color: white;
 }
 
 table {
@@ -574,7 +576,7 @@ select {
  }
 
 .error-text {
-    color: #F4C7C3;
+    color: var(--error-highlight);
     font-weight: bold;
 }
 
