@@ -46,9 +46,9 @@
   --secondary-color: #1d486a;
   --link-block-color: #29b3ad;
   --link-block-highlight: #122d42;
-  --error-highlight: #F4C7C3;
+  --error-highlight: #29b3ad;
   --table-header: #333;
-  --alternate-row: #F2F2F2;
+  --alternate-row: #122d42;
 }
 
 body {
@@ -381,6 +381,48 @@ nav a:hover {
     background-color: var(--secondary-color); /* Background color */
 }
 
+.analysis-summary {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--main-color);
+    color: white;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+
+.analysis-summary li {
+    padding: 0.25em;
+}
+
+.analysis-content-container {
+    display: grid;
+    grid-template-columns: 1fr; /* Single column layout */
+    justify-items: center; /* Center grid items horizontally */
+    gap: 20px; /* Space between grid items */
+}
+
+.analysis-block-container {
+    display: grid;
+    grid-template-columns: 1fr; /* Single column layout */
+    justify-content: space-around;
+    width: 100%; /* Full width */
+}
+
+.analysis-block-container a {
+  color: white;
+  text-decoration: none;
+}
+
+.analysis-block-content {
+    flex: 1;
+    width: 100%;
+    padding: 10px;
+    background-color: var(--secondary-color);
+    color: white;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+
 /*
 .charge-block {
   position: absolute;
@@ -427,7 +469,6 @@ nav a:hover {
 }
 
 table {
-    //width: 100%;
     border-collapse: collapse;
 }
 
@@ -478,8 +519,6 @@ th:first-child, td:first-child {
     align-items: left;
 }
 
-
-
 /* Styles for lists within estate-info and block-info */
 .estate-info ul, .block-info ul, .premise-info ul {
     list-style-type: none; /* Removes bullet points */
@@ -497,23 +536,6 @@ select {
     box-sizing: border-box; /* Ensures padding doesn't affect overall width */
 }
 
-/* Optional: Style for <option> elements */
-select option {
-    background-color: white;
-    color: #333;
-}
-
-.home-content-container {
-    display: grid;
-    grid-template-columns: 1fr; /* Single column layout */
-    justify-items: center; /* Center grid items horizontally */
-    gap: 20px; /* Space between grid items */
-}
-
-.home-block-container {
-    width: 100%; /* Full width of the grid column */
-    gap: 20px; /* Space between grid items */
-}
 
 
 
@@ -523,12 +545,6 @@ select option {
     gap: 20px; /* Space between grid items */
     width: 100%; /* Fit the grid width to its content */
     align-items: stretch; /* Stretches items to fill the container (this doesn't seem to work) */
-}
-
-
-.home-block-container a {
-  color: white;
-  text-decoration: none;
 }
 
 /* Common styles for all content blocks inside the grid */

@@ -203,14 +203,48 @@ const AnalysisContent = ({ borough, estateId, blockId, estateRv, blockRv }) => {
   }
 
   return (
-    <div className="home-content-container">
-    <div className="home-block-container">
+
+  <>
+    <div className="analysis-summary">
+      {error && <p>Error: {error}</p>}
+      {!isLoading && !error && (
+        <div>
+          <h2>Analysis Summary</h2>
+          <h3>This is a summary of how your charges compare to the average in the borough, and the average for similar sized blocks.</h3>
+          <p>With this data, you may want to contact your council to ask why you have been overcharged.</p>
+          <ul>
+            {chargeTypes.map(type => (
+              parseFloat(unitChargesData[type]) > 0 ? (
+                <React.Fragment key={type}>
+                  <li><strong>{type.replace(/_/g, ' ')}:</strong> £{roundToCurrency(unitChargesData[type])}</li>
+                  <ul>
+                    <li>
+                      {percentageText(unitChargesData[type], unitChargesRepository.stats[type]?.mean)} than the borough average of £{roundToCurrency(unitChargesRepository.stats[type]?.mean)}
+                    </li>
+                    <li>
+                      {type.startsWith('Block') ?
+                        `${percentageText(unitChargesData[type], similarBlockStats[type]?.mean)} than the average of £${roundToCurrency(similarBlockStats[type]?.mean)} for similar sized ${blockOrEstate(type)}s`
+                        : `${percentageText(unitChargesData[type], similarEstateStats[type]?.mean)} than the average of £${roundToCurrency(similarEstateStats[type]?.mean)} for similar sized ${blockOrEstate(type)}s`
+                  }
+                    </li>
+                  </ul>
+                </React.Fragment>
+              ) : null
+            ))}
+          </ul>
+          <p>See below for the full details about each of your service charges.</p>
+        </div>
+      )}
+    </div>
+
+    <div className="analysis-content-container">
+    <div className="analysis-block-container">
 
       {error && <p>Error: {error}</p>}
       {!isLoading && !error && (
         chargeTypes.map(type => (
           parseFloat(unitChargesData[type]) > 0 ?
-            <div className="home-content">
+            <div className="analysis-block-content">
             <h2>
               {type.replace(/_/g, ' ')}
             </h2>
@@ -360,7 +394,7 @@ const AnalysisContent = ({ borough, estateId, blockId, estateRv, blockRv }) => {
             </div>
             </div>
             :
-            <div className="home-content">
+            <div className="analysis-block-content">
             <div className="table-container">
               <div key={type}>
                 <h2>{type.replace(/_/g, ' ')}</h2>
@@ -373,6 +407,7 @@ const AnalysisContent = ({ borough, estateId, blockId, estateRv, blockRv }) => {
 
     </div>
     </div>
+    </>
   );
 };
 
