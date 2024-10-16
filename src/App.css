@@ -169,7 +169,7 @@ nav a:hover {
   font-weight: bold;
 }
 
- .querying-content {
+.querying-content {
     background-color: var(--secondary-color); /* Solid background color */
     align-items: center;
     justify-content: center;
@@ -209,11 +209,9 @@ nav a:hover {
 
 .home-borough-layout {
   width: 100%;
-
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
-
   justify-content: space-between;
 }
 
@@ -287,7 +285,6 @@ nav a:hover {
     box-sizing: border-box;
 }
 
-
 .full-width a {
   text-decoration: none;
   color: white;
@@ -324,6 +321,38 @@ nav a:hover {
 .grid-item a {
   text-decoration: none;
   color: white;
+}
+
+/* Borough Analysis */
+
+.borough-analysis-page-content {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--main-color);
+    color: white;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+
+.borough-analysis-page-content h2, .borough-analysis-page-content h3 {
+    margin-top: 0; /* Removes the top margin */
+    padding-top: 0px; /* Optional: Adds some padding at the top if needed */
+    text-align: center; /* Optional: center the text */
+ }
+
+.borough-analysis-page-content a {
+  color: white;
+  font-weight: bold;
+}
+
+.alt-color {
+    background-color: var(--secondary-color);
+}
+
+.expand-button {
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
 }
 
 /*
@@ -538,10 +567,6 @@ select option {
 .inner-container {
     width: 100%; /* Adjust as needed */
     justify-content: left;
-}
-
-.alt-color {
-    background-color: var(--secondary-color);
 }
 
 .video-responsive {

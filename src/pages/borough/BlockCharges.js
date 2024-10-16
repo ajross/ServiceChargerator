@@ -6,7 +6,7 @@ import BoroughNavBar from '../../components/BoroughNavBar';
 import EstateBlockDropdowns from '../../components/EstateBlockDropdowns';
 import Footer from '../../components/Footer';
 
-const BlockCharges = () => {
+const BlockCharges = ({ borough }) => {
   return (
     <div>
       <>
@@ -15,7 +15,7 @@ const BlockCharges = () => {
         </Helmet>
       </>
       <Header />
-      <BoroughNavBar />
+      <BoroughNavBar borough={borough}/>
       <main>
         <div className="home-content-container">
           <div className="home-block-container">

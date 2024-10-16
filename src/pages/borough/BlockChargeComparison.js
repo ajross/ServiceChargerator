@@ -6,7 +6,7 @@ import BoroughNavBar from '../../components/BoroughNavBar';
 import BlockComparisonData from '../../components/BlockComparisonData';
 import Footer from '../../components/Footer';
 
-const BlockChargeComparison = () => {
+const BlockChargeComparison = ({ borough }) => {
   return (
     <div>
       <>
@@ -15,7 +15,7 @@ const BlockChargeComparison = () => {
         </Helmet>
       </>
       <Header />
-      <BoroughNavBar />
+      <BoroughNavBar borough={borough}/>
       <main>
         <div className="home-content-container">
           <div className="home-block-container">

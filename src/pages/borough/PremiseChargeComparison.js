@@ -6,7 +6,7 @@ import BoroughNavBar from '../../components/BoroughNavBar';
 import PremiseComparisonData from '../../components/PremiseComparisonData';
 import Footer from '../../components/Footer';
 
-const PremiseChargeComparison = () => {
+const PremiseChargeComparison = ({ borough }) => {
   return (
     <div>
       <>
@@ -15,7 +15,7 @@ const PremiseChargeComparison = () => {
         </Helmet>
       </>
       <Header />
-      <BoroughNavBar />
+      <BoroughNavBar borough={borough}/>
       <main>
         <div className="home-content-container">
           <div className="home-block-container">

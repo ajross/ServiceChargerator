@@ -62,7 +62,7 @@ const AnalysisData = () => {
     <div>
       <div className='estate-block-info-container'>
           <div className='estate-info'>
-            <h2>Estate</h2>
+            <h2>Step 1: Choose Your Estate</h2>
             <EstateDropdown estates={estates} onEstateSelect={handleEstateSelect} />
             {estates && (
               <ul>
@@ -72,7 +72,7 @@ const AnalysisData = () => {
             )}
           </div>
           <div className='block-info'>
-            <h2>Block</h2>
+            <h2>Step 2: Choose Your Block</h2>
             <BlockDropdown blocks={blocks} onBlockSelect={handleBlockSelect} />
             {blocks && (
               <ul>

@@ -6,7 +6,7 @@ import BoroughNavBar from '../../components/BoroughNavBar';
 import PremiseData from '../../components/PremiseData'
 import Footer from '../../components/Footer';
 
-const PremiseCharges = () => {
+const PremiseCharges = ({ borough }) => {
   return (
     <div>
       <>
@@ -15,7 +15,7 @@ const PremiseCharges = () => {
         </Helmet>
       </>
       <Header />
-      <BoroughNavBar />
+      <BoroughNavBar borough={borough}/>
       <main>
         <div className="home-content-container">
           <div className="home-block-container">

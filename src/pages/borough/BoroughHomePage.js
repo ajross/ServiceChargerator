@@ -27,7 +27,7 @@ const BoroughHomePage = ({ borough }) => {
             </div>
           </div>
           <div className="full-width borough-analysis-content">
-            <Link to="/analysis">
+            <Link to={`/${borough}/analysis`}>
               <div className="borough-analysis">
                 <h2>2022-2023 Service Charge Analysis</h2>
                 <h3>See how the service charges for your block compares against average costs in the borough and similar sized blocks.</h3>
@@ -37,7 +37,7 @@ const BoroughHomePage = ({ borough }) => {
           </div>
           <div className="grid-container">
               <div className="grid-item">
-                <Link to="/block-charges">
+                <Link to={`/${borough}/block-charges`}>
                   <div className="block-charges">
                     <h2>Block Charges</h2>
                     <h3>View the service charges for your block and how they change over time (where data is available).</h3>
@@ -45,7 +45,7 @@ const BoroughHomePage = ({ borough }) => {
                 </Link>
               </div>
               <div className="grid-item">
-                <Link to="/block-charge-comparison">
+                <Link to={`/${borough}/block-charge-comparison`}>
                   <div className="block-comparison">
                     <h2>Block Charge Comparison</h2>
                     <h3>Compare the service charges for your block against others in the borough.</h3>
@@ -53,7 +53,7 @@ const BoroughHomePage = ({ borough }) => {
                 </Link>
               </div>
               <div className="grid-item">
-                <Link to="/premise-charges">
+                <Link to={`/${borough}/premise-charges`}>
                   <div className="dwelling-charges">
                     <h2>Premise Charges</h2>
                     <h3>View the service charges for your flat and how they change over time (where data is available).</h3>
@@ -61,7 +61,7 @@ const BoroughHomePage = ({ borough }) => {
                 </Link>
               </div>
               <div className="grid-item">
-                <Link to="/premise-charge-comparison">
+                <Link to={`/${borough}/premise-charge-comparison`}>
                   <div className="dwelling-comparison">
                     <h2>Premise Charge Comparison</h2>
                     <h3>Compare the service charges for your flat against others in the borough.</h3>
