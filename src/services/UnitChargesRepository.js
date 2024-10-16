@@ -1,8 +1,8 @@
 import Papa from 'papaparse';
 
 class UnitChargesRepository {
-    constructor() {
-        this.csvFilePath = "./unit_charges.csv";
+    constructor(borough) {
+        this.csvFilePath = `./${borough}/unit_charges.csv`;
         this.data = [];
         this.stats = {};
         this.dataLoaded = this.loadData(); // Returns a promise

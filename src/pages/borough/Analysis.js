@@ -55,7 +55,7 @@ const Analysis = ({ borough }) => {
                   <p>If we use this method of dividing the total cost by the block rateable value to get a notional "unit cost" for each service, we can compare this cost across blocks and estates to spot anomalies.</p>
               </div>)}
             </div>
-            <AnalysisData />
+            <AnalysisData borough={borough}/>
           </div>
         </div>
       </main>

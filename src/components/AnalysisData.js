@@ -7,7 +7,7 @@ import AnalysisContent from './AnalysisContent';
 import ScrollToTopButton from './ScrollToTopButton';
 import ReactGA4 from 'react-ga4';
 
-const AnalysisData = () => {
+const AnalysisData = ({ borough }) => {
   const [selectedEstate, setSelectedEstate] = useState(null);
   const [selectedBlock, setSelectedBlock] = useState(null);
   const [estates, setEstates] = useState([]);
@@ -15,17 +15,17 @@ const AnalysisData = () => {
 
   // Fetch estates data
   useEffect(() => {
-    const estatesRepository = new EstatesRepository();
+    const estatesRepository = new EstatesRepository(borough);
     estatesRepository.dataLoaded.then(() => {
         setEstates(estatesRepository.getEstates());
     })
       .catch(error => console.error('Error:', error));
-  }, []);
+  }, [borough]);
 
   // Fetch blocks data when selectedEstate changes
   useEffect(() => {
     if (selectedEstate) {
-      const blocksRepository = new BlocksRepository();
+      const blocksRepository = new BlocksRepository(borough);
       blocksRepository.dataLoaded.then(() => {
           setBlocks(blocksRepository.getBlocks(selectedEstate));
       })
@@ -33,7 +33,7 @@ const AnalysisData = () => {
     } else {
       setBlocks([]); // Reset blocks if no estate is selected
     }
-  }, [selectedEstate]);
+  }, [borough, selectedEstate]);
 
   const handleEstateSelect = (id) => {
     console.log('Selected Estate ID:', id); // Debugging
@@ -63,7 +63,7 @@ const AnalysisData = () => {
       <div className='estate-block-info-container'>
           <div className='estate-info'>
             <h2>Step 1: Choose Your Estate</h2>
-            <EstateDropdown estates={estates} onEstateSelect={handleEstateSelect} />
+            <EstateDropdown borough={borough} estates={estates} onEstateSelect={handleEstateSelect} />
             {estates && (
               <ul>
                 <li>Estate Name: {estates?.find(item => item.ID === selectedEstate)?.Estate_Name}</li>
@@ -73,7 +73,7 @@ const AnalysisData = () => {
           </div>
           <div className='block-info'>
             <h2>Step 2: Choose Your Block</h2>
-            <BlockDropdown blocks={blocks} onBlockSelect={handleBlockSelect} />
+            <BlockDropdown borough={borough} blocks={blocks} onBlockSelect={handleBlockSelect} />
             {blocks && (
               <ul>
                 <li>Block Name: {blocks?.find(item => item.ID === selectedBlock)?.Block_Name}</li>
@@ -82,7 +82,7 @@ const AnalysisData = () => {
             )}
           </div>
       </div>
-      <AnalysisContent estateId={selectedEstate} blockId={selectedBlock} estateRv={estates?.find(item => item.ID === selectedEstate)?.Estate_RV} blockRv={blocks?.find(item => item.ID === selectedBlock)?.Block_RV} />
+      <AnalysisContent borough={borough} estateId={selectedEstate} blockId={selectedBlock} estateRv={estates?.find(item => item.ID === selectedEstate)?.Estate_RV} blockRv={blocks?.find(item => item.ID === selectedBlock)?.Block_RV} />
       <ScrollToTopButton />
     </div>
   );

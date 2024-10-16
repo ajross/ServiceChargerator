@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import UnitChargesRepository from '../services/UnitChargesRepository';
 
-const AnalysisContent = ({ estateId, blockId, estateRv, blockRv }) => {
+const AnalysisContent = ({ borough, estateId, blockId, estateRv, blockRv }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [unitChargesData, setUnitChargesData] = useState([]);
@@ -43,7 +43,7 @@ const AnalysisContent = ({ estateId, blockId, estateRv, blockRv }) => {
     ];
   }, []);
 
-  const unitChargesRepository = useMemo(() => new UnitChargesRepository(), []);
+  const unitChargesRepository = useMemo(() => new UnitChargesRepository(borough), [borough]);
 
   const toggleExpand = (type) => {
     setExpandedTypes(prevExpandedTypes => {
