@@ -164,7 +164,7 @@ nav a:hover {
     text-align: center; /* Optional: center the text */
  }
 
- .home-content a {
+.home-content a {
   color: white;
   font-weight: bold;
 }
@@ -274,7 +274,75 @@ nav a:hover {
     box-sizing: border-box; /* Include padding in the width calculation */
 }
 
-/* TBD */
+/* Borough Home Page */
+/* See Home Page for home-content styles */
+
+.full-width {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--main-color);
+    color: white;
+    text-align: center;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+
+
+.full-width a {
+  text-decoration: none;
+  color: white;
+}
+
+.borough-analysis-content {
+    background-color: var(--link-block-color);
+}
+
+.borough-analysis-content:hover {
+  background-color: var(--link-block-highlight); /* Change this to the color you want on hover */
+  transition: background-color 0.3s ease; /* Smooth transition effect */
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 equal-width columns */
+    gap: 16px;
+    box-sizing: border-box;
+}
+
+.grid-item {
+    padding: 10px;
+    text-align: center;
+    background-color: var(--link-block-color);
+    box-sizing: border-box;
+}
+
+.grid-item:hover {
+  background-color: var(--link-block-highlight); /* Change this to the color you want on hover */
+  transition: background-color 0.3s ease; /* Smooth transition effect */
+}
+
+.grid-item a {
+  text-decoration: none;
+  color: white;
+}
+
+/*
+.charge-block {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--link-block-color);
+}
+
+.charge-block:hover {
+  background-color: var(--link-block-highlight);
+  transition: background-color 0.3s ease;
+}*/
 
 /*
 .home-content table {

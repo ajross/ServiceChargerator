@@ -19,64 +19,56 @@ const BoroughHomePage = ({ borough }) => {
       <BoroughNavBar borough={borough}/>
       <main>
         <p/>
-        <div className="home-content-container">
-          <div className="home-block-container">
-            <div className="home-content">
-              <h2>Welcome to {formatBoroughFromProp(borough)} Service Charge Insights!</h2>
-              <p>This tool has been created by Lambeth residents to help each other compare leasehold service charge costs across estates and blocks in the borough.</p>
-              <p>You can use it to help spot anomalies in your service charge which you can then query with Lambeth Housing Management.</p>
-              <p>Remember, under the terms of your lease, service charges must be "reasonable". Whilst this is subjective, you may be able to use these tools to show how you are being overcharged in your block.</p>
-              <p>See the page on <Link to="/querying-charges">Querying Charges</Link> for more advice about what to challenge, and how.</p>
-              <p>This site is only as good as the data we have available.  You can help!  See our page on <Link to="Submitting Data">Submitting Data</Link> to see how you can help!</p>
+          <div class="full-width">
+            <div className="borough-home-content">
+              <h2>{formatBoroughFromProp(borough)} Service Charge Insights!</h2>
+              <p>Read an analysis of the service charges for your block, and see how they compare to others in the borough.</p>
+              <p>Analyse the service charges for your block or flat using the sections below.</p>
             </div>
           </div>
-          <div className="home-block-container">
+          <div className="full-width borough-analysis-content">
             <Link to="/analysis">
-              <div className="analysis-content">
-                <h2>{formatBoroughFromProp(borough)} 2022-2023 Service Charge Analysis</h2>
-                <p>See how the service charge for your block compares against the rest of the blocks in the borough.</p>
-                <p>Identify how each charge compares to the average cost across the borough, and to similar sized blocks.</p>
-                <p>Dive into the data to see the charges for all blocks/estates of a similar size.</p>
-                <p>Use this information to identify anomalies in your service charges which you can then query.</p>
+              <div className="borough-analysis">
+                <h2>2022-2023 Service Charge Analysis</h2>
+                <h3>See how the service charges for your block compares against average costs in the borough and similar sized blocks.</h3>
+                <h3>Generate a summary email which you can use to request specific information about your charges from your council.</h3>
               </div>
             </Link>
           </div>
-          <div className="home-links-content-container">
-            <Link to="/block-charges">
-              <div className="block-charges-content">
-                <h2>Block Charges</h2>
-                <p>Use the Block Charges tool to see the service charge costs for estates and blocks across the borough.</p>
-                <p>Look at trends for how costs have changed over time.</p>
-                <p>Spot anomalies where costs have appeared or changed suddenly with no explanation.</p>
+          <div className="grid-container">
+              <div className="grid-item">
+                <Link to="/block-charges">
+                  <div className="block-charges">
+                    <h2>Block Charges</h2>
+                    <h3>View the service charges for your block and how they change over time (where data is available).</h3>
+                  </div>
+                </Link>
               </div>
-            </Link>
-            <Link to="/block-charge-comparison">
-              <div className="block-charge-comparison-content">
-                <h2>Block Charge Comparison</h2>
-                <p>Select 2 different estates/blocks and compare the block level charges side by side for any year for which we have data.</p>
-                <p>See whether blocks on the same estate are charged the same amount for the same service.</p>
-                <p>Find other blocks you could collaborate with when querying charges.</p>
+              <div className="grid-item">
+                <Link to="/block-charge-comparison">
+                  <div className="block-comparison">
+                    <h2>Block Charge Comparison</h2>
+                    <h3>Compare the service charges for your block against others in the borough.</h3>
+                  </div>
+                </Link>
               </div>
-            </Link>
-            <Link to="/premise-charges">
-              <div className="premise-charges-content">
-                <h2>Premise Charges</h2>
-                <p>Enter your Dwelling Rateable Value to see the charges for your flat on your estate.</p>
-                <p>Compare the values shown here with those on the statement Lambeth sent you, and spot where they made an error!  They have made errors before and you should claim this back!</p>
-                <p>Alternatively, use your Dwelling Rateable Value to see what your charges would be on a different block on the same estate.</p>
+              <div className="grid-item">
+                <Link to="/premise-charges">
+                  <div className="dwelling-charges">
+                    <h2>Premise Charges</h2>
+                    <h3>View the service charges for your flat and how they change over time (where data is available).</h3>
+                  </div>
+                </Link>
               </div>
-            </Link>
-            <Link to="/premise-charge-comparison">
-              <div className="premise-charge-comparison-content">
-                <h2>Premise Charge Comparison</h2>
-                <p>Enter your Dwelling Rateable Value and select 2 different estates/blocks.</p>
-                <p>Compare the premise level charges side by side for any year for which we have data.</p>
-                <p>See how much you would have to pay if your flat was in a different block.</p>
-                <p>Identify services for which you are disproportionately charged.</p>
+              <div className="grid-item">
+                <Link to="/premise-charge-comparison">
+                  <div className="dwelling-comparison">
+                    <h2>Premise Charge Comparison</h2>
+                    <h3>Compare the service charges for your flat against others in the borough.</h3>
+                  </div>
+                </Link>
               </div>
-            </Link>
           </div>
-        </div>
       </main>
       <Footer />
     </div>
