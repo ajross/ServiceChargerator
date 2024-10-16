@@ -33,7 +33,7 @@ const PremiseChargeComparison = ({ borough }) => {
               <p>If you spot a difference between these figures and the ones on your invoice, you should get in touch with Lambeth and query the difference.</p>
               <p>If you do not see your estate/block listed, it means we need more data.  Check out <Link to="/submitting-data">Submitting Data</Link> to see how you can help.</p>
             </div>
-            <PremiseComparisonData />
+            <PremiseComparisonData borough={borough}/>
           </div>
         </div>
       </main>

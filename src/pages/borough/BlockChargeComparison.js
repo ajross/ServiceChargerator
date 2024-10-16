@@ -29,7 +29,7 @@ const BlockChargeComparison = ({ borough }) => {
               <p>You should compare the value on the invoice that Lambeth sent you against the value shown on the <Link to="/premise-charges">Premise Charges</Link> page.</p>
               <p>If there is a difference then you should contact Lambeth and ask them to fix their mistake and refund you any over-payment.</p>
             </div>
-            <BlockComparisonData />
+            <BlockComparisonData borough={borough}/>
           </div>
         </div>
       </main>

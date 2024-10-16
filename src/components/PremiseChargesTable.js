@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import ChargesRepository from '../services/ChargesRepository';
 import ChargeErrorsRepository from '../services/ChargeErrorsRepository';
 
-const PremiseChargesTable = ({ estateId, blockId, estateRv, blockRv, premiseRv }) => {
+const PremiseChargesTable = ({ borough, estateId, blockId, estateRv, blockRv, premiseRv }) => {
   const [chargesData, setChargesData] = useState([]);
   const [chargeErrors, setChargeErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -59,8 +59,8 @@ const PremiseChargesTable = ({ estateId, blockId, estateRv, blockRv, premiseRv }
     };
 
     if (estateId && blockId && estateRv && blockRv && premiseRv > 0) {
-      const chargesRepository = new ChargesRepository();
-      const chargeErrorsRepository = new ChargeErrorsRepository();
+      const chargesRepository = new ChargesRepository(borough);
+      const chargeErrorsRepository = new ChargeErrorsRepository(borough);
       setIsLoading(true);
       chargesRepository.dataLoaded.then(() => {
         setChargesData(pivotData(chargesRepository.getCharges(estateId, blockId)));
@@ -77,7 +77,7 @@ const PremiseChargesTable = ({ estateId, blockId, estateRv, blockRv, premiseRv }
         setIsLoading(false);
       });
     }
-  }, [estateId, blockId, estateRv, blockRv, premiseRv, chargeTypes]);
+  }, [borough, estateId, blockId, estateRv, blockRv, premiseRv, chargeTypes]);
 
   return (
     <div className="table-container">

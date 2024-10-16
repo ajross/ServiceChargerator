@@ -6,7 +6,7 @@ import EstatesRepository from '../services/EstatesRepository';
 import BlocksRepository from '../services/BlocksRepository';
 import ReactGA4 from 'react-ga4';
 
-const PremiseData = () => {
+const PremiseData = ({borough}) => {
   const [selectedEstate, setSelectedEstate] = useState(null);
   const [selectedBlock, setSelectedBlock] = useState(null);
   const [estateRv, setEstateRv] = useState(null);
@@ -17,18 +17,18 @@ const PremiseData = () => {
 
   // Fetch estates data
   useEffect(() => {
-    const estatesRepository = new EstatesRepository();
+    const estatesRepository = new EstatesRepository(borough);
     estatesRepository.dataLoaded.then(() => {
         const estates = estatesRepository.getEstates();
         setEstates(estates);
     })
     .catch(error => console.error('Error:', error));
-  }, []);
+  }, [borough]);
 
   // Fetch blocks data when selectedEstate changes
   useEffect(() => {
     if (selectedEstate) {
-      const blocksRepository = new BlocksRepository();
+      const blocksRepository = new BlocksRepository(borough);
       blocksRepository.dataLoaded.then(() => {
         const blocks = blocksRepository.getBlocks(selectedEstate)
         setBlocks(blocks);
@@ -37,7 +37,7 @@ const PremiseData = () => {
     } else {
       setBlocks([]); // Reset blocks if no estate is selected
     }
-  }, [selectedEstate]);
+  }, [borough, selectedEstate]);
 
   const handleEstateSelect = (id) => {
     console.log('Selected Estate ID:', id); // Debugging
@@ -82,7 +82,7 @@ const PremiseData = () => {
     <div>
       <div className='estate-block-info-container'>
           <div className='estate-info'>
-            <h2>Estate</h2>
+            <h2>Step 1: Estate</h2>
             <EstateDropdown estates={estates} onEstateSelect={handleEstateSelect} />
             {estates && (
               <ul>
@@ -92,7 +92,7 @@ const PremiseData = () => {
             )}
           </div>
           <div className='block-info'>
-            <h2>Block</h2>
+            <h2>Step 2: Block</h2>
             <BlockDropdown blocks={blocks} onBlockSelect={handleBlockSelect} />
             {blocks && (
               <ul>
@@ -102,7 +102,7 @@ const PremiseData = () => {
             )}
           </div>
           <div className='premise-info'>
-            <h2>Premise</h2>
+            <h2>Step 3: Premise</h2>
             <p>Enter the rateable value for your property.</p>
             <p>It will likely be a 3 digit number.</p>
             <input
@@ -118,7 +118,7 @@ const PremiseData = () => {
             />
           </div>
       </div>
-      <PremiseChargesTable estateId={selectedEstate} blockId={selectedBlock} estateRv={estateRv} blockRv={blockRv} premiseRv={numberInput} />
+      <PremiseChargesTable borough={borough} estateId={selectedEstate} blockId={selectedBlock} estateRv={estateRv} blockRv={blockRv} premiseRv={numberInput} />
     </div>
   );
 };

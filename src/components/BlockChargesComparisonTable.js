@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import ChargesRepository from '../services/ChargesRepository';
 import ChargeErrorsRepository from '../services/ChargeErrorsRepository';
 
-const BlockChargesComparisonTable = ({ firstEstateId, firstBlockId, secondEstateId, secondBlockId }) => {
+const BlockChargesComparisonTable = ({ borough, firstEstateId, firstBlockId, secondEstateId, secondBlockId }) => {
   const [allYears, setAllYears] = useState([]);
   const [allPivotData, setAllPivotData] = useState([]);
   const [chargeErrors, setChargeErrors] = useState([]);
@@ -59,9 +59,9 @@ const BlockChargesComparisonTable = ({ firstEstateId, firstBlockId, secondEstate
       return { pivotedData, years };
     };
 
-    if (firstEstateId && firstBlockId && secondEstateId && secondBlockId) {
-      const chargesRepository = new ChargesRepository();
-      const chargeErrorsRepository = new ChargeErrorsRepository();
+    if (borough && firstEstateId && firstBlockId && secondEstateId && secondBlockId) {
+      const chargesRepository = new ChargesRepository(borough);
+      const chargeErrorsRepository = new ChargeErrorsRepository(borough);
 
 
       setIsLoading(true);
@@ -123,7 +123,7 @@ const BlockChargesComparisonTable = ({ firstEstateId, firstBlockId, secondEstate
           setIsLoading(false);
         });
     }
-  }, [firstEstateId, firstBlockId, secondEstateId, secondBlockId, chargeTypes]);
+  }, [borough, firstEstateId, firstBlockId, secondEstateId, secondBlockId, chargeTypes]);
 
   return (
     <div className="table-container">

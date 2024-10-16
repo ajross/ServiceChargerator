@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import ChargesRepository from '../services/ChargesRepository';
 import ChargeErrorsRepository from '../services/ChargeErrorsRepository';
 
-const PremiseChargesComparisonTable = ({
+const PremiseChargesComparisonTable = ({borough,
  firstEstateId, firstBlockId, firstEstateRv, firstBlockRv, firstPremiseRv,
  secondEstateId, secondBlockId, secondEstateRv, secondBlockRv, secondPremiseRv
  }) => {
@@ -64,8 +64,8 @@ const PremiseChargesComparisonTable = ({
   
     if (firstEstateId && firstBlockId && firstEstateRv && firstBlockRv && firstPremiseRv > 0
     && secondEstateId && secondBlockId && secondEstateRv && secondBlockRv && secondPremiseRv > 0) {
-      const chargesRepository = new ChargesRepository();
-      const chargeErrorsRepository = new ChargeErrorsRepository();
+      const chargesRepository = new ChargesRepository(borough);
+      const chargeErrorsRepository = new ChargeErrorsRepository(borough);
 
 
       setIsLoading(true);
@@ -126,7 +126,7 @@ const PremiseChargesComparisonTable = ({
           setIsLoading(false);
         });
     }
-  }, [firstEstateId, firstBlockId, firstEstateRv, firstBlockRv, firstPremiseRv,
+  }, [borough, firstEstateId, firstBlockId, firstEstateRv, firstBlockRv, firstPremiseRv,
       secondEstateId, secondBlockId, secondEstateRv, secondBlockRv, secondPremiseRv, chargeTypes]);
 
 

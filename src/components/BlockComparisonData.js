@@ -6,7 +6,7 @@ import EstatesRepository from '../services/EstatesRepository';
 import BlocksRepository from '../services/BlocksRepository';
 import ReactGA4 from 'react-ga4';
 
-const BlockComparisonData = () => {
+const BlockComparisonData = ({borough}) => {
   const [firstSelectedEstate, setFirstSelectedEstate] = useState(null);
   const [firstSelectedBlock, setFirstSelectedBlock] = useState(null);
   const [firstEstates, setFirstEstates] = useState([]);
@@ -19,19 +19,19 @@ const BlockComparisonData = () => {
 
   // Fetch estates data
   useEffect(() => {
-    const estatesRepository = new EstatesRepository();
+    const estatesRepository = new EstatesRepository(borough);
     estatesRepository.dataLoaded.then(() => {
         const estates = estatesRepository.getEstates();
         setFirstEstates(estates);
         setSecondEstates(estates);
       })
       .catch(error => console.error('Error:', error));
-  }, []);
+  }, [borough]);
 
   // Fetch blocks data when selectedEstate changes
   useEffect(() => {
     if (firstSelectedEstate) {
-      const blocksRepository = new BlocksRepository();
+      const blocksRepository = new BlocksRepository(borough);
       blocksRepository.dataLoaded.then(() => {
         setFirstBlocks(blocksRepository.getBlocks(firstSelectedEstate));
       })
@@ -39,12 +39,12 @@ const BlockComparisonData = () => {
     } else {
       setFirstBlocks([]); // Reset blocks if no estate is selected
     }
-  }, [firstSelectedEstate]);
+  }, [borough, firstSelectedEstate]);
   
   // Fetch blocks data when selectedEstate changes
   useEffect(() => {
     if (secondSelectedEstate) {
-      const blocksRepository = new BlocksRepository();
+      const blocksRepository = new BlocksRepository(borough);
       blocksRepository.dataLoaded.then(() => {
           setSecondBlocks(blocksRepository.getBlocks(secondSelectedEstate));
       })
@@ -52,7 +52,7 @@ const BlockComparisonData = () => {
     } else {
       setSecondBlocks([]); // Reset blocks if no estate is selected
     }
-  }, [secondSelectedEstate]);
+  }, [borough, secondSelectedEstate]);
 
   const handleFirstEstateSelect = (id) => {
     setFirstSelectedEstate(id);
@@ -100,7 +100,7 @@ const BlockComparisonData = () => {
     <div>
       <div className='estate-block-info-container'>
           <div className='estate-info first-block'>
-            <h2>First Estate</h2>
+            <h2>Step 1: First Estate</h2>
             <EstateDropdown estates={firstEstates} onEstateSelect={handleFirstEstateSelect} />
             {firstEstates && (
               <ul>
@@ -110,7 +110,7 @@ const BlockComparisonData = () => {
             )}
           </div>
           <div className='block-info first-block'>
-            <h2>First Block</h2>
+            <h2>Step 2: First Block</h2>
             <BlockDropdown blocks={firstBlocks} onBlockSelect={handleFirstBlockSelect} />
             {firstBlocks && (
               <ul>
@@ -122,7 +122,7 @@ const BlockComparisonData = () => {
       </div>
       <div className='estate-block-info-container'>
           <div className='estate-info second-block'>
-            <h2>Second Estate</h2>
+            <h2>Step 3: Second Estate</h2>
             <EstateDropdown estates={secondEstates} onEstateSelect={handleSecondEstateSelect} />
             {secondEstates && (
               <ul>
@@ -132,7 +132,7 @@ const BlockComparisonData = () => {
             )}
           </div>
           <div className='block-info second-block'>
-            <h2>Second Block</h2>
+            <h2>Step 4: Second Block</h2>
             <BlockDropdown blocks={secondBlocks} onBlockSelect={handleSecondBlockSelect} />
             {secondBlocks && (
               <ul>
@@ -142,7 +142,7 @@ const BlockComparisonData = () => {
             )}
           </div>
       </div>
-      <BlockChargesComparisonTable firstEstateId={firstSelectedEstate} firstBlockId={firstSelectedBlock} secondEstateId={secondSelectedEstate} secondBlockId={secondSelectedBlock} />
+      <BlockChargesComparisonTable borough={borough} firstEstateId={firstSelectedEstate} firstBlockId={firstSelectedBlock} secondEstateId={secondSelectedEstate} secondBlockId={secondSelectedBlock} />
     </div>
   );
 };

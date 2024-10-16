@@ -6,7 +6,7 @@ import EstatesRepository from '../services/EstatesRepository';
 import BlocksRepository from '../services/BlocksRepository';
 import ReactGA4 from 'react-ga4';
 
-const PremiseComparisonData = () => {
+const PremiseComparisonData = ({borough}) => {
   const [firstSelectedEstate, setFirstSelectedEstate] = useState(null);
   const [firstSelectedBlock, setFirstSelectedBlock] = useState(null);
   const [firstEstates, setFirstEstates] = useState([]);
@@ -31,19 +31,19 @@ const PremiseComparisonData = () => {
 
   // Fetch estates data
   useEffect(() => {
-    const estatesRepository = new EstatesRepository();
+    const estatesRepository = new EstatesRepository(borough);
     estatesRepository.dataLoaded.then(() => {
         const estates = estatesRepository.getEstates();
         setFirstEstates(estates);
         setSecondEstates(estates);
       })
       .catch(error => console.error('Error:', error));
-  }, []);
+  }, [borough]);
 
   // Fetch blocks data when selectedEstate changes
   useEffect(() => {
     if (firstSelectedEstate) {
-      const blocksRepository = new BlocksRepository();
+      const blocksRepository = new BlocksRepository(borough);
       blocksRepository.dataLoaded.then(() => {
         const blocks = blocksRepository.getBlocks(firstSelectedEstate);
         setFirstBlocks(blocks);
@@ -52,12 +52,12 @@ const PremiseComparisonData = () => {
     } else {
       setFirstBlocks([]); // Reset blocks if no estate is selected
     }
-  }, [firstSelectedEstate]);
+  }, [borough, firstSelectedEstate]);
 
   // Fetch blocks data when selectedEstate changes
   useEffect(() => {
     if (secondSelectedEstate) {
-      const blocksRepository = new BlocksRepository();
+      const blocksRepository = new BlocksRepository(borough);
       blocksRepository.dataLoaded.then(() => {
         const blocks = blocksRepository.getBlocks(secondSelectedEstate);
         setSecondBlocks(blocks);
@@ -67,7 +67,7 @@ const PremiseComparisonData = () => {
     } else {
       setSecondBlocks([]); // Reset blocks if no estate is selected
     }
-  }, [secondSelectedEstate]);
+  }, [borough, secondSelectedEstate]);
 
 
   const handleFirstEstateSelect = (id) => {
@@ -152,8 +152,8 @@ const PremiseComparisonData = () => {
     <div>
       <div className='estate-block-info-container'>
           <div className='estate-info first-block'>
-            <h2>First Estate</h2>
-            <EstateDropdown estates={firstEstates} onEstateSelect={handleFirstEstateSelect} />
+            <h2>Step 1: First Estate</h2>
+            <EstateDropdown borough={borough} estates={firstEstates} onEstateSelect={handleFirstEstateSelect} />
             {firstEstates && (
               <ul>
                 <li>Estate Name: {firstEstates?.find(item => item.ID === firstSelectedEstate)?.Estate_Name}</li>
@@ -162,8 +162,8 @@ const PremiseComparisonData = () => {
             )}
           </div>
           <div className='block-info first-block'>
-            <h2>First Block</h2>
-            <BlockDropdown blocks={firstBlocks} onBlockSelect={handleFirstBlockSelect} />
+            <h2>Step 2: First Block</h2>
+            <BlockDropdown borough={borough} blocks={firstBlocks} onBlockSelect={handleFirstBlockSelect} />
             {firstBlocks && (
               <ul>
                 <li>Block Name: {firstBlocks?.find(item => item.ID === firstSelectedBlock)?.Block_Name}</li>
@@ -172,7 +172,7 @@ const PremiseComparisonData = () => {
             )}
           </div>
           <div className='premise-info first-block'>
-            <h2>First Premise</h2>
+            <h2>Step 3: First Premise</h2>
             <p>Enter the rateable value for your property.</p>
             <p>It will likely be a 3 digit number.</p>
             <input
@@ -190,8 +190,8 @@ const PremiseComparisonData = () => {
       </div>
       <div className='estate-block-info-container'>
           <div className='estate-info second-block'>
-            <h2>Second Estate</h2>
-            <EstateDropdown estates={secondEstates} onEstateSelect={handleSecondEstateSelect} />
+            <h2>Step 4: Second Estate</h2>
+            <EstateDropdown borough={borough} estates={secondEstates} onEstateSelect={handleSecondEstateSelect} />
             {secondEstates && (
               <ul>
                 <li>Estate Name: {secondEstates?.find(item => item.ID === secondSelectedEstate)?.Estate_Name}</li>
@@ -200,8 +200,8 @@ const PremiseComparisonData = () => {
             )}
           </div>
           <div className='block-info second-block'>
-            <h2>Second Block</h2>
-            <BlockDropdown blocks={secondBlocks} onBlockSelect={handleSecondBlockSelect} />
+            <h2>Step 5: Second Block</h2>
+            <BlockDropdown borough={borough} blocks={secondBlocks} onBlockSelect={handleSecondBlockSelect} />
             {secondBlocks && (
               <ul>
                 <li>Block Name: {secondBlocks?.find(item => item.ID === secondSelectedBlock)?.Block_Name}</li>
@@ -210,7 +210,7 @@ const PremiseComparisonData = () => {
             )}
           </div>
           <div className='premise-info second-block'>
-            <h2>Second Premise</h2>
+            <h2>Step 6: Second Premise</h2>
             <p>Enter the rateable value for your property.</p>
             <p>It will likely be a 3 digit number.</p>
             <input
@@ -226,7 +226,7 @@ const PremiseComparisonData = () => {
             />
           </div>
       </div>
-      <PremiseChargesComparisonTable firstEstateId={firstSelectedEstate} firstBlockId={firstSelectedBlock}
+      <PremiseChargesComparisonTable borough={borough} firstEstateId={firstSelectedEstate} firstBlockId={firstSelectedBlock}
         firstEstateRv={firstEstateRv} firstBlockRv={firstBlockRv} firstPremiseRv={firstNumberInput}
         secondEstateId={secondSelectedEstate} secondBlockId={secondSelectedBlock}
         secondEstateRv={secondEstateRv} secondBlockRv={secondBlockRv} secondPremiseRv={secondNumberInput}/>

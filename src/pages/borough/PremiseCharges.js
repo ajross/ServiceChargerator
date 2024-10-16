@@ -31,7 +31,7 @@ const PremiseCharges = ({ borough }) => {
               <p>If you use this data alongside the <Link to="/block-charges">Block Charges</Link> data, you can see how changes in block costs impact your property charges over time.</p>
               <p>If you do not see your estate/block listed, it means we need more data.  Check out <Link to="/submitting-data">Submitting Data</Link> to see how you can help.</p>
             </div>
-            <PremiseData />
+            <PremiseData borough={borough}/>
           </div>
         </div>
       </main>
