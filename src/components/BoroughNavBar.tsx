@@ -1,8 +1,11 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { formatBoroughFromProp } from '../utils/TextUtils';
 
-const BoroughNavBar = ({ borough }) => {
+interface BoroughProps {
+  borough: string;
+}
+
+const BoroughNavBar = ({ borough }: BoroughProps) => {
   return (
     <nav>
       <Link to={"/"}>Home</Link><span className="separator">|</span>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import EstateDropdown from './EstateDropdown';
 import BlockDropdown from './BlockDropdown';
 import PremiseChargesTable from './PremiseChargesTable';
@@ -6,7 +6,11 @@ import EstatesRepository from '../services/EstatesRepository';
 import BlocksRepository from '../services/BlocksRepository';
 import ReactGA4 from 'react-ga4';
 
-const PremiseData = ({borough}) => {
+interface BoroughProps {
+  borough: string;
+}
+
+const PremiseData = ({borough}: BoroughProps) => {
   const [selectedEstate, setSelectedEstate] = useState(null);
   const [selectedBlock, setSelectedBlock] = useState(null);
   const [estateRv, setEstateRv] = useState(null);

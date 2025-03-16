@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import EstateDropdown from './EstateDropdown';
 import BlockDropdown from './BlockDropdown';
 import BlockChargesComparisonTable from './BlockChargesComparisonTable';
@@ -6,7 +6,11 @@ import EstatesRepository from '../services/EstatesRepository';
 import BlocksRepository from '../services/BlocksRepository';
 import ReactGA4 from 'react-ga4';
 
-const BlockComparisonData = ({borough}) => {
+interface BoroughProps {
+  borough: string;
+}
+
+const BlockComparisonData = ({borough}: BoroughProps) => {
   const [firstSelectedEstate, setFirstSelectedEstate] = useState(null);
   const [firstSelectedBlock, setFirstSelectedBlock] = useState(null);
   const [firstEstates, setFirstEstates] = useState([]);

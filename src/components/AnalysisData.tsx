@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import EstateDropdown from './EstateDropdown';
 import BlockDropdown from './BlockDropdown';
 import EstatesRepository from '../services/EstatesRepository';
@@ -7,7 +7,11 @@ import AnalysisContent from './AnalysisContent';
 import ScrollToTopButton from './ScrollToTopButton';
 import ReactGA4 from 'react-ga4';
 
-const AnalysisData = ({ borough }) => {
+interface BoroughProps {
+  borough: string;
+}
+
+const AnalysisData = ({ borough }: BoroughProps) => {
   const [selectedEstate, setSelectedEstate] = useState(null);
   const [selectedBlock, setSelectedBlock] = useState(null);
   const [estates, setEstates] = useState([]);

@@ -9,7 +9,7 @@ interface AnalysisContentProps {
   blockRv: number;
 }
 
-const AnalysisContent: React.FC<AnalysisContentProps> = ({ borough, estateId, blockId, estateRv, blockRv }) => {
+const AnalysisContent = ({ borough, estateId, blockId, estateRv, blockRv }: AnalysisContentProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [unitChargesData, setUnitChargesData] = useState([]);
