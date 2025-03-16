@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { HashRouter as Router, Route, Routes, useLocation, useParams } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import BoroughAnalysis20222023 from './pages/BoroughAnalysis20222023';
@@ -50,9 +50,9 @@ function Analytics() {
   return null;
 }
 
-function PageWrapper({ Component }: { Component: ComponentType<{ borough: string | undefined }> }) {
+function PageWrapper({ Component }: { Component: ComponentType<{ borough: string }> }) {
   const { borough } = useParams();
-  return <Component borough={borough} />;
+  return <Component borough={borough ?? ''} />;
 }
 
 export default App;
