@@ -6,8 +6,11 @@ import BoroughNavBar from '../../components/BoroughNavBar';
 import Footer from '../../components/Footer';
 import { formatBoroughFromProp } from '../../utils/TextUtils';
 
+interface BoroughProps {
+  borough: string;
+}
 
-const BoroughHomePage = ({ borough }) => {
+const BoroughHomePage = ({ borough }: BoroughProps) => {
   return (
     <div>
       <>
@@ -19,7 +22,7 @@ const BoroughHomePage = ({ borough }) => {
       <BoroughNavBar borough={borough}/>
       <main>
         <p/>
-          <div class="full-width">
+          <div className="full-width">
             <div className="borough-home-content">
               <h2>{formatBoroughFromProp(borough)} Service Charge Insights!</h2>
               <p>Read an analysis of the service charges for your block, and see how they compare to others in the borough.</p>

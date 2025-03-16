@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
@@ -6,7 +6,11 @@ import BoroughNavBar from '../../components/BoroughNavBar';
 import AnalysisData from '../../components/AnalysisData';
 import Footer from '../../components/Footer';
 
-const Analysis = ({ borough }) => {
+interface AnalysisProps {
+  borough: string;
+}
+
+const Analysis = ({ borough }: AnalysisProps) => {
 
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -38,7 +42,7 @@ const Analysis = ({ borough }) => {
             </div>
             <div className="expandable-container borough-analysis-page-content alt-color">
               <h2>How are costs calculated</h2>
-              <div class="expand-button" onClick={toggleContent}>
+              <div className="expand-button" onClick={toggleContent}>
                 {isExpanded ? 'Hide this section' : 'Click to see how your costs are calculated.'}
               </div>
               {isExpanded && (

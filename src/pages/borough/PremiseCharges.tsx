@@ -6,7 +6,11 @@ import BoroughNavBar from '../../components/BoroughNavBar';
 import PremiseData from '../../components/PremiseData'
 import Footer from '../../components/Footer';
 
-const PremiseCharges = ({ borough }) => {
+interface BoroughProps {
+  borough: string;
+}
+
+const PremiseCharges = ({ borough }: BoroughProps) => {
   return (
     <div>
       <>

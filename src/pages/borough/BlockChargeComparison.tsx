@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Header from '../../components/Header';
@@ -6,7 +5,11 @@ import BoroughNavBar from '../../components/BoroughNavBar';
 import BlockComparisonData from '../../components/BlockComparisonData';
 import Footer from '../../components/Footer';
 
-const BlockChargeComparison = ({ borough }) => {
+interface BoroughProps {
+  borough: string;
+}
+
+const BlockChargeComparison = ({ borough }: BoroughProps) => {
   return (
     <div>
       <>

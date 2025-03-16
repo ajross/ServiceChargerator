@@ -6,7 +6,11 @@ import BoroughNavBar from '../../components/BoroughNavBar';
 import EstateBlockDropdowns from '../../components/EstateBlockDropdowns';
 import Footer from '../../components/Footer';
 
-const BlockCharges = ({ borough }) => {
+interface BoroughProps {
+  borough: string;
+}
+
+const BlockCharges = ({ borough }: BoroughProps) => {
   return (
     <div>
       <>

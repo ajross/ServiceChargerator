@@ -6,7 +6,11 @@ import BoroughNavBar from '../../components/BoroughNavBar';
 import PremiseComparisonData from '../../components/PremiseComparisonData';
 import Footer from '../../components/Footer';
 
-const PremiseChargeComparison = ({ borough }) => {
+interface BoroughProps {
+  borough: string;
+}
+
+const PremiseChargeComparison = ({ borough }: BoroughProps) => {
   return (
     <div>
       <>
