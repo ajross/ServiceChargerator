@@ -12,6 +12,7 @@ import MajorWorks from './pages/MajorWorks';
 import QueryingCharges from './pages/QueryingCharges';
 import About from './pages/About';
 import ReactGA4 from 'react-ga4';
+import { ComponentType } from 'react';
 
 function App() {
   return (
@@ -49,7 +50,7 @@ function Analytics() {
   return null;
 }
 
-function PageWrapper({ Component }) {
+function PageWrapper({ Component }: { Component: ComponentType<{ borough: string | undefined }> }) {
   const { borough } = useParams();
   return <Component borough={borough} />;
 }

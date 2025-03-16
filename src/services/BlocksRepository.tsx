@@ -1,19 +1,29 @@
 import Papa from 'papaparse';
 
+interface BlockData {
+  ID: string,
+  Block_Name:string,
+  Block_RV:string,
+  Estate_ID:string
+}
+
 class BlocksRepository {
-    constructor(borough) {
+    csvFilePath: string;
+    data: BlockData[];
+    dataLoaded: Promise<unknown>;
+    constructor(borough: string) {
         this.csvFilePath = `./${borough}/blocks.csv`;
         this.data = [];
         this.dataLoaded = this.loadData(); // Returns a promise
     }
 
     loadData() {
-        return new Promise ((resolve, reject) => {
+        return new Promise<void> ((resolve, reject) => {
           Papa.parse(this.csvFilePath, {
             download: true,
             header: true,
-            complete: (result) => {
-                this.data = result.data.sort((a, b) => {
+            complete: (result: any) => {
+                this.data = result.data.sort((a: { Block_Name: string; }, b: { Block_Name: string; }) => {
                   if (a.Block_Name < b.Block_Name) {
                     return -1;
                   }
@@ -24,12 +34,12 @@ class BlocksRepository {
                 });
                 resolve();
             },
-            error: (error) => reject(error)
+            error: (error: any) => reject(error)
           });
         });
     }
 
-    getBlocks(estate_id) {
+    getBlocks(estate_id: any) {
         return this.data.filter(item => item.Estate_ID === estate_id);
     }
 }

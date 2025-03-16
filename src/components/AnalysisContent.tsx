@@ -1,7 +1,15 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import UnitChargesRepository from '../services/UnitChargesRepository';
 
-const AnalysisContent = ({ borough, estateId, blockId, estateRv, blockRv }) => {
+interface AnalysisContentProps {
+  borough: string;
+  estateId: string;
+  blockId: string;
+  estateRv: number;
+  blockRv: number;
+}
+
+const AnalysisContent: React.FC<AnalysisContentProps> = ({ borough, estateId, blockId, estateRv, blockRv }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [unitChargesData, setUnitChargesData] = useState([]);
@@ -10,16 +18,16 @@ const AnalysisContent = ({ borough, estateId, blockId, estateRv, blockRv }) => {
   const [similarEstateCharges, setSimilarEstateCharges] = useState([]);
   const [similarEstateStats, setSimilarEstateStats] = useState({});
   const [expandedTypes, setExpandedTypes] = useState(new Set());
-  const [chargeTypes, setChargeTypes] = useState([]);
+  const [chargeTypes, setChargeTypes] = useState<string[]>([]);
 
   useEffect(() => {
     if (borough && estateId && blockId) {
       const unitChargesRepository = new UnitChargesRepository(borough);
       unitChargesRepository.dataLoaded.then(() => {
-        const charges = unitChargesRepository.getUnitCharges(estateId, blockId);
-        setChargeTypes(Object.keys(charges).slice(5).filter(item => !item.endsWith("_Unit")));
+        const charges: Record<string, number> = unitChargesRepository.getUnitCharges(estateId, blockId);
+        setChargeTypes(Object.keys(charges).slice(5).filter((item: string) => !item.endsWith("_Unit")));
       })
-      .catch(error => {
+      .catch((error: Error) => {
         setError(error.message);
         setIsLoading(false);
       });

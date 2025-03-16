@@ -1,7 +1,50 @@
 import Papa from 'papaparse';
 
+interface UnitChargeData {
+    Year_Start: number,
+    Year_End: number,
+    Estate_ID: string,
+    Estate_Name: string,
+    Estate_RV: number,
+    Block_ID: string,
+    Block_Name: string,
+    Block_RV: number,
+    Block_Boiler_Repairs_and_Maintenance: string,
+    Block_Cleaning: string,
+    Block_Communal_Electricity: string,
+    Block_Communal_Electrical_Maintenance: string,
+    Block_Communal_Ventilation_Maintenance: string,
+    Block_Communal_Water_Quality: string,
+    Block_Communal_Window_Cleaning: string,
+    Block_Concierge: string,
+    Block_CCTV: string,
+    Block_Disinfestation: string,
+    Block_Door_Entry_System: string,
+    Block_Dry_Riser: string,
+    Block_Lightning_Protection: string,
+    Block_Lift_Services_and_Repairs: string,
+    Block_Fire_Ventilation_Maintenance: string,
+    Block_Repairs_and_Maintenance: string,
+    Block_TV_Aerial: string,
+    Block_Ext_Cleaning: string,
+    Block_Ext_External_Tree_Maintenance: string,
+    Block_Ext_Grounds_Maintenance: string,
+    Block_Ext_Repairs_and_Maintenance: string,
+    Estate_Cleaning: string,
+    Estate_CCTV: string,
+    Estate_Communal_Electricity: string,
+    Estate_Grounds_Maintenance: string,
+    Estate_Repairs_and_Maintenance: string,
+    Estate_Tree_Maintenance: string
+}
+
 class UnitChargesRepository {
-    constructor(borough) {
+    csvFilePath: string;
+    data: UnitChargeData[];
+    stats: {};
+    dataLoaded: Promise<unknown>;
+    columnNames: string[];
+    constructor(borough: string) {
         this.csvFilePath = `./${borough}/unit_charges.csv`;
         this.data = [];
         this.stats = {};
@@ -10,8 +53,8 @@ class UnitChargesRepository {
     }
 
     // Function to calculate median
-    calculateMedian(values) {
-        values.sort((a, b) => a - b);
+    calculateMedian(values: any[]) {
+        values.sort((a: number, b: number) => a - b);
         const mid = Math.floor(values.length / 2);
         if (values.length % 2 === 0) {
             return (values[mid - 1] + values[mid]) / 2;
@@ -20,12 +63,12 @@ class UnitChargesRepository {
         }
     }
 
-    calculateStats(columns, data) {
-        let aggregateStatistics = {};
-        let estatesSeen = {};
+    calculateStats(columns: any[], data: any[]) {
+        let aggregateStatistics: { [key: string]: any } = {};
+        let estatesSeen: { [key: string]: Set<string> } = {};
 
         // Iterate over the headers and initialize aggregate statistics for each column
-        columns.forEach(header => {
+        columns.forEach((header: string) => {
             // Ignore headers that should be ignored
             if (header === 'Year_Start' || header === 'Year_End' || header === 'Estate_ID' || header === 'Estate_Name' || header === 'Estate_RV' || header === 'Block_ID' || header === 'Block_Name' || header === 'Block_RV') {
                 return;
@@ -46,8 +89,8 @@ class UnitChargesRepository {
         });
 
         // Iterate over the data rows to calculate aggregate statistics
-        data.forEach(row => {
-            columns.forEach((header, index) => {
+        data.forEach((row: { [x: string]: any; }) => {
+            columns.forEach((header: string, index: any) => {
                 // Ignore columns that should be ignored
                 if (header === 'Year_Start' || header === 'Year_End' || header === 'Estate_ID' || header === 'Estate_Name' || header === 'Estate_RV' || header === 'Block_ID' || header === 'Block_Name' || header === 'Block_RV') {
                     return;
@@ -93,37 +136,37 @@ class UnitChargesRepository {
     }
 
     loadData() {
-        return new Promise ((resolve, reject) => {
+        return new Promise<void> ((resolve, reject) => {
           Papa.parse(this.csvFilePath, {
             download: true,
             header: true,
             complete: (result) => {
-                this.data = result.data;
-                this.columnNames = result.meta.fields;
+                this.data = result.data as UnitChargeData[];
+                this.columnNames = result.meta.fields || [];
                 this.stats = this.calculateStats(this.columnNames, this.data);
                 resolve();
             },
-            error: (error) => reject(error)
+            error: (error: any) => reject(error)
           });
         });
     }
 
-    getUnitCharges(estate_id, block_id) {
-        const charges = this.data.find(item => item.Estate_ID === estate_id && item.Block_ID === block_id); // Finds the first row, assuming there is only 1 year of data
+    getUnitCharges(estate_id: string, block_id: string) {
+        const charges = this.data.find((item: { Estate_ID: any; Block_ID: any; }) => item.Estate_ID === estate_id && item.Block_ID === block_id); // Finds the first row, assuming there is only 1 year of data
 
         return charges;
     }
 
     // This assumes there is only one year's worth of data in the dataset
-    getSimilarBlockCharges(block_rv) {
-        const charges = this.data.filter(item => parseInt(item.Block_RV) >= Math.max((parseInt(block_rv) - 500), 0) && parseInt(item.Block_RV) <= (parseInt(block_rv) + 500))
-                        .sort((a, b) => b.Block_RV - a.Block_RV); // Sort in descending order
+    getSimilarBlockCharges(block_rv: number) {
+        const charges = this.data.filter((item: { Block_RV: number; }) => item.Block_RV >= Math.max((block_rv - 500), 0) && item.Block_RV <= (block_rv + 500))
+                        .sort((a: { Block_RV: number; }, b: { Block_RV: number; }) => b.Block_RV - a.Block_RV); // Sort in descending order
         return charges;
     }
 
-    getSimilarEstateCharges(estate_rv) {
+    getSimilarEstateCharges(estate_rv: number) {
         const estatesSeen = new Set();
-        const charges = this.data.filter(item => {
+        const charges = this.data.filter((item: { Estate_ID: unknown; }) => {
                                     if(!estatesSeen.has(item.Estate_ID)) {
                                         estatesSeen.add(item.Estate_ID);
                                         return true;
@@ -132,20 +175,20 @@ class UnitChargesRepository {
                                         return false;
                                     }
                                 })
-                                 .filter(item => parseInt(item.Estate_RV) >= Math.max((parseInt(estate_rv) - (parseInt(estate_rv) / 10)), 0) && parseInt(item.Estate_RV) <= (parseInt(estate_rv) + (parseInt(estate_rv) / 10)))
-                        .sort((a, b) => b.Estate_RV - a.Estate_RV); // Sort in descending order
+                                 .filter((item: { Estate_RV: number; }) => item.Estate_RV >= Math.max((estate_rv - (estate_rv / 10)), 0) && item.Estate_RV <= (estate_rv + (estate_rv / 10)))
+                        .sort((a: { Estate_RV: number; }, b: { Estate_RV: number; }) => b.Estate_RV - a.Estate_RV); // Sort in descending order
         return charges;
     }
 
-    getSimilarBlockStats(block_rv) {
-        const charges = this.data.filter(item => parseInt(item.Block_RV) >= Math.max((parseInt(block_rv) - 500), 0) && parseInt(item.Block_RV) <= (parseInt(block_rv) + 500))
-                        .sort((a, b) => b.Block_RV - a.Block_RV); // Sort in descending order
+    getSimilarBlockStats(block_rv: number) {
+        const charges = this.data.filter((item: { Block_RV: number; }) => item.Block_RV >= Math.max((block_rv - 500), 0) && item.Block_RV <= (block_rv + 500))
+                        .sort((a: { Block_RV: number; }, b: { Block_RV: number; }) => b.Block_RV - a.Block_RV); // Sort in descending order
         return this.calculateStats(this.columnNames, charges);
     }
 
-    getSimilarEstateStats(estate_rv) {
+    getSimilarEstateStats(estate_rv: number) {
         const estatesSeen = new Set();
-        const charges = this.data.filter(item => {
+        const charges = this.data.filter((item: { Estate_ID: unknown; }) => {
                                     if(!estatesSeen.has(item.Estate_ID)) {
                                         estatesSeen.add(item.Estate_ID);
                                         return true;
@@ -154,8 +197,8 @@ class UnitChargesRepository {
                                         return false;
                                     }
                                 })
-                                 .filter(item => parseInt(item.Estate_RV) >= Math.max((parseInt(estate_rv) - (parseInt(estate_rv) / 10)), 0) && parseInt(item.Estate_RV) <= (parseInt(estate_rv) + (parseInt(estate_rv) / 10)))
-                        .sort((a, b) => b.Estate_RV - a.Estate_RV); // Sort in descending order
+                                 .filter((item: { Estate_RV: number; }) => item.Estate_RV >= Math.max((estate_rv - (estate_rv / 10)), 0) && item.Estate_RV <= (estate_rv + (estate_rv / 10)))
+                        .sort((a: { Estate_RV: number; }, b: { Estate_RV: number; }) => b.Estate_RV - a.Estate_RV); // Sort in descending order
         return this.calculateStats(this.columnNames, charges);
     }
 }

@@ -1,19 +1,28 @@
 import Papa from 'papaparse';
 
+interface EstateData {
+  ID: string,
+  Estate_Name:string,
+  Estate_RV:string
+}
+
 class EstatesRepository {
-    constructor(borough) {
+    csvFilePath: string;
+    data: EstateData[];
+    dataLoaded: Promise<unknown>;
+    constructor(borough: string) {
         this.csvFilePath = `./${borough}/estates.csv`;
         this.data = [];
         this.dataLoaded = this.loadData(); // Returns a promise
     }
 
     loadData() {
-        return new Promise ((resolve, reject) => {
+        return new Promise<void> ((resolve, reject) => {
           Papa.parse(this.csvFilePath, {
             download: true,
             header: true,
             complete: (result) => {
-                this.data = result.data.sort((a, b) => {
+                this.data = (result.data as EstateData[]).sort((a, b) => {
                   if (a.Estate_Name < b.Estate_Name) {
                     return -1;
                   }
