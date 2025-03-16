@@ -10,38 +10,21 @@ const AnalysisContent = ({ borough, estateId, blockId, estateRv, blockRv }) => {
   const [similarEstateCharges, setSimilarEstateCharges] = useState([]);
   const [similarEstateStats, setSimilarEstateStats] = useState({});
   const [expandedTypes, setExpandedTypes] = useState(new Set());
+  const [chargeTypes, setChargeTypes] = useState([]);
 
-  const chargeTypes = useMemo(() => {
-      return [
-      'Block_Boiler_Repairs_and_Maintenance',
-      'Block_Cleaning',
-      'Block_Communal_Electricity',
-      'Block_Communal_Electrical_Maintenance',
-      'Block_Communal_Ventilation_Maintenance',
-      'Block_Communal_Water_Quality',
-      'Block_Communal_Window_Cleaning',
-      'Block_Concierge',
-      'Block_CCTV',
-      'Block_Disinfestation',
-      'Block_Door_Entry_System',
-      'Block_Dry_Riser',
-      'Block_Lightning_Protection',
-      'Block_Lift_Services_and_Repairs',
-      'Block_Fire_Ventilation_Maintenance',
-      'Block_Repairs_and_Maintenance',
-      'Block_TV_Aerial',
-      'Block_Ext_Cleaning',
-      'Block_Ext_External_Tree_Maintenance',
-      'Block_Ext_Grounds_Maintenance',
-      'Block_Ext_Repairs_and_Maintenance',
-      'Estate_Cleaning',
-      'Estate_CCTV',
-      'Estate_Communal_Electricity',
-      'Estate_Grounds_Maintenance',
-      'Estate_Repairs_and_Maintenance',
-      'Estate_Tree_Maintenance'
-    ];
-  }, []);
+  useEffect(() => {
+    if (borough && estateId && blockId) {
+      const unitChargesRepository = new UnitChargesRepository(borough);
+      unitChargesRepository.dataLoaded.then(() => {
+        const charges = unitChargesRepository.getUnitCharges(estateId, blockId);
+        setChargeTypes(Object.keys(charges).slice(5).filter(item => !item.endsWith("_Unit")));
+      })
+      .catch(error => {
+        setError(error.message);
+        setIsLoading(false);
+      });
+    }
+  }, [borough, estateId, blockId]);
 
   const unitChargesRepository = useMemo(() => new UnitChargesRepository(borough), [borough]);
 

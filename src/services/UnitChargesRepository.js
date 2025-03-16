@@ -116,7 +116,7 @@ class UnitChargesRepository {
 
     // This assumes there is only one year's worth of data in the dataset
     getSimilarBlockCharges(block_rv) {
-        const charges = this.data.filter(item => parseInt(item.Block_RV) >= (parseInt(block_rv) - 500) && parseInt(item.Block_RV) <= (parseInt(block_rv) + 500))
+        const charges = this.data.filter(item => parseInt(item.Block_RV) >= Math.max((parseInt(block_rv) - 500), 0) && parseInt(item.Block_RV) <= (parseInt(block_rv) + 500))
                         .sort((a, b) => b.Block_RV - a.Block_RV); // Sort in descending order
         return charges;
     }
@@ -132,13 +132,13 @@ class UnitChargesRepository {
                                         return false;
                                     }
                                 })
-                                 .filter(item => parseInt(item.Estate_RV) >= (parseInt(estate_rv) - (parseInt(estate_rv) / 10)) && parseInt(item.Estate_RV) <= (parseInt(estate_rv) + (parseInt(estate_rv) / 10)))
+                                 .filter(item => parseInt(item.Estate_RV) >= Math.max((parseInt(estate_rv) - (parseInt(estate_rv) / 10)), 0) && parseInt(item.Estate_RV) <= (parseInt(estate_rv) + (parseInt(estate_rv) / 10)))
                         .sort((a, b) => b.Estate_RV - a.Estate_RV); // Sort in descending order
         return charges;
     }
 
     getSimilarBlockStats(block_rv) {
-        const charges = this.data.filter(item => parseInt(item.Block_RV) >= (parseInt(block_rv) - 500) && parseInt(item.Block_RV) <= (parseInt(block_rv) + 500))
+        const charges = this.data.filter(item => parseInt(item.Block_RV) >= Math.max((parseInt(block_rv) - 500), 0) && parseInt(item.Block_RV) <= (parseInt(block_rv) + 500))
                         .sort((a, b) => b.Block_RV - a.Block_RV); // Sort in descending order
         return this.calculateStats(this.columnNames, charges);
     }
@@ -154,7 +154,7 @@ class UnitChargesRepository {
                                         return false;
                                     }
                                 })
-                                 .filter(item => parseInt(item.Estate_RV) >= (parseInt(estate_rv) - (parseInt(estate_rv) / 10)) && parseInt(item.Estate_RV) <= (parseInt(estate_rv) + (parseInt(estate_rv) / 10)))
+                                 .filter(item => parseInt(item.Estate_RV) >= Math.max((parseInt(estate_rv) - (parseInt(estate_rv) / 10)), 0) && parseInt(item.Estate_RV) <= (parseInt(estate_rv) + (parseInt(estate_rv) / 10)))
                         .sort((a, b) => b.Estate_RV - a.Estate_RV); // Sort in descending order
         return this.calculateStats(this.columnNames, charges);
     }

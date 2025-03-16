@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import ChargesRepository from '../services/ChargesRepository';
 import ChargeErrorsRepository from '../services/ChargeErrorsRepository';
 
@@ -7,38 +7,21 @@ const PremiseChargesTable = ({ borough, estateId, blockId, estateRv, blockRv, pr
   const [chargeErrors, setChargeErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [chargeTypes, setChargeTypes] = useState([]);
 
-  const chargeTypes = useMemo(() => {
-      return [
-      'Block_Boiler_Repairs_and_Maintenance',
-      'Block_Cleaning',
-      'Block_Communal_Electricity',
-      'Block_Communal_Electrical_Maintenance',
-      'Block_Communal_Ventilation_Maintenance',
-      'Block_Communal_Water_Quality',
-      'Block_Communal_Window_Cleaning',
-      'Block_Concierge',
-      'Block_CCTV',
-      'Block_Disinfestation',
-      'Block_Door_Entry_System',
-      'Block_Dry_Riser',
-      'Block_Lightning_Protection',
-      'Block_Lift_Services_and_Repairs',
-      'Block_Fire_Ventilation_Maintenance',
-      'Block_Repairs_and_Maintenance',
-      'Block_TV_Aerial',
-      'Block_Ext_Cleaning',
-      'Block_Ext_External_Tree_Maintenance',
-      'Block_Ext_Grounds_Maintenance',
-      'Block_Ext_Repairs_and_Maintenance',
-      'Estate_Cleaning',
-      'Estate_CCTV',
-      'Estate_Communal_Electricity',
-      'Estate_Grounds_Maintenance',
-      'Estate_Repairs_and_Maintenance',
-      'Estate_Tree_Maintenance'
-    ];
-  }, []);
+  useEffect(() => {
+    if (borough && estateId && blockId) {
+      const chargesRepository = new ChargesRepository(borough);
+      chargesRepository.dataLoaded.then(() => {
+        const charges = chargesRepository.getCharges(estateId, blockId);
+        setChargeTypes(Object.keys(charges[0]).slice(5));
+      })
+      .catch(error => {
+        setError(error.message);
+        setIsLoading(false);
+      });
+    }
+  }, [borough, estateId, blockId]);
 
   useEffect(() => {
     const pivotData = (data) => {
@@ -58,7 +41,7 @@ const PremiseChargesTable = ({ borough, estateId, blockId, estateRv, blockRv, pr
       return { pivotedData, years };
     };
 
-    if (estateId && blockId && estateRv && blockRv && premiseRv > 0) {
+    if (estateId && blockId && estateRv && blockRv && premiseRv > 0 && chargeTypes.length > 0) {
       const chargesRepository = new ChargesRepository(borough);
       const chargeErrorsRepository = new ChargeErrorsRepository(borough);
       setIsLoading(true);
