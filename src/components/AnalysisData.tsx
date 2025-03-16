@@ -6,10 +6,7 @@ import BlocksRepository from '../services/BlocksRepository';
 import AnalysisContent from './AnalysisContent';
 import ScrollToTopButton from './ScrollToTopButton';
 import ReactGA4 from 'react-ga4';
-
-interface BoroughProps {
-  borough: string;
-}
+import { BoroughProps } from '../interfaces/BoroughProps';
 
 const AnalysisData = ({ borough }: BoroughProps) => {
   const [selectedEstate, setSelectedEstate] = useState(null);

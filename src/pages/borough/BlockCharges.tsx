@@ -4,10 +4,7 @@ import Header from '../../components/Header';
 import BoroughNavBar from '../../components/BoroughNavBar';
 import EstateBlockDropdowns from '../../components/EstateBlockDropdowns';
 import Footer from '../../components/Footer';
-
-interface BoroughProps {
-  borough: string;
-}
+import { BoroughProps } from '../../interfaces/BoroughProps';
 
 const BlockCharges = ({ borough }: BoroughProps) => {
   return (

@@ -4,10 +4,7 @@ import Header from '../../components/Header';
 import BoroughNavBar from '../../components/BoroughNavBar';
 import PremiseComparisonData from '../../components/PremiseComparisonData';
 import Footer from '../../components/Footer';
-
-interface BoroughProps {
-  borough: string;
-}
+import { BoroughProps } from '../../interfaces/BoroughProps';
 
 const PremiseChargeComparison = ({ borough }: BoroughProps) => {
   return (

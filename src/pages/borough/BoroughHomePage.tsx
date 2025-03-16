@@ -4,10 +4,7 @@ import Header from '../../components/Header';
 import BoroughNavBar from '../../components/BoroughNavBar';
 import Footer from '../../components/Footer';
 import { formatBoroughFromProp } from '../../utils/TextUtils';
-
-interface BoroughProps {
-  borough: string;
-}
+import { BoroughProps } from '../../interfaces/BoroughProps';
 
 const BoroughHomePage = ({ borough }: BoroughProps) => {
   return (

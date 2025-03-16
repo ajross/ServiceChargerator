@@ -5,10 +5,7 @@ import BlockChargesComparisonTable from './BlockChargesComparisonTable';
 import EstatesRepository from '../services/EstatesRepository';
 import BlocksRepository from '../services/BlocksRepository';
 import ReactGA4 from 'react-ga4';
-
-interface BoroughProps {
-  borough: string;
-}
+import { BoroughProps } from '../interfaces/BoroughProps';
 
 const BlockComparisonData = ({borough}: BoroughProps) => {
   const [firstSelectedEstate, setFirstSelectedEstate] = useState(null);

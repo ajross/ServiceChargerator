@@ -5,12 +5,9 @@ import Header from '../../components/Header';
 import BoroughNavBar from '../../components/BoroughNavBar';
 import AnalysisData from '../../components/AnalysisData';
 import Footer from '../../components/Footer';
+import { BoroughProps } from '../../interfaces/BoroughProps';
 
-interface AnalysisProps {
-  borough: string;
-}
-
-const Analysis = ({ borough }: AnalysisProps) => {
+const Analysis = ({ borough }: BoroughProps) => {
 
   const [isExpanded, setIsExpanded] = useState(false);
 

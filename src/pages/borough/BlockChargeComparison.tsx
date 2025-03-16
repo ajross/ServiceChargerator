@@ -4,10 +4,7 @@ import Header from '../../components/Header';
 import BoroughNavBar from '../../components/BoroughNavBar';
 import BlockComparisonData from '../../components/BlockComparisonData';
 import Footer from '../../components/Footer';
-
-interface BoroughProps {
-  borough: string;
-}
+import { BoroughProps } from '../../interfaces/BoroughProps';
 
 const BlockChargeComparison = ({ borough }: BoroughProps) => {
   return (

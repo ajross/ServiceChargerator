@@ -1,9 +1,6 @@
 import { Link } from 'react-router-dom';
 import { formatBoroughFromProp } from '../utils/TextUtils';
-
-interface BoroughProps {
-  borough: string;
-}
+import { BoroughProps } from '../interfaces/BoroughProps';
 
 const BoroughNavBar = ({ borough }: BoroughProps) => {
   return (
