@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Header from '../components/Header';
@@ -39,7 +38,6 @@ const QueryingCharges = () => {
             <div className="video-responsive">
               <iframe
                 src="https://www.youtube.com/embed/sGygJZQz6Eo"
-                frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
                 title="Embedded youtube"

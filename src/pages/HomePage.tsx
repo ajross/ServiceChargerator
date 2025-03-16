@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Header from '../components/Header';
@@ -18,8 +17,8 @@ const HomePage = () => {
       <main>
         <p/>
 
-        <section class="home-layout">
-          <div class="home-section">
+        <section className="home-layout">
+          <div className="home-section">
             <div className="home-content">
               <h2>Welcome to Service Charge Insights!</h2>
               <h3>Compare your service charges and see whether you are getting value for money.</h3>
@@ -27,7 +26,7 @@ const HomePage = () => {
               <h3>Understand how your charges compare to the average in the borough.</h3>
             </div>
           </div>
-          <div class="querying-section">
+          <div className="querying-section">
             <div className="querying-content">
               <h2>Analysis across London</h2>
               <h3>We hold data from Greenwich, Lambeth, Lewisham, Southwark, and Tower Hamlets boroughs, and more are being added soon.</h3>
@@ -35,7 +34,7 @@ const HomePage = () => {
               <h3>See the page on <Link to="/querying-charges">Querying Charges</Link> for more advice about what to challenge, and how.</h3>
             </div>
           </div>
-          <div class="cross-borough-analysis">
+          <div className="cross-borough-analysis">
             <Link to="/borough-analysis-2022-2023">
               <div className="analysis-content">
                 <h2>Cross-Borough Analysis for 2022-2023</h2>
@@ -43,8 +42,8 @@ const HomePage = () => {
               </div>
             </Link>
           </div>
-          <div class="borough-blocks">
-            <section class="home-borough-layout">
+          <div className="borough-blocks">
+            <section className="home-borough-layout">
               <div>
                 <Link to="/greenwich">
                   <div className="borough-block">

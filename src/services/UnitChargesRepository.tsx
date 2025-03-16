@@ -90,7 +90,7 @@ class UnitChargesRepository {
 
         // Iterate over the data rows to calculate aggregate statistics
         data.forEach((row: { [x: string]: any; }) => {
-            columns.forEach((header: string, index: any) => {
+            columns.forEach((header: string) => {
                 // Ignore columns that should be ignored
                 if (header === 'Year_Start' || header === 'Year_End' || header === 'Estate_ID' || header === 'Estate_Name' || header === 'Estate_RV' || header === 'Block_ID' || header === 'Block_Name' || header === 'Block_RV') {
                     return;
