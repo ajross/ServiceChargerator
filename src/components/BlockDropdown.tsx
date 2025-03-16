@@ -1,6 +1,14 @@
-import React from 'react';
+interface Block {
+  ID: string;
+  Block_Name: string;
+}
 
-const BlockDropdown = ({ blocks, onBlockSelect }) => {
+interface BlockDropdownProps {
+  blocks: Block[];
+  onBlockSelect: (id: string) => void;
+}
+
+const BlockDropdown: React.FC<BlockDropdownProps> = ({ blocks, onBlockSelect }) => {
   return (
     <select onChange={(b) => onBlockSelect(b.target.value)}  disabled={!blocks.length}>
       <option value="">Select Block</option>

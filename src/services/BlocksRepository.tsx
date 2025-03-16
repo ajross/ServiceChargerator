@@ -1,11 +1,5 @@
 import Papa from 'papaparse';
-
-interface BlockData {
-  ID: string,
-  Block_Name:string,
-  Block_RV:string,
-  Estate_ID:string
-}
+import { BlockData } from './BlockData';
 
 class BlocksRepository {
     csvFilePath: string;

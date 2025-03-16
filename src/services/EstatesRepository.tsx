@@ -1,10 +1,5 @@
 import Papa from 'papaparse';
-
-interface EstateData {
-  ID: string,
-  Estate_Name:string,
-  Estate_RV:string
-}
+import { EstateData } from '../interfaces/EstateData';
 
 class EstatesRepository {
     csvFilePath: string;

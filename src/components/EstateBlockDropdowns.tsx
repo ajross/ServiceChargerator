@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import EstateDropdown from './EstateDropdown';
 import BlockDropdown from './BlockDropdown';
 import BlockChargesTable from './BlockChargesTable';
 import EstatesRepository from '../services/EstatesRepository';
+import { EstateData } from '../interfaces/EstateData';
 import BlocksRepository from '../services/BlocksRepository';
 import ReactGA4 from 'react-ga4';
+import { BoroughProps } from '../interfaces/BoroughProps';
+import { BlockData } from '../interfaces/BlockData';
 
-const EstateBlockDropdowns = ({borough}) => {
-  const [selectedEstate, setSelectedEstate] = useState(null);
-  const [selectedBlock, setSelectedBlock] = useState(null);
-  const [estates, setEstates] = useState([]);
-  const [blocks, setBlocks] = useState([]);
+const EstateBlockDropdowns = ({borough}: BoroughProps) => {
+  const [selectedEstate, setSelectedEstate] = useState<string | null>(null);
+  const [selectedBlock, setSelectedBlock] = useState<string | null>(null);
+  const [estates, setEstates] = useState<EstateData[]>([]);
+  const [blocks, setBlocks] = useState<BlockData[]>([]);
 
   // Fetch estates data
   useEffect(() => {
@@ -34,7 +37,7 @@ const EstateBlockDropdowns = ({borough}) => {
     }
   }, [borough, selectedEstate]);
 
-  const handleEstateSelect = (id) => {
+  const handleEstateSelect = (id: string) => {
     console.log('Selected Estate ID:', id); // Debugging
     setSelectedEstate(id);
     setSelectedBlock(null); // Reset block selection when estate changes
@@ -46,7 +49,7 @@ const EstateBlockDropdowns = ({borough}) => {
     });
   };
 
-  const handleBlockSelect = (id) => {
+  const handleBlockSelect = (id: string) => {
     console.log('Selected Block ID:', id); // Debugging
     setSelectedBlock(id);
     ReactGA4.event({
