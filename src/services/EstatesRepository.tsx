@@ -33,7 +33,7 @@ class EstatesRepository {
         });
     }
 
-    getEstates() {
+    getEstates(): EstateData[] {
         return this.data;
     }
 }

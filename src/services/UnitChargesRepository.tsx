@@ -1,42 +1,6 @@
 import Papa from 'papaparse';
-
-interface UnitChargeData {
-    Year_Start: number,
-    Year_End: number,
-    Estate_ID: string,
-    Estate_Name: string,
-    Estate_RV: number,
-    Block_ID: string,
-    Block_Name: string,
-    Block_RV: number,
-    Block_Boiler_Repairs_and_Maintenance: string,
-    Block_Cleaning: string,
-    Block_Communal_Electricity: string,
-    Block_Communal_Electrical_Maintenance: string,
-    Block_Communal_Ventilation_Maintenance: string,
-    Block_Communal_Water_Quality: string,
-    Block_Communal_Window_Cleaning: string,
-    Block_Concierge: string,
-    Block_CCTV: string,
-    Block_Disinfestation: string,
-    Block_Door_Entry_System: string,
-    Block_Dry_Riser: string,
-    Block_Lightning_Protection: string,
-    Block_Lift_Services_and_Repairs: string,
-    Block_Fire_Ventilation_Maintenance: string,
-    Block_Repairs_and_Maintenance: string,
-    Block_TV_Aerial: string,
-    Block_Ext_Cleaning: string,
-    Block_Ext_External_Tree_Maintenance: string,
-    Block_Ext_Grounds_Maintenance: string,
-    Block_Ext_Repairs_and_Maintenance: string,
-    Estate_Cleaning: string,
-    Estate_CCTV: string,
-    Estate_Communal_Electricity: string,
-    Estate_Grounds_Maintenance: string,
-    Estate_Repairs_and_Maintenance: string,
-    Estate_Tree_Maintenance: string
-}
+import { UnitChargeData } from '../interfaces/UnitChargeData';
+import { ChargeStat } from '../interfaces/ChargeStat';
 
 class UnitChargesRepository {
     csvFilePath: string;
@@ -53,7 +17,7 @@ class UnitChargesRepository {
     }
 
     // Function to calculate median
-    calculateMedian(values: any[]) {
+    calculateMedian(values: number[]): number {
         values.sort((a: number, b: number) => a - b);
         const mid = Math.floor(values.length / 2);
         if (values.length % 2 === 0) {
@@ -63,7 +27,7 @@ class UnitChargesRepository {
         }
     }
 
-    calculateStats(columns: any[], data: any[]) {
+    calculateStats(columns: any[], data: any[]): { [key: string]: any; } {
         let aggregateStatistics: { [key: string]: any } = {};
         let estatesSeen: { [key: string]: Set<string> } = {};
 
@@ -135,7 +99,7 @@ class UnitChargesRepository {
         return aggregateStatistics;
     }
 
-    loadData() {
+    loadData(): Promise<void> {
         return new Promise<void> ((resolve, reject) => {
           Papa.parse(this.csvFilePath, {
             download: true,
@@ -151,22 +115,22 @@ class UnitChargesRepository {
         });
     }
 
-    getUnitCharges(estate_id: string, block_id: string) {
-        const charges = this.data.find((item: { Estate_ID: any; Block_ID: any; }) => item.Estate_ID === estate_id && item.Block_ID === block_id); // Finds the first row, assuming there is only 1 year of data
+    getUnitCharges(estate_id: string, block_id: string): UnitChargeData | undefined {
+        const charges = this.data.find((item: UnitChargeData) => item.Estate_ID === estate_id && item.Block_ID === block_id); // Finds the first row, assuming there is only 1 year of data
 
         return charges;
     }
 
     // This assumes there is only one year's worth of data in the dataset
-    getSimilarBlockCharges(block_rv: number) {
-        const charges = this.data.filter((item: { Block_RV: number; }) => item.Block_RV >= Math.max((block_rv - 500), 0) && item.Block_RV <= (block_rv + 500))
-                        .sort((a: { Block_RV: number; }, b: { Block_RV: number; }) => b.Block_RV - a.Block_RV); // Sort in descending order
+    getSimilarBlockCharges(block_rv: number): UnitChargeData[] {
+        const charges = this.data.filter((item: UnitChargeData) => item.Block_RV >= Math.max((block_rv - 500), 0) && item.Block_RV <= (block_rv + 500))
+                        .sort((a: UnitChargeData, b: UnitChargeData) => b.Block_RV - a.Block_RV); // Sort in descending order
         return charges;
     }
 
-    getSimilarEstateCharges(estate_rv: number) {
+    getSimilarEstateCharges(estate_rv: number): UnitChargeData[] {
         const estatesSeen = new Set();
-        const charges = this.data.filter((item: { Estate_ID: unknown; }) => {
+        const charges = this.data.filter((item: UnitChargeData) => {
                                     if(!estatesSeen.has(item.Estate_ID)) {
                                         estatesSeen.add(item.Estate_ID);
                                         return true;
@@ -175,20 +139,20 @@ class UnitChargesRepository {
                                         return false;
                                     }
                                 })
-                                 .filter((item: { Estate_RV: number; }) => item.Estate_RV >= Math.max((estate_rv - (estate_rv / 10)), 0) && item.Estate_RV <= (estate_rv + (estate_rv / 10)))
-                        .sort((a: { Estate_RV: number; }, b: { Estate_RV: number; }) => b.Estate_RV - a.Estate_RV); // Sort in descending order
+                                 .filter((item: UnitChargeData) => item.Estate_RV >= Math.max((estate_rv - (estate_rv / 10)), 0) && item.Estate_RV <= (estate_rv + (estate_rv / 10)))
+                        .sort((a: UnitChargeData, b: UnitChargeData) => b.Estate_RV - a.Estate_RV); // Sort in descending order
         return charges;
     }
 
-    getSimilarBlockStats(block_rv: number) {
-        const charges = this.data.filter((item: { Block_RV: number; }) => item.Block_RV >= Math.max((block_rv - 500), 0) && item.Block_RV <= (block_rv + 500))
-                        .sort((a: { Block_RV: number; }, b: { Block_RV: number; }) => b.Block_RV - a.Block_RV); // Sort in descending order
+    getSimilarBlockStats(block_rv: number): ChargeStat {
+        const charges = this.data.filter((item: UnitChargeData) => item.Block_RV >= Math.max((block_rv - 500), 0) && item.Block_RV <= (block_rv + 500))
+                        .sort((a: UnitChargeData, b: UnitChargeData) => b.Block_RV - a.Block_RV); // Sort in descending order
         return this.calculateStats(this.columnNames, charges);
     }
 
-    getSimilarEstateStats(estate_rv: number) {
+    getSimilarEstateStats(estate_rv: number): ChargeStat {
         const estatesSeen = new Set();
-        const charges = this.data.filter((item: { Estate_ID: unknown; }) => {
+        const charges = this.data.filter((item: UnitChargeData) => {
                                     if(!estatesSeen.has(item.Estate_ID)) {
                                         estatesSeen.add(item.Estate_ID);
                                         return true;
@@ -197,8 +161,8 @@ class UnitChargesRepository {
                                         return false;
                                     }
                                 })
-                                 .filter((item: { Estate_RV: number; }) => item.Estate_RV >= Math.max((estate_rv - (estate_rv / 10)), 0) && item.Estate_RV <= (estate_rv + (estate_rv / 10)))
-                        .sort((a: { Estate_RV: number; }, b: { Estate_RV: number; }) => b.Estate_RV - a.Estate_RV); // Sort in descending order
+                                 .filter((item: UnitChargeData) => item.Estate_RV >= Math.max((estate_rv - (estate_rv / 10)), 0) && item.Estate_RV <= (estate_rv + (estate_rv / 10)))
+                        .sort((a: UnitChargeData, b: UnitChargeData) => b.Estate_RV - a.Estate_RV); // Sort in descending order
         return this.calculateStats(this.columnNames, charges);
     }
 }

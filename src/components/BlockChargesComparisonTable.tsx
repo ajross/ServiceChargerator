@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import ChargesRepository from '../services/ChargesRepository';
 import ChargeErrorsRepository from '../services/ChargeErrorsRepository';
 

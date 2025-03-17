@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import UnitChargesRepository from '../services/UnitChargesRepository';
+import { UnitChargeData } from '../interfaces/UnitChargeData';
+import { ChargeStat } from '../interfaces/ChargeStat';
 
 interface AnalysisContentProps {
   borough: string;
@@ -11,12 +13,12 @@ interface AnalysisContentProps {
 
 const AnalysisContent = ({ borough, estateId, blockId, estateRv, blockRv }: AnalysisContentProps) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [unitChargesData, setUnitChargesData] = useState([]);
-  const [similarBlockCharges, setSimilarBlockCharges] = useState([]);
-  const [similarBlockStats, setSimilarBlockStats] = useState({});
-  const [similarEstateCharges, setSimilarEstateCharges] = useState([]);
-  const [similarEstateStats, setSimilarEstateStats] = useState({});
+  const [error, setError] = useState<string | null>(null);
+  const [unitChargesData, setUnitChargesData] = useState<UnitChargeData | undefined>(undefined);
+  const [similarBlockCharges, setSimilarBlockCharges] = useState<UnitChargeData[]>([]);
+  const [similarBlockStats, setSimilarBlockStats] = useState<ChargeStat>({});
+  const [similarEstateCharges, setSimilarEstateCharges] = useState<UnitChargeData[]>([]);
+  const [similarEstateStats, setSimilarEstateStats] = useState<ChargeStat>({});
   const [expandedTypes, setExpandedTypes] = useState(new Set());
   const [chargeTypes, setChargeTypes] = useState<string[]>([]);
 
@@ -24,8 +26,10 @@ const AnalysisContent = ({ borough, estateId, blockId, estateRv, blockRv }: Anal
     if (borough && estateId && blockId) {
       const unitChargesRepository = new UnitChargesRepository(borough);
       unitChargesRepository.dataLoaded.then(() => {
-        const charges: Record<string, number> = unitChargesRepository.getUnitCharges(estateId, blockId);
-        setChargeTypes(Object.keys(charges).slice(5).filter((item: string) => !item.endsWith("_Unit")));
+        const charges = unitChargesRepository.getUnitCharges(estateId, blockId);
+        if (charges) {
+          setChargeTypes(Object.keys(charges).slice(5).filter((item: string) => !item.endsWith("_Unit")));
+        }
       })
       .catch((error: Error) => {
         setError(error.message);
@@ -36,7 +40,7 @@ const AnalysisContent = ({ borough, estateId, blockId, estateRv, blockRv }: Anal
 
   const unitChargesRepository = useMemo(() => new UnitChargesRepository(borough), [borough]);
 
-  const toggleExpand = (type) => {
+  const toggleExpand = (type: string) => {
     setExpandedTypes(prevExpandedTypes => {
       const newExpandedTypes = new Set(prevExpandedTypes);
       if (newExpandedTypes.has(type)) {
@@ -66,36 +70,36 @@ const AnalysisContent = ({ borough, estateId, blockId, estateRv, blockRv }: Anal
     }
   }, [estateId, blockId, estateRv, blockRv, unitChargesRepository, chargeTypes]);
 
-  function roundToCurrency(num) {
-    return parseFloat(num).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  function roundToCurrency(num: number): string {
+    return num.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
 
-  function roundToUnitPrice(num) {
-    return parseFloat(num).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 4 });
+  function roundToUnitPrice(num: number): string {
+    return num.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 4 });
   }
 
-  function calcPercentageIncrease(cost, average) {
-    return (100 * ((parseFloat(cost) - parseFloat(average)) / parseFloat(average))).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  function calcPercentageIncrease(cost: number, average: number): string {
+    return (100 * ((cost - average) / average)).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
 
-  function percentageText(cost, average) {
+  function percentageText(cost: number, average: number): string {
     const percentageIncrease = calcPercentageIncrease(cost, average);
     return percentageIncrease + "% " + (parseFloat(percentageIncrease) > 0 ? "higher" : "lower");
   }
 
-  function blockOrEstate(type) {
+  function blockOrEstate(type: string): string {
     return type.startsWith('Block') ? "block" : "estate";
   }
 
-  function similarStats(type, unitChargesData, rateableValue, similarStats) {
+  function similarStats(type: string, unitChargesData: UnitChargeData[], rateableValue: number, similarStats: ChargeStat) {
     return (
             <>
                 <h3>Statistics comparing your {blockOrEstate(type)} to similar sized {blockOrEstate(type)}s.</h3>
                 <div className="summary-text">
                   {type.startsWith('Block') ?
-                  <p>Your block's rateable value is {rateableValue}.  There are {similarStats[type]?.count} comparable blocks with rateable values between {parseInt(rateableValue) - 500} and {parseInt(rateableValue) + 500}.</p>
+                  <p>Your block's rateable value is {rateableValue}.  There are {similarStats[type]?.count} comparable blocks with rateable values between {rateableValue - 500} and {rateableValue + 500}.</p>
                   :
-                  <p>Your estate's rateable value is {rateableValue}.  There are {similarStats[type]?.count} comparable estates with rateable values between {parseInt(rateableValue) - (parseInt(rateableValue) / 10)} and {parseInt(rateableValue) + (parseInt(rateableValue) / 10)}.</p>
+                  <p>Your estate's rateable value is {rateableValue}.  There are {similarStats[type]?.count} comparable estates with rateable values between {rateableValue - (rateableValue / 10)} and {rateableValue + (rateableValue / 10)}.</p>
                   }
                   <p>You can expand the section below to see the full data.</p>
                   <p>Your charge of £{roundToCurrency(unitChargesData[type])} is {percentageText(unitChargesData[type], similarStats[type]?.mean)} than the average paid at similar sized {blockOrEstate(type)}s, which is £{roundToCurrency(similarStats[type]?.mean)}.</p>

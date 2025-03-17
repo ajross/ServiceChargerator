@@ -1,5 +1,5 @@
 import Papa from 'papaparse';
-import { BlockData } from './BlockData';
+import { BlockData } from '../interfaces/BlockData';
 
 class BlocksRepository {
     csvFilePath: string;
@@ -33,7 +33,7 @@ class BlocksRepository {
         });
     }
 
-    getBlocks(estate_id: any) {
+    getBlocks(estate_id: string): BlockData[] {
         return this.data.filter(item => item.Estate_ID === estate_id);
     }
 }

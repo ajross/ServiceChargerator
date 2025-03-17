@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, SetStateAction, KeyboardEvent } from 'react';
 import EstateDropdown from './EstateDropdown';
 import BlockDropdown from './BlockDropdown';
 import PremiseChargesTable from './PremiseChargesTable';
@@ -6,15 +6,17 @@ import EstatesRepository from '../services/EstatesRepository';
 import BlocksRepository from '../services/BlocksRepository';
 import ReactGA4 from 'react-ga4';
 import { BoroughProps } from '../interfaces/BoroughProps';
+import { BlockData } from '../interfaces/BlockData';
+import { EstateData } from '../interfaces/EstateData';
 
 const PremiseData = ({borough}: BoroughProps) => {
-  const [selectedEstate, setSelectedEstate] = useState(null);
-  const [selectedBlock, setSelectedBlock] = useState(null);
-  const [estateRv, setEstateRv] = useState(null);
-  const [blockRv, setBlockRv] = useState(null);
+  const [selectedEstate, setSelectedEstate] = useState<string | undefined>();
+  const [selectedBlock, setSelectedBlock] = useState<string | undefined>();
+  const [estateRv, setEstateRv] = useState<number>();
+  const [blockRv, setBlockRv] = useState<number>();
   const [numberInput, setNumberInput] = useState('');
-  const [estates, setEstates] = useState([]);
-  const [blocks, setBlocks] = useState([]);
+  const [estates, setEstates] = useState<EstateData[]>([]);
+  const [blocks, setBlocks] = useState<BlockData[]>([]);
 
   // Fetch estates data
   useEffect(() => {
@@ -40,11 +42,11 @@ const PremiseData = ({borough}: BoroughProps) => {
     }
   }, [borough, selectedEstate]);
 
-  const handleEstateSelect = (id) => {
+  const handleEstateSelect = (id: string) => {
     console.log('Selected Estate ID:', id); // Debugging
     setSelectedEstate(id);
     setEstateRv(estates.find(estate => estate.ID === id)?.Estate_RV);
-    setSelectedBlock(null); // Reset block selection when estate changes
+    setSelectedBlock(undefined); // Reset block selection when estate changes
     ReactGA4.event({
       category: 'Premise Charges',
       action: 'Estate Selection',
@@ -53,7 +55,7 @@ const PremiseData = ({borough}: BoroughProps) => {
     });
   };
 
-  const handleBlockSelect = (id) => {
+  const handleBlockSelect = (id: string) => {
     console.log('Selected Block ID:', id); // Debugging
     setSelectedBlock(id);
     setBlockRv(blocks.find(block => block.ID === id)?.Block_RV);
@@ -65,19 +67,20 @@ const PremiseData = ({borough}: BoroughProps) => {
     });
   };
 
-  const handleNumberInputChange = (event) => {
+  const handleNumberInputChange = (event: { target: { value: SetStateAction<string>; }; }) => {
     setNumberInput(event.target.value);
   };
 
-  const handleNumberInputSubmit = (event) => {
-    setNumberInput(event.target.value);
-    ReactGA4.event({
-      category: 'Premise Charges',
-      action: 'Dwelling Value',
-      label: 'PC Dwelling',
-      value: parseInt(event.target.value)
-    });
-  };
+  const handleNumberInputSubmit = (event: KeyboardEvent<HTMLInputElement> | React.FocusEvent<HTMLInputElement>) => {
+      const value = (event.target as HTMLInputElement).value;
+      setNumberInput(value);
+      ReactGA4.event({
+        category: 'Premise Charges',
+        action: 'Dwelling Value',
+        label: 'PC Dwelling',
+        value: parseInt(value)
+      });
+    };
 
   return (
     <div>
@@ -111,9 +114,9 @@ const PremiseData = ({borough}: BoroughProps) => {
               value={numberInput}
               onChange={handleNumberInputChange}
               onBlur={handleNumberInputSubmit}
-              onKeyPress={event => {
+              onKeyUp={event => {
                 if (event.key === 'Enter') {
-                  handleNumberInputSubmit();
+                  handleNumberInputSubmit(event);
                 }
               }}
             />
